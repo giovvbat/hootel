@@ -5,7 +5,7 @@ import com.grupo11.hootel.entity.Reserva;
 import java.util.List;
 
 public interface ReservaService {
-    Reserva lerReservaPin(Integer pin);
+    Reserva lerReservaPin(long pin);
 
     List<Reserva> lerTodasReservas();
 

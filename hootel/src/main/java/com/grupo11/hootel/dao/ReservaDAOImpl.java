@@ -20,7 +20,7 @@ public class ReservaDAOImpl implements ReservaDAO{
     }
 
     @Override
-    public Reserva lerReservaPin(Integer pin) {
+    public Reserva lerReservaPin(long pin) {
         return entityManager.find(Reserva.class, pin);
     }
 

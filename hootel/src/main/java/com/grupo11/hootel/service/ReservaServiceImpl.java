@@ -19,7 +19,7 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
-    public Reserva lerReservaPin(Integer pin) {
+    public Reserva lerReservaPin(long pin) {
         return reservaDAO.lerReservaPin(pin);
     }
 

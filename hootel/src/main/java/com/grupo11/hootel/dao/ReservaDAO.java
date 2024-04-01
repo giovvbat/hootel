@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ReservaDAO {
 
-    Reserva lerReservaPin(Integer pin);
+    Reserva lerReservaPin(long pin);
 
     List<Reserva> lerTodasReservas();
 
