@@ -18,18 +18,12 @@ public class CardapioServiceImpl implements CardapioService {
 
     @Override
     @Transactional
-    public void atualizarCardapio(Cardapio cardapio) {
-        cardapioDAO.atualizarCardapio(cardapio);
+    public Cardapio atualizarCardapio(Cardapio cardapio) {
+        return cardapioDAO.atualizarCardapio(cardapio);
     }
 
     @Override
     public Cardapio lerCardapio() {
         return cardapioDAO.lerCardapio();
-    }
-
-    @Override
-    @Transactional
-    public void criarCardapio(Cardapio cardapio) {
-        cardapioDAO.criarCardapio(cardapio);
     }
 }

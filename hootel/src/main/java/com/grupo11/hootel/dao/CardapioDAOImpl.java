@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Repository
 public class CardapioDAOImpl implements CardapioDAO{
 
@@ -19,19 +21,18 @@ public class CardapioDAOImpl implements CardapioDAO{
 
     @Override
     @Transactional
-    public void atualizarCardapio(Cardapio cardapio) {
-        entityManager.merge(cardapio);
+    public Cardapio atualizarCardapio(Cardapio cardapio) {
+        return entityManager.merge(cardapio);
     }
 
     @Override
     public Cardapio lerCardapio() {
-        TypedQuery<Cardapio> query = entityManager.createQuery("FROM Cardapio", Cardapio.class);
-        return query.getResultList().get(0);
-    }
+        List<Cardapio> list = entityManager.createQuery("FROM Cardapio", Cardapio.class).getResultList();
 
-    @Override
-    @Transactional
-    public void criarCardapio(Cardapio cardapio) {
-        entityManager.persist(cardapio);
+        if (list.isEmpty()) {
+            return null;
+        }
+
+        return list.get(0);
     }
 }

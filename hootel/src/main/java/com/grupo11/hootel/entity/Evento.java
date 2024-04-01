@@ -1,5 +1,6 @@
 package com.grupo11.hootel.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -23,6 +24,7 @@ public class Evento {
     private String nome;
 
     @Column(name = "data_inicio")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dataInicio;
 
     @Column(name = "capacidade")
