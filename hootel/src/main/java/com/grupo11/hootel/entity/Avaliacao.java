@@ -34,6 +34,18 @@ public class Avaliacao {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date data;
 
+    public Avaliacao() {
+
+    }
+
+    public Avaliacao(Reserva reserva, String avalicacao_positiva, String avalicacao_negativa, String nota, Date data) {
+        this.reserva = reserva;
+        this.avalicacao_positiva = avalicacao_positiva;
+        this.avalicacao_negativa = avalicacao_negativa;
+        this.nota = nota;
+        this.data = data;
+    }
+
     public Reserva getReserva() {
         return reserva;
     }
@@ -72,5 +84,16 @@ public class Avaliacao {
 
     public void setData(Date data) {
         this.data = data;
+    }
+
+    @Override
+    public String toString() {
+        return "Avaliacao{" +
+                "reserva=" + reserva +
+                ", avalicacao_positiva='" + avalicacao_positiva + '\'' +
+                ", avalicacao_negativa='" + avalicacao_negativa + '\'' +
+                ", nota='" + nota + '\'' +
+                ", data=" + data +
+                '}';
     }
 }
