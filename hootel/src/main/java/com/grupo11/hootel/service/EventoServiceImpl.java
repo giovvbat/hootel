@@ -1,7 +1,8 @@
 package com.grupo11.hootel.service;
 
-import com.grupo11.hootel.dao.EventoDAO;
+import com.grupo11.hootel.dao.EventoRepository;
 import com.grupo11.hootel.entity.Evento;
+import com.grupo11.hootel.entity.Reserva;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,32 +12,44 @@ import java.util.List;
 @Service
 public class EventoServiceImpl implements EventoService {
 
-    private EventoDAO eventoDAO;
+    private final ReservaService reservaService;
+    private final EventoRepository eventoRepository;
 
     @Autowired
-    public EventoServiceImpl(EventoDAO eventoDAO) {
-        this.eventoDAO = eventoDAO;
+    public EventoServiceImpl(EventoRepository eventoRepository, ReservaService reservaService) {
+        this.eventoRepository = eventoRepository;
+        this.reservaService = reservaService;
     }
 
     @Override
     @Transactional
     public void atualizarEvento(Evento evento) {
-        eventoDAO.atualizarEvento(evento);
+        eventoRepository.save(evento);
     }
 
     @Override
     @Transactional
     public void criarEvento(Evento evento) {
-        eventoDAO.criarEvento(evento);
+        eventoRepository.save(evento);
     }
 
     @Override
     public Evento lerEventoId(Integer id) {
-        return eventoDAO.lerEventoId(id);
+        return eventoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Evento inválido"));
     }
 
     @Override
     public List<Evento> lerTodosEventos() {
-        return eventoDAO.lerTodosEventos();
+        return eventoRepository.findAll();
+    }
+
+    @Override
+    public void adicionarParticipante(int idReserva, int numParticipantes, int idEvento) {
+        Evento evento = lerEventoId(idEvento);
+        Reserva reserva = reservaService.lerReservaPin(idReserva);
+
+        evento.addReserva(reserva);
+        eventoRepository.save(evento);
     }
 }

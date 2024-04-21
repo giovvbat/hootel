@@ -1,6 +1,6 @@
 package com.grupo11.hootel.service;
 
-import com.grupo11.hootel.dao.ReservaDAO;
+import com.grupo11.hootel.dao.ReservaRepository;
 import com.grupo11.hootel.entity.Reserva;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,26 +11,27 @@ import java.util.List;
 @Service
 public class ReservaServiceImpl implements ReservaService {
 
-    private ReservaDAO reservaDAO;
+    private final ReservaRepository reservaRepository;
 
     @Autowired
-    public ReservaServiceImpl(ReservaDAO reservaDAO) {
-        this.reservaDAO = reservaDAO;
+    public ReservaServiceImpl(ReservaRepository reservaRepository) {
+        this.reservaRepository = reservaRepository;
     }
 
     @Override
     public Reserva lerReservaPin(long pin) {
-        return reservaDAO.lerReservaPin(pin);
+        return reservaRepository.findById(pin)
+                .orElseThrow(() -> new RuntimeException("PIN inválido"));
     }
 
     @Override
     public List<Reserva> lerTodasReservas() {
-        return reservaDAO.lerTodasReservas();
+        return reservaRepository.findAll();
     }
 
     @Override
     @Transactional
     public void deletarReserva(Reserva reserva) {
-        reservaDAO.deletarReserva(reserva);
+        reservaRepository.delete(reserva);
     }
 }

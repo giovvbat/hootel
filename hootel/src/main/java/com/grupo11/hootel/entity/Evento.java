@@ -3,7 +3,7 @@ package com.grupo11.hootel.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Table(name="evento")
@@ -27,22 +27,22 @@ public class Evento {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date dataInicio;
 
-    @Column(name = "capacidade")
-    private Integer capacidade;
-
-    @Column(name = "ocupacao")
-    private Integer ocupacao;
+    @ManyToMany
+    @JoinTable(
+            name = "participantes_eventos",
+            joinColumns = @JoinColumn(name = "evento_id"),
+            inverseJoinColumns = @JoinColumn(name = "reserva_pin")
+    )
+    private List<Reserva> reservas;
 
     public Evento() { }
 
-    public Evento(Integer id, String horario, String lugar, String nome, Date dataInicio, Integer capacidade, Integer ocupacao) {
+    public Evento(Integer id, String horario, String lugar, String nome, Date dataInicio) {
         this.id = id;
         this.horario = horario;
         this.lugar = lugar;
         this.nome = nome;
         this.dataInicio = dataInicio;
-        this.capacidade = capacidade;
-        this.ocupacao = ocupacao;
     }
 
     public Integer getId() {
@@ -85,20 +85,20 @@ public class Evento {
         this.dataInicio = dataInicio;
     }
 
-    public Integer getCapacidade() {
-        return capacidade;
+    public List<Reserva> getReservas() {
+        return reservas;
     }
 
-    public void setCapacidade(Integer capacidade) {
-        this.capacidade = capacidade;
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
     }
 
-    public Integer getOcupacao() {
-        return ocupacao;
-    }
+    public void addReserva(Reserva reserva) {
+        if (reservas == null) {
+            reservas = new ArrayList<>();
+        }
 
-    public void setOcupacao(Integer ocupacao) {
-        this.ocupacao = ocupacao;
+        reservas.add(reserva);
     }
 
     @Override
@@ -109,8 +109,7 @@ public class Evento {
                 ", lugar='" + lugar + '\'' +
                 ", nome='" + nome + '\'' +
                 ", dataInicio=" + dataInicio +
-                ", capacidade=" + capacidade +
-                ", ocupacao=" + ocupacao +
+                ", reservas=" + reservas +
                 '}';
     }
 }

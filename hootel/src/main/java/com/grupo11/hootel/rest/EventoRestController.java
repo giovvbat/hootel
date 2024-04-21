@@ -1,9 +1,7 @@
 package com.grupo11.hootel.rest;
 
-import com.grupo11.hootel.dao.EventoDAO;
 import com.grupo11.hootel.entity.Evento;
 import com.grupo11.hootel.service.EventoService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +11,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class EventoRestController {
 
-    private EventoService eventoService;
+    private final EventoService eventoService;
 
     @Autowired
     public EventoRestController(EventoService eventoService) {

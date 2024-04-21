@@ -2,17 +2,14 @@ package com.grupo11.hootel.rest;
 
 import com.grupo11.hootel.entity.Cardapio;
 import com.grupo11.hootel.service.CardapioService;
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
 public class CardapioRestController {
 
-    private CardapioService cardapioService;
+    private final CardapioService cardapioService;
 
     @Autowired
     public CardapioRestController(CardapioService cardapioService) {

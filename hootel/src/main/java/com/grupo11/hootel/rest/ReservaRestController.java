@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class ReservaRestController {
 
-    private ReservaService reservaService;
+    private final ReservaService reservaService;
 
     @Autowired
     public ReservaRestController(ReservaService reservaService) {
@@ -24,12 +24,12 @@ public class ReservaRestController {
     }
 
     @GetMapping("/reservas/{pin}")
-    public Reserva lerReservaPin(@PathVariable long pin) {
+    public Reserva lerReservaPin(@PathVariable int pin) {
         return reservaService.lerReservaPin(pin);
     }
 
     @DeleteMapping("/reservas/{pin}")
-    public void deletarReserva(@PathVariable long pin) {
+    public void deletarReserva(@PathVariable int pin) {
         Reserva reserva = reservaService.lerReservaPin(pin);
 
         if (reserva == null) {
