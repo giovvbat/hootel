@@ -69,7 +69,7 @@ html, body, #home, #formulario {
 
 @font-face {
     font-family: Super Sunday;
-    src: url('../fontes/KGRedHands.ttf')
+    src: url('../static.fonts/KGRedHands.ttf')
 }
 
 .brand p {
