@@ -11,12 +11,4 @@ public class HootelApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HootelApplication.class, args);
 	}
-
-	@Bean
-	public CommandLineRunner commmandLineRunner(String[] args) {
-		return runner -> {
-			System.out.println("hello world!");
-		};
-	}
-
 }
