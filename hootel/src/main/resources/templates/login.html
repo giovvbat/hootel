@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <link rel="stylesheet" type="text/css" href="../static.css/style_login.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style_login.css}">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
@@ -65,15 +65,17 @@
               <p style="color: white;">Já fez o check-in? Beleza! <br> 
               Certifique o recebimento do seu PIN e tenha ele em mãos. Te ajudaremos com tudo!</p>
 
-              <form>
+              <form action="#" th:action="@{/reserva/checar}" th:object="${reserva}" method="POST">
+
                 <div class="input-group input-group-lg">
-                  <input type="text" placeholder="Digite seu PIN" class="form-control">
+                  <input type="text" th:field="*{PIN}" placeholder="Digite seu PIN" class="form-control">
                   <div class="input-group-append">
-                    <button type="button" class="btn" id="botao-logar" style="color: white">Entrar</button>
+                    <button type="submit" class="btn" id="botao-logar" style="color: white">Entrar</button>
                   </div>
                   
                 </div>
               </form>
+
             </div>
           </div>
 

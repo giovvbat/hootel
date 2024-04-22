@@ -20,8 +20,7 @@ public class ReservaServiceImpl implements ReservaService {
 
     @Override
     public Reserva lerReservaPin(long pin) {
-        return reservaRepository.findById(pin)
-                .orElseThrow(() -> new RuntimeException("PIN inválido"));
+        return reservaRepository.findById(pin).orElse(null);
     }
 
     @Override

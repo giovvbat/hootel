@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
   <head>
     <!-- Meta tags Obrigatórias -->
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <![endif]-->
 
     <!-- Estilo customizado -->
-    <link rel="stylesheet" type="text/css" href="../static.css/style.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 
     <title>hootel</title>
     <link rel="icon" href="imagens/favicon.png">
@@ -54,7 +54,7 @@
               <li class="nav-item divisor"></li>
 
               <li class="nav-item">
-                <a href="login.html" class="nav-link btn" id="btn-navbar">Entrar</a>
+                 <a th:href="@{/reserva/formulario}" class="nav-link btn" id="btn-navbar">Entrar</a>
               </li>
             </ul>
           </div>
@@ -88,7 +88,7 @@
                 <div class="carousel-item">
                   <h1>É um hóspede?</h1>
 
-                  <a href="login.html" class="btn btn-lg btn-custom btn-roxo">
+                  <a th:href="@{/reserva/formulario}" class="btn btn-lg btn-custom btn-roxo">
                     Entrar com PIN
                     <i class="fa-solid fa-lock"></i>
                   </a>

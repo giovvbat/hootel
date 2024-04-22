@@ -1,11 +1,13 @@
 body {
-	background: linear-gradient(50deg, #3c32a8, #7c26f8);
+	background: #FFF;
 				font-family: Helvetica,Arial, sans-serif;
 }
 
 nav.navbar-transparente {
 	padding: 15px 0px;
 	background: rgba(255, 255, 255, 0.9);
+	border-bottom: 1px solid;
+	border-color: #7c26f8;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -18,7 +20,7 @@ nav.navbar-transparente {
 
 .navbar-light .navbar-toggler {
 	color: #7c26f8;
-	border-color: #7c26f8
+	border-color: #7c26f8;
 }
 
 .divisor {
@@ -34,65 +36,23 @@ nav.navbar-transparente {
 
 
 #btn-navbar:hover {
-	transition: background 0.3s, color 0.4s;
 	background: #351a57;
 }
 
-html, body, #home, #formulario {
+html, body {
 	height: 100%;
 	overflow-x: hidden;
-}
-
-.capa, #formulario {
-	text-align: center;
-}
-
-.btn-custom {
-	color: white;
-	border-radius: 500px;
-	-webkit-border-radius: 500px;
-	-moz-border-radius: 500px;
-	text-transform: uppercase;
-	transition: background 0.4s, color 0.4s;
-	padding: 10px 20px;
-	margin-left: 5px;
-}
-
-.btn-roxo {
-	background: #7c25f8;
-}
-
-.btn-roxo:hover {
-	background: #351a57;
-	color: white;
-}
-
-.btn-branco {
-	border: 2px solid white;
-}
-
-.btn-branco:hover {
-	background: white;
-	color: black;
 }
 
 h1 {
 	font-weight: 900;
 	letter-spacing: -0.05em;
-	margin-bottom: 50px;
-	margin-top: 50px;
-	color: white;
-}
-
-h2 {
-	font-size: 3em;
-	font-weight: 700;
-	letter-spacing: -0.04em;
+	color: #7c26f8;
 }
 
 h3 {
 	font-size: 2em;
-	font-weight: 700;
+	font-weight: 900;
 	letter-spacing: -0.04em;
 }
 
@@ -104,7 +64,7 @@ h3 {
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
-	h1 {
+	h3 {
 		font-size: 2em;
 	}
 	.btn-custom {
@@ -113,24 +73,49 @@ h3 {
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
-	h1 {
-		font-size: 3em;
+	h3 {
+		font-size: 2em;
 	}
 }
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
-	h1 {
-		font-size: 4em;
+	h3 {
+		font-size: 3em;
 	}
 }
 
 @media (min-width: 1200px) {
-	h1 {
-		font-size: 5em;
+	h3 {
+		font-size: 3em;
 	}
 }
 
+.capa {
+	color: #7c26f8;
+	margin-top: 160px;
+	margin-bottom: 58px;
+}
+
+.capa form {
+	margin-top: 25px;
+}
+
+.capa span, .capa label {
+	color: #7c26f8;
+}
+
+h6 a {
+	color: #7c26f8;
+}
+
+h6 a:hover {
+	color: #351a57;
+	text-decoration: underline;
+}
+
 footer {
+	border-top: 1px solid;
+	border-color: #7c26f8;
 	background: rgba(255, 255, 255, 1.0);
 	padding: 20px 0px 20px 0;
 	position: relative;
@@ -178,7 +163,7 @@ footer ul li {
 
 @font-face {
     font-family: Super Sunday;
-    src: url('../static.fonts/KGRedHands.ttf')
+    src: url('../fonts/KGRedHands.ttf')
 }
 
 
@@ -190,4 +175,36 @@ footer ul li {
 	font-family: Super Sunday, sans-serif;
 }
 
+#btn-roxo, #btn-hora {
+	background: #7c26f8;
+	color: white;
+}
 
+
+#btn-roxo:hover, #btn-hora:hover {
+	transition: background 0.3s, color 0.4s;
+	background: #351a57;
+}
+
+#btn-outline-hora {
+	margin-right: 5px;
+	margin-bottom: 10px;
+}
+
+#tarefas form-check {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#btn-outline-hora {
+  color: #7c26f8;;
+  background-color: transparent;
+  background-image: none;
+  border-color: #7c26f8;;
+}
+
+#btn-outline-hora:hover {
+  color: #fff;
+  background-color: #7c26f8;;
+  border-color: #7c26f8;;
+}

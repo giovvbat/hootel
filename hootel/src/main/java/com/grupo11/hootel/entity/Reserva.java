@@ -11,7 +11,7 @@ public class Reserva {
 
     @Id
     @Column(name="pin")
-    private long PIN;
+    private Long PIN;
 
     @ManyToMany
     @JoinTable(
@@ -24,15 +24,15 @@ public class Reserva {
     public Reserva() {
     }
 
-    public Reserva(long PIN) {
+    public Reserva(Long PIN) {
         this.PIN = PIN;
     }
 
-    public long getPIN() {
+    public Long getPIN() {
         return PIN;
     }
 
-    public void setPIN(long PIN) {
+    public void setPIN(Long PIN) {
         this.PIN = PIN;
     }
 
