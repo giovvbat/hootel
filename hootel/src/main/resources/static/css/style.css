@@ -43,8 +43,8 @@ html, body, #home, #formulario {
 	overflow-x: hidden;
 }
 
-.capa, #home, #formulario {
-	text-align: left;
+.capa, #formulario {
+	text-align: center;
 }
 
 .btn-custom {
@@ -67,31 +67,33 @@ html, body, #home, #formulario {
 	color: white;
 }
 
-@font-face {
-    font-family: Super Sunday;
-    src: url('../static.fonts/KGRedHands.ttf')
+.btn-branco {
+	border: 2px solid white;
 }
 
-.brand p {
-	color: #7c26f8;
-	font-size: 2.5em;
-	margin: 0px;
-	padding: 0px;
-	font-family: Super Sunday, sans-serif;
+.btn-branco:hover {
+	background: white;
+	color: black;
+}
+
+h1 {
+	font-weight: 900;
+	letter-spacing: -0.05em;
+	margin-bottom: 50px;
+	margin-top: 50px;
+	color: white;
 }
 
 h2 {
-	font-weight: 900;
-	letter-spacing: -0.05em;
-	margin-top: 10px;
-	color: white;
+	font-size: 3em;
+	font-weight: 700;
+	letter-spacing: -0.04em;
 }
 
 h3 {
-	font-weight: 600;
-	letter-spacing: -0.05em;
-	margin-top: 10px;
-	color: white;
+	font-size: 2em;
+	font-weight: 700;
+	letter-spacing: -0.04em;
 }
 
 @media (max-width: 575.98px) {
@@ -99,44 +101,32 @@ h3 {
 		margin: 10px 15px;
 		font-size: 1em;
 	}
-	h3 {
-		font-size: 1em;
-	}
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
-	h2 {
-		font-size: 3em;
-	}
-	h3 {
+	h1 {
 		font-size: 2em;
+	}
+	.btn-custom {
+		margin: 10px 15px;
 	}
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
-	h2 {
+	h1 {
 		font-size: 3em;
-	}
-	h3 {
-		font-size: 2em;
 	}
 }
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
-	h2 {
+	h1 {
 		font-size: 4em;
-	}
-	h3 {
-		font-size: 3em;
 	}
 }
 
 @media (min-width: 1200px) {
-	h2 {
+	h1 {
 		font-size: 5em;
-	}
-	h3 {
-		font-size: 3em;
 	}
 }
 
@@ -182,14 +172,22 @@ footer ul li {
 	margin: 0 5px;
 }
 
-.capa {
-	text-align: left;
+.carousel-control-prev, .carousel-control-next {
+	width: 5%;
 }
 
-#botao-logar {
-	background: #3c32a8;
+@font-face {
+    font-family: Super Sunday;
+    src: url('../fonts/KGRedHands.ttf')
 }
 
-#botao-logar:hover {
-	background: #1d1852;
+
+.brand p {
+	color: #7c26f8;
+	font-size: 2.5em;
+	margin: 0px;
+	padding: 0px;
+	font-family: Super Sunday, sans-serif;
 }
+
+

@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.Date;
+
 @Controller
 @RequestMapping("/avaliacao")
 public class AvaliacaoController {
@@ -26,12 +28,13 @@ public class AvaliacaoController {
 
         theModel.addAttribute("avaliacao", theAvaliacao);
 
-        return "avaliacao-form";
+        return "avaliacao";
     }
 
     @PostMapping("/salvar")
     public String salvarAvaliacao(@ModelAttribute("avaliacao")Avaliacao theAvaliacao) {
 
+        theAvaliacao.setData(new Date());
         avaliacaoService.criarAvaliacao(theAvaliacao);
 
         return "redirect:saldacao";

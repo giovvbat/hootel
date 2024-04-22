@@ -1,13 +1,11 @@
 body {
-	background: #FFF;
+	background: linear-gradient(50deg, #3c32a8, #7c26f8);
 				font-family: Helvetica,Arial, sans-serif;
 }
 
 nav.navbar-transparente {
 	padding: 15px 0px;
 	background: rgba(255, 255, 255, 0.9);
-	border-bottom: 1px solid;
-	border-color: #7c26f8;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -20,7 +18,7 @@ nav.navbar-transparente {
 
 .navbar-light .navbar-toggler {
 	color: #7c26f8;
-	border-color: #7c26f8;
+	border-color: #7c26f8
 }
 
 .divisor {
@@ -36,24 +34,64 @@ nav.navbar-transparente {
 
 
 #btn-navbar:hover {
+	transition: background 0.3s, color 0.4s;
 	background: #351a57;
 }
 
-html, body {
+html, body, #home, #formulario {
 	height: 100%;
 	overflow-x: hidden;
 }
 
-h1 {
+.capa, #home, #formulario {
+	text-align: left;
+}
+
+.btn-custom {
+	color: white;
+	border-radius: 500px;
+	-webkit-border-radius: 500px;
+	-moz-border-radius: 500px;
+	text-transform: uppercase;
+	transition: background 0.4s, color 0.4s;
+	padding: 10px 20px;
+	margin-left: 5px;
+}
+
+.btn-roxo {
+	background: #7c25f8;
+}
+
+.btn-roxo:hover {
+	background: #351a57;
+	color: white;
+}
+
+@font-face {
+    font-family: Super Sunday;
+    src: url('../fonts/KGRedHands.ttf')
+}
+
+.brand p {
+	color: #7c26f8;
+	font-size: 2.5em;
+	margin: 0px;
+	padding: 0px;
+	font-family: Super Sunday, sans-serif;
+}
+
+h2 {
 	font-weight: 900;
 	letter-spacing: -0.05em;
-	color: #7c26f8;
+	margin-top: 10px;
+	color: white;
 }
 
 h3 {
-	font-size: 2em;
-	font-weight: 900;
-	letter-spacing: -0.04em;
+	font-weight: 600;
+	letter-spacing: -0.05em;
+	margin-top: 10px;
+	color: white;
 }
 
 @media (max-width: 575.98px) {
@@ -61,61 +99,48 @@ h3 {
 		margin: 10px 15px;
 		font-size: 1em;
 	}
+	h3 {
+		font-size: 1em;
+	}
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
+	h2 {
+		font-size: 3em;
+	}
 	h3 {
 		font-size: 2em;
-	}
-	.btn-custom {
-		margin: 10px 15px;
 	}
 }
 
 @media (min-width: 768px) and (max-width: 991.98px) {
+	h2 {
+		font-size: 3em;
+	}
 	h3 {
 		font-size: 2em;
 	}
 }
 
 @media (min-width: 992px) and (max-width: 1199.98px) {
+	h2 {
+		font-size: 4em;
+	}
 	h3 {
 		font-size: 3em;
 	}
 }
 
 @media (min-width: 1200px) {
+	h2 {
+		font-size: 5em;
+	}
 	h3 {
 		font-size: 3em;
 	}
 }
 
-.capa {
-	color: #7c26f8;
-	margin-top: 160px;
-	margin-bottom: 58px;
-}
-
-.capa form {
-	margin-top: 25px;
-}
-
-.capa span, .capa label {
-	color: #7c26f8;
-}
-
-h6 a {
-	color: #7c26f8;
-}
-
-h6 a:hover {
-	color: #351a57;
-	text-decoration: underline;
-}
-
 footer {
-	border-top: 1px solid;
-	border-color: #7c26f8;
 	background: rgba(255, 255, 255, 1.0);
 	padding: 20px 0px 20px 0;
 	position: relative;
@@ -157,54 +182,14 @@ footer ul li {
 	margin: 0 5px;
 }
 
-.carousel-control-prev, .carousel-control-next {
-	width: 5%;
+.capa {
+	text-align: left;
 }
 
-@font-face {
-    font-family: Super Sunday;
-    src: url('../static.fonts/KGRedHands.ttf')
+#botao-logar {
+	background: #3c32a8;
 }
 
-
-.brand p {
-	color: #7c26f8;
-	font-size: 2.5em;
-	margin: 0px;
-	padding: 0px;
-	font-family: Super Sunday, sans-serif;
-}
-
-#btn-roxo, #btn-hora {
-	background: #7c26f8;
-	color: white;
-}
-
-
-#btn-roxo:hover, #btn-hora:hover {
-	transition: background 0.3s, color 0.4s;
-	background: #351a57;
-}
-
-#btn-outline-hora {
-	margin-right: 5px;
-	margin-bottom: 10px;
-}
-
-#tarefas form-check {
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-#btn-outline-hora {
-  color: #7c26f8;;
-  background-color: transparent;
-  background-image: none;
-  border-color: #7c26f8;;
-}
-
-#btn-outline-hora:hover {
-  color: #fff;
-  background-color: #7c26f8;;
-  border-color: #7c26f8;;
+#botao-logar:hover {
+	background: #1d1852;
 }

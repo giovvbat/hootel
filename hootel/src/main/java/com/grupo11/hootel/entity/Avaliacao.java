@@ -14,15 +14,19 @@ import java.util.Date;
 public class Avaliacao {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_avaliacao")
+    private Integer id_avaliacao;
+
     @OneToOne
     @JoinColumn(name = "reserva_id")
     private Reserva reserva;
 
-    @Column(name = "avalicacao_positiva")
-    private String avalicacao_positiva;
+    @Column(name = "avaliacao_positiva")
+    private String avaliacao_positiva;
 
-    @Column(name = "avalicacao_negativa")
-    private String avalicacao_negativa;
+    @Column(name = "avaliacao_negativa")
+    private String avaliacao_negativa;
 
     @Column(name = "nota")
     @NotNull(message="is required")
@@ -38,12 +42,21 @@ public class Avaliacao {
 
     }
 
-    public Avaliacao(Reserva reserva, String avalicacao_positiva, String avalicacao_negativa, String nota, Date data) {
+    public Avaliacao(Integer id_avaliacao,Reserva reserva, String avaliacao_positiva, String avaliacao_negativa, String nota, Date data) {
+        this.id_avaliacao = id_avaliacao;
         this.reserva = reserva;
-        this.avalicacao_positiva = avalicacao_positiva;
-        this.avalicacao_negativa = avalicacao_negativa;
+        this.avaliacao_positiva = avaliacao_positiva;
+        this.avaliacao_negativa = avaliacao_negativa;
         this.nota = nota;
         this.data = data;
+    }
+
+    public int getId_avaliacao() {
+        return id_avaliacao;
+    }
+
+    public void setId_avaliacao(int id_avaliacao) {
+        this.id_avaliacao = id_avaliacao;
     }
 
     public Reserva getReserva() {
@@ -54,20 +67,20 @@ public class Avaliacao {
         this.reserva = reserva;
     }
 
-    public String getAvalicacao_positiva() {
-        return avalicacao_positiva;
+    public String getavaliacao_positiva() {
+        return avaliacao_positiva;
     }
 
-    public void setAvalicacao_positiva(String avalicacao_positiva) {
-        this.avalicacao_positiva = avalicacao_positiva;
+    public void setavaliacao_positiva(String avaliacao_positiva) {
+        this.avaliacao_positiva = avaliacao_positiva;
     }
 
-    public String getAvalicacao_negativa() {
-        return avalicacao_negativa;
+    public String getavaliacao_negativa() {
+        return avaliacao_negativa;
     }
 
-    public void setAvalicacao_negativa(String avalicacao_negativa) {
-        this.avalicacao_negativa = avalicacao_negativa;
+    public void setavaliacao_negativa(String avaliacao_negativa) {
+        this.avaliacao_negativa = avaliacao_negativa;
     }
 
     public String getNota() {
@@ -90,8 +103,8 @@ public class Avaliacao {
     public String toString() {
         return "Avaliacao{" +
                 "reserva=" + reserva +
-                ", avalicacao_positiva='" + avalicacao_positiva + '\'' +
-                ", avalicacao_negativa='" + avalicacao_negativa + '\'' +
+                ", avaliacao_positiva='" + avaliacao_positiva + '\'' +
+                ", avaliacao_negativa='" + avaliacao_negativa + '\'' +
                 ", nota='" + nota + '\'' +
                 ", data=" + data +
                 '}';
