@@ -5,6 +5,8 @@ import com.grupo11.hootel.service.HorarioCamareiraService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -29,4 +31,22 @@ public class CamareiraController {
 
         return "camareiras";
     }
+
+    @PostMapping("/processarCamareiras")
+    public String processarCamareiras(@ModelAttribute("horarioCamareira") HorarioCamareira horarioCamareira) {
+        camareiraService.atualizarHorario(
+                horarioCamareira.getId(),
+                horarioCamareira.getReserva().getPIN(),
+                horarioCamareira.getServicos());
+
+        return "redirect:home";
+    }
 }
+
+
+
+
+
+
+
+

@@ -27,7 +27,7 @@ public class HorarioCamareiraServiceImpl implements HorarioCamareiraService {
     }
 
     @Override
-    public List<HorarioCamareira> getHorariosPin(int pin) {
+    public List<HorarioCamareira> getHorariosPin(long pin) {
         Reserva reserva = reservaService.lerReservaPin(pin);
 
         return horarioCamareiraRepository.findAllByReserva(reserva);
@@ -39,7 +39,7 @@ public class HorarioCamareiraServiceImpl implements HorarioCamareiraService {
     }
 
     @Override
-    public HorarioCamareira atualizarHorario(int id, long pin) {
+    public HorarioCamareira atualizarHorario(int id, long pin, List<String> servicos) {
         HorarioCamareira horarioCamareira = horarioCamareiraRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Horário inválido"));
 
@@ -48,6 +48,7 @@ public class HorarioCamareiraServiceImpl implements HorarioCamareiraService {
         }
 
         horarioCamareira.setReserva(reservaService.lerReservaPin(pin));
+        horarioCamareira.setServicos(servicos);
         return horarioCamareiraRepository.save(horarioCamareira);
     }
 }

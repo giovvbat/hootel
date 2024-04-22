@@ -18,10 +18,6 @@ public class Avaliacao {
     @Column(name = "id_avaliacao")
     private Integer id_avaliacao;
 
-    @OneToOne
-    @JoinColumn(name = "reserva_id")
-    private Reserva reserva;
-
     @Column(name = "avaliacao_positiva")
     private String avaliacao_positiva;
 
@@ -32,7 +28,7 @@ public class Avaliacao {
     @NotNull(message="is required")
     @Min(value=0, message="must be greater than or equal to zero")
     @Max(value=10, message="must be less than or equal to 10")
-    private String nota;
+    private Integer nota;
 
     @Column(name = "data_avaliacao")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -42,9 +38,8 @@ public class Avaliacao {
 
     }
 
-    public Avaliacao(Integer id_avaliacao,Reserva reserva, String avaliacao_positiva, String avaliacao_negativa, String nota, Date data) {
+    public Avaliacao(Integer id_avaliacao, String avaliacao_positiva, String avaliacao_negativa, Integer nota, Date data) {
         this.id_avaliacao = id_avaliacao;
-        this.reserva = reserva;
         this.avaliacao_positiva = avaliacao_positiva;
         this.avaliacao_negativa = avaliacao_negativa;
         this.nota = nota;
@@ -57,14 +52,6 @@ public class Avaliacao {
 
     public void setId_avaliacao(int id_avaliacao) {
         this.id_avaliacao = id_avaliacao;
-    }
-
-    public Reserva getReserva() {
-        return reserva;
-    }
-
-    public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
     }
 
     public String getavaliacao_positiva() {
@@ -83,11 +70,11 @@ public class Avaliacao {
         this.avaliacao_negativa = avaliacao_negativa;
     }
 
-    public String getNota() {
+    public Integer getNota() {
         return nota;
     }
 
-    public void setNota(String nota) {
+    public void setNota(Integer nota) {
         this.nota = nota;
     }
 
@@ -102,7 +89,6 @@ public class Avaliacao {
     @Override
     public String toString() {
         return "Avaliacao{" +
-                "reserva=" + reserva +
                 ", avaliacao_positiva='" + avaliacao_positiva + '\'' +
                 ", avaliacao_negativa='" + avaliacao_negativa + '\'' +
                 ", nota='" + nota + '\'' +

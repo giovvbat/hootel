@@ -8,7 +8,7 @@ import java.util.List;
 public interface HorarioCamareiraService {
 
     List<HorarioCamareira> getHorariosCamareiras();
-    List<HorarioCamareira> getHorariosPin(int pin);
+    List<HorarioCamareira> getHorariosPin(long pin);
     List<HorarioCamareira> getHorariosDisponiveis();
-    HorarioCamareira atualizarHorario(int id, long pin);
+    HorarioCamareira atualizarHorario(int id, long pin, List<String> servicos);
 }

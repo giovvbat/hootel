@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Date;
 
 @Controller
-@RequestMapping("/avaliacao")
 public class AvaliacaoController {
 
     private AvaliacaoService avaliacaoService;
@@ -21,7 +20,7 @@ public class AvaliacaoController {
         this.avaliacaoService = avaliacaoService;
     }
 
-    @GetMapping("/formulario")
+    @GetMapping("/avaliacao/formulario")
     public String mostrarFormulario(Model theModel) {
 
         Avaliacao theAvaliacao = new Avaliacao();
@@ -31,12 +30,12 @@ public class AvaliacaoController {
         return "avaliacao";
     }
 
-    @PostMapping("/salvar")
+    @PostMapping("/avaliacao/salvar")
     public String salvarAvaliacao(@ModelAttribute("avaliacao")Avaliacao theAvaliacao) {
 
         theAvaliacao.setData(new Date());
         avaliacaoService.criarAvaliacao(theAvaliacao);
 
-        return "redirect:saldacao";
+        return "index";
     }
 }

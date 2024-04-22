@@ -22,6 +22,11 @@ public class ReservaController {
         return "index";
     }
 
+    @GetMapping("/home")
+    public String mostrarHome(){
+        return "home";
+    }
+
     @GetMapping("/reserva/formulario")
     public String mostrarFormulario(Model theModel) {
 
