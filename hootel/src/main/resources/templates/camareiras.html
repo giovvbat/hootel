@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
   <head>
     <!-- Meta tags Obrigatórias -->
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <![endif]-->
 
     <!-- Estilo customizado -->
-    <link rel="stylesheet" type="text/css" href="../static/css/style_camareiras.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style_camareiras.css}">
 
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/af46ebb8cd.js" crossorigin="anonymous"></script>
@@ -85,41 +85,57 @@
 
 
           <div class="row justify-content-center mt-3 no-gutters">
-            <div class="col-md-4 align-self-end">
-              <div>
-                <input id="btn-outline-hora" class="btn" type="submit" value="07:00">
-                <input id="btn-outline-hora" class="btn" type="submit" value="07:30">
-                <input id="btn-outline-hora" class="btn" type="submit" value="08:00">
-                <input id="btn-outline-hora" class="btn" type="submit" value="08:30">
-                <input id="btn-outline-hora" class="btn" type="submit" value="09:00">
-                <input id="btn-outline-hora" class="btn" type="submit" value="09:30">
-                <input id="btn-outline-hora" class="btn" type="submit" value="10:00">
-                <input id="btn-outline-hora" class="btn" type="submit" value="10:30">
-                <input id="btn-outline-hora" class="btn" type="submit" value="11:00">
-                <input id="btn-outline-hora" class="btn" type="submit" value="11:30">
-                <input id="btn-outline-hora" class="btn" type="submit" value="13:00">
-                <input id="btn-outline-hora" class="btn" type="submit" value="13:30">
-                <input id="btn-outline-hora" class="btn" type="submit" value="14:00">
-                <input id="btn-outline-hora" class="btn" type="submit" value="14:30">
-                <input id="btn-outline-hora" class="btn" type="submit" value="15:00">
-                <input id="btn-outline-hora" class="btn" type="submit" value="15:30">
-                <input id="btn-outline-hora" class="btn" type="submit" value="16:00">
-                <input id="btn-outline-hora" class="btn" type="submit" value="16:30">
-                <input id="btn-outline-hora" class="btn" type="submit" value="17:00">
-                <input id="btn-outline-hora" class="btn" type="submit" value="17:30">
-                <input id="btn-outline-hora" class="btn" type="submit" value="18:00">
-                <input id="btn-outline-hora" class="btn" type="submit" value="18:30">
-                <input id="btn-outline-hora" class="btn" type="submit" value="19:00">
-                <input id="btn-outline-hora" class="btn" type="submit" value="19:30">
-                <input id="btn-outline-hora" class="btn" type="submit" value="20:00">
-                <input id="btn-outline-hora" class="btn" type="submit" value="20:30">
-                <input id="btn-outline-hora" class="btn" type="submit" value="21:00">
-                <input id="btn-outline-hora" class="btn" type="submit" value="21:30">
-                <input id="btn-outline-hora" class="btn" type="submit" value="22:00">
-                <input id="btn-outline-hora" class="btn" type="submit" value="22:30">
+
+            <form th:action="@{/processarCamareiras}" th:object="${horarioCamareira}" method="POST">
+
+              <div class="col-md-4" style="border:1px solid red">
+                <label>
+                  <input type="radio" th:field="*{horario}"
+                         th:each="tempHorario : ${horarios}"
+                         th:value="${tempHorario}"
+                         th:text="${tempHorario}" />
+                </label>
               </div>
-              
-            </div>
+
+            </form>
+
+            <!--
+              <div class="col-md-4 align-self-end">
+                <div>
+                  <input id="btn-outline-hora" class="btn" type="submit" value="07:00">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="07:30">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="08:00">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="08:30">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="09:00">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="09:30">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="10:00">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="10:30">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="11:00">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="11:30">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="13:00">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="13:30">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="14:00">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="14:30">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="15:00">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="15:30">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="16:00">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="16:30">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="17:00">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="17:30">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="18:00">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="18:30">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="19:00">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="19:30">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="20:00">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="20:30">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="21:00">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="21:30">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="22:00">
+                  <input id="btn-outline-hora" class="btn" type="submit" value="22:30">
+                </div>
+
+              </div>
+              -->
 
             <div class="col-md-4 d-flex">
               <div class="row justify-content-end">

@@ -2,7 +2,10 @@ package com.grupo11.hootel.entity;
 
 import jakarta.persistence.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "horario_camareira")
@@ -19,6 +22,11 @@ public class HorarioCamareira {
     @OneToOne
     @JoinColumn(name = "id_reserva")
     private Reserva reserva;
+
+    @ElementCollection(targetClass = String.class)
+    @CollectionTable(name = "servicos", joinColumns = @JoinColumn(name = "id_servico"))
+    @Column(name = "servico", nullable = false)
+    private List<String> servicos;
 
     public HorarioCamareira() {
     }
@@ -53,12 +61,17 @@ public class HorarioCamareira {
         this.reserva = reserva;
     }
 
+    public List<String> getServicos() {
+        return servicos;
+    }
+
+    public void setServicos(List<String> servicos) {
+        this.servicos = servicos;
+    }
+
     @Override
     public String toString() {
-        return "HorarioCamareira{" +
-                "id=" + id +
-                ", horario=" + horario +
-                ", reserva=" + reserva +
-                '}';
+        DateFormat format = new SimpleDateFormat("HH:mm");
+        return format.format(horario);
     }
 }
