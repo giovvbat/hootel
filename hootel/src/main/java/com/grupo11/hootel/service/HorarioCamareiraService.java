@@ -10,5 +10,5 @@ public interface HorarioCamareiraService {
     List<HorarioCamareira> getHorariosCamareiras();
     List<HorarioCamareira> getHorariosPin(long pin);
     List<HorarioCamareira> getHorariosDisponiveis();
-    HorarioCamareira atualizarHorario(int id, long pin, List<String> servicos);
+    HorarioCamareira atualizarHorario(Integer id, Long pin, List<String> servicos);
 }

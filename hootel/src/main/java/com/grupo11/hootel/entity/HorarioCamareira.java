@@ -1,6 +1,7 @@
 package com.grupo11.hootel.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -14,7 +15,8 @@ public class HorarioCamareira {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    @NotNull(message = "Selecione um horário!")
+    private Integer id;
 
     @Column(name = "horario")
     private Date horario;
@@ -26,22 +28,23 @@ public class HorarioCamareira {
     @ElementCollection(targetClass = String.class)
     @CollectionTable(name = "servicos", joinColumns = @JoinColumn(name = "id_servico"))
     @Column(name = "servico", nullable = false)
+    @NotNull
     private List<String> servicos;
 
     public HorarioCamareira() {
     }
 
-    public HorarioCamareira(int id, Date horario, Reserva reserva) {
+    public HorarioCamareira(Integer id, Date horario, Reserva reserva) {
         this.id = id;
         this.horario = horario;
         this.reserva = reserva;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

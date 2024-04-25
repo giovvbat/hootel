@@ -1,9 +1,12 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.HorarioCamareira;
+import com.grupo11.hootel.entity.Reserva;
 import com.grupo11.hootel.service.HorarioCamareiraService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,25 +22,42 @@ public class CamareiraController {
         this.camareiraService = camareiraService;
     }
 
+    @ModelAttribute("horarios")
+    public List<HorarioCamareira> loadHorarios() {
+        return camareiraService.getHorariosDisponiveis();
+    }
+
+    @ModelAttribute("horarioCamareira")
+    public HorarioCamareira loadHorarioCamareira() {
+        return new HorarioCamareira();
+    }
+
     @GetMapping("/camareiras")
     public String mostrarCamareiras(Model model) {
-
-        List<HorarioCamareira> horarios = camareiraService.getHorariosDisponiveis();
-        HorarioCamareira horarioCamareira = new HorarioCamareira();
-
-        model.addAttribute("horarios", horarios);
-
-        model.addAttribute("horarioCamareira", horarioCamareira);
-
         return "camareiras";
     }
 
     @PostMapping("/processarCamareiras")
-    public String processarCamareiras(@ModelAttribute("horarioCamareira") HorarioCamareira horarioCamareira) {
-        camareiraService.atualizarHorario(
-                horarioCamareira.getId(),
-                horarioCamareira.getReserva().getPIN(),
-                horarioCamareira.getServicos());
+    public String processarCamareiras(@Valid @ModelAttribute("horarioCamareira") HorarioCamareira horarioCamareira,
+                                      BindingResult bindingResult,
+                                      Model model
+
+    ) {
+        if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getAllErrors());
+            return "camareiras";
+        }
+
+        try {
+            camareiraService.atualizarHorario(
+                    horarioCamareira.getId(),
+                    horarioCamareira.getReserva().getPIN(),
+                    horarioCamareira.getServicos());
+        } catch(Exception e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "camareiras";
+        }
+
 
         return "redirect:home";
     }

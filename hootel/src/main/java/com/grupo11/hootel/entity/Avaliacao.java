@@ -26,7 +26,7 @@ public class Avaliacao {
 
     @Column(name = "nota")
     @NotNull(message="is required")
-    @Min(value=0, message="must be greater than or equal to zero")
+    @Min(value=1, message="must be greater than or equal to 1")
     @Max(value=10, message="must be less than or equal to 10")
     private Integer nota;
 

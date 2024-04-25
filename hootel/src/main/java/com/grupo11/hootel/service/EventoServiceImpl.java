@@ -45,7 +45,7 @@ public class EventoServiceImpl implements EventoService {
     }
 
     @Override
-    public void adicionarParticipante(int idReserva, int numParticipantes, int idEvento) {
+    public void adicionarParticipante(Long idReserva, int numParticipantes, int idEvento) {
         Evento evento = lerEventoId(idEvento);
         Reserva reserva = reservaService.lerReservaPin(idReserva);
 

@@ -13,5 +13,5 @@ public interface EventoService {
 
     List<Evento> lerTodosEventos();
 
-    void adicionarParticipante(int idReserva, int numParticipantes, int idEvento);
+    void adicionarParticipante(Long idReserva, int numParticipantes, int idEvento);
 }

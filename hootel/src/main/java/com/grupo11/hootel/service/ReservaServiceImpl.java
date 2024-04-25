@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReservaServiceImpl implements ReservaService {
@@ -19,8 +20,17 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
-    public Reserva lerReservaPin(long pin) {
-        return reservaRepository.findById(pin).orElse(null);
+    public Reserva lerReservaPin(Long pin) {
+        if (pin == null) {
+            throw new RuntimeException("Digite um PIN!");
+        }
+
+        Optional<Reserva> reservaOptional = reservaRepository.findById(pin);
+        if (reservaOptional.isEmpty()) {
+            throw new RuntimeException("PIN inválido");
+        }
+
+        return reservaOptional.get();
     }
 
     @Override

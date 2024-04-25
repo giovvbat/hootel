@@ -26,7 +26,7 @@
       <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
         <div class="container">
 
-          <a href="" class="navbar-brand brand">
+          <a th:href="@{/index}" class="navbar-brand brand">
             <p>hootel</p>
           </a> 
 
@@ -72,8 +72,12 @@
                   <div class="input-group-append">
                     <button type="submit" class="btn" id="botao-logar" style="color: white">Entrar</button>
                   </div>
-                  
+
+
                 </div>
+
+                <span style="color: #cb2d51" th:if="${#fields.hasErrors('PIN')}" th:errors="*{PIN}"></span>
+                <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
               </form>
 
             </div>
