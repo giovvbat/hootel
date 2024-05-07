@@ -35,14 +35,18 @@ public class Evento {
     )
     private List<Reserva> reservas;
 
+    @Column(name = "descricao")
+    private String descricao;
+
     public Evento() { }
 
-    public Evento(Integer id, String horario, String lugar, String nome, Date dataInicio) {
+    public Evento(Integer id, String horario, String lugar, String nome, Date dataInicio, String descricao) {
         this.id = id;
         this.horario = horario;
         this.lugar = lugar;
         this.nome = nome;
         this.dataInicio = dataInicio;
+        this.descricao = descricao;
     }
 
     public Integer getId() {
@@ -101,6 +105,14 @@ public class Evento {
         reservas.add(reserva);
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
     @Override
     public String toString() {
         return "Evento{" +
@@ -110,6 +122,7 @@ public class Evento {
                 ", nome='" + nome + '\'' +
                 ", dataInicio=" + dataInicio +
                 ", reservas=" + reservas +
+                ", descricao='" + descricao + '\'' +
                 '}';
     }
 }
