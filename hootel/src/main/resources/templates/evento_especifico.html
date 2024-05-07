@@ -9,14 +9,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Eventos</title>
+    <title>Evento Especifico</title>
 </head>
 
 <body>
 
 <div class="container">
 
-    <h3>Employee Directory</h3>
+    <h3>Evento Escolhido</h3>
     <hr>
 
 
@@ -27,25 +27,18 @@
             <th>Lugar</th>
             <th>Data</th>
             <th>Horario</th>
-            <th>Ver Evento</th>
+            <th>Descrição</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="evento : ${eventos}">
+        <tr >
 
-            <td th:text="${evento.nome}" />
-            <td th:text="${evento.lugar}" />
-            <td th:text="${evento.dataInicio}" />
-            <td th:text="${evento.horario}" />
-
-            <!-- Add update button/link -->
-            <td>
-                <a th:href="@{/employees/evento_especifico(eventoId=${evento.id})}"
-                   class="btn btn-info btn-sm">
-                    Ver mais
-                </a>
-            </td>
+            <td th:text="${evento_escolhido.nome}" />
+            <td th:text="${evento_escolhido.lugar}" />
+            <td th:text="${evento_escolhido.dataInicio}" />
+            <td th:text="${evento_escolhido.horario}" />
+            <td th:text="${evento_escolhido.descricao}">
 
         </tr>
         </tbody>
