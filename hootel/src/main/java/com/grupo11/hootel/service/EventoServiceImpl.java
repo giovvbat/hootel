@@ -44,12 +44,19 @@ public class EventoServiceImpl implements EventoService {
         return eventoRepository.findAll();
     }
 
+    // adicionarParticipante tbm tinha como parametro  ->int numParticipantes<- mas tirei por enquanto
     @Override
-    public void adicionarParticipante(Long idReserva, int numParticipantes, int idEvento) {
+    public void adicionarParticipante(Long pinReserva, int idEvento) {
         Evento evento = lerEventoId(idEvento);
-        Reserva reserva = reservaService.lerReservaPin(idReserva);
+        Reserva reserva = reservaService.lerReservaPin(pinReserva);
 
-        evento.addReserva(reserva);
-        eventoRepository.save(evento);
+        if (!evento.getReservas().contains(reserva)) {
+            evento.addReserva(reserva);
+            eventoRepository.save(evento);
+            System.out.println("aqui-1");
+        }else {
+            //fazer alguma coisa, pois está tentando reserva presença para o mesmo evento"
+            System.out.println("aqui-2");
+        }
     }
 }

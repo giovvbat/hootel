@@ -2,11 +2,13 @@ package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Cardapio;
 import com.grupo11.hootel.entity.Evento;
+import com.grupo11.hootel.entity.HorarioCamareira;
 import com.grupo11.hootel.service.EventoService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class EventoController {
     }
 
     @GetMapping("/eventos")
-    public String getEventos(Model model) {
+    public String mostrarEventos(Model model) {
         try {
             List<Evento> eventos = eventoService.lerTodosEventos();
             model.addAttribute("eventos", eventos);
@@ -31,15 +33,30 @@ public class EventoController {
     }
 
     @GetMapping("/evento")
-    public String getEventoID(@RequestParam("eventoId") int theId,
+    public String mostrarEventoPorId(@RequestParam("eventoId") int theId,
                               Model model) {
         try {
             Evento evento = eventoService.lerEventoId(theId);
             model.addAttribute("evento_escolhido", evento);
         }catch (Exception e){
             model.addAttribute("errorMessage", e.getMessage());
+            return "teste";
         }
-        return "evento_especifico";
+        return "eventoEspecifico";
+    }
+
+    @PostMapping("/evento123")
+    public String cadastrarParticipacao(@ModelAttribute("evento_escolhido") Evento evento,
+                                        @RequestParam("pin") Long pin,
+                                        Model model){
+
+        try {
+            eventoService.adicionarParticipante(pin, evento.getId());
+        }catch (Exception e){
+            model.addAttribute("errorMessage", e.getMessage());
+        }
+
+        return "redirect:eventos";
     }
 
 }
