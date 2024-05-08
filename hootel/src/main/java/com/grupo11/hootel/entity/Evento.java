@@ -9,8 +9,9 @@ import java.util.*;
 @Table(name="evento")
 public class Evento {
 
+
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
