@@ -3,6 +3,7 @@ package com.grupo11.hootel.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.*;
 
 @Entity
@@ -25,8 +26,8 @@ public class Evento {
     private String nome;
 
     @Column(name = "data_inicio")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date dataInicio;
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate dataInicio;
 
     @ManyToMany
     @JoinTable(
@@ -41,7 +42,7 @@ public class Evento {
 
     public Evento() { }
 
-    public Evento(Integer id, String horario, String lugar, String nome, Date dataInicio, String descricao) {
+    public Evento(Integer id, String horario, String lugar, String nome, LocalDate dataInicio, String descricao) {
         this.id = id;
         this.horario = horario;
         this.lugar = lugar;
@@ -82,11 +83,11 @@ public class Evento {
         this.nome = nome;
     }
 
-    public Date getDataInicio() {
+    public LocalDate getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Date dataInicio) {
+    public void setDataInicio(LocalDate dataInicio) {
         this.dataInicio = dataInicio;
     }
 
@@ -104,6 +105,12 @@ public class Evento {
         }
 
         reservas.add(reserva);
+    }
+
+    public void removeReserva(Reserva reserva) {
+        if (reservas != null) {
+            reservas.remove(reserva);
+        }
     }
 
     public String getDescricao() {

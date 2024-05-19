@@ -44,7 +44,6 @@ public class EventoServiceImpl implements EventoService {
         return eventoRepository.findAll();
     }
 
-    // adicionarParticipante tbm tinha como parametro  ->int numParticipantes<- mas tirei por enquanto
     @Override
     public void adicionarParticipante(Long pinReserva, int idEvento) {
         Evento evento = lerEventoId(idEvento);
@@ -53,10 +52,22 @@ public class EventoServiceImpl implements EventoService {
         if (!evento.getReservas().contains(reserva)) {
             evento.addReserva(reserva);
             eventoRepository.save(evento);
-            System.out.println("aqui-1");
         }else {
-            //fazer alguma coisa, pois está tentando reserva presença para o mesmo evento"
-            System.out.println("aqui-2");
+            throw new RuntimeException("Você já confirmou presença nesse evento");
         }
     }
+
+    @Override
+    public void removerParticipante(Long pinReserva, int idEvento) {
+        Evento evento = lerEventoId(idEvento);
+        Reserva reserva = reservaService.lerReservaPin(pinReserva);
+
+        if (evento.getReservas().contains(reserva)) {
+            evento.removeReserva(reserva);
+            eventoRepository.save(evento);
+        }else {
+            throw new RuntimeException("Sua presença não está confirmada para esse evento");
+        }
+    }
+
 }
