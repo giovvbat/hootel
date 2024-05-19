@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Meta tags Obrigatórias -->
     <meta charset="utf-8">
@@ -18,12 +18,12 @@
     <![endif]-->
 
     <!-- Estilo customizado -->
-    <link rel="stylesheet" type="text/css" href="css/style_cardapio.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style_cardapio.css}">
 
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/af46ebb8cd.js" crossorigin="anonymous"></script>
 
-    <title>informações</title>
+    <title>cardápio</title>
 
 </head>
 <body>
@@ -81,17 +81,17 @@
 
                     <div class="mb-4">
                         <h5>Opção carnívora</h5>
-                        <span>A opção carnívora oferecida é *opcao*.</span>
+                        <span>A opção carnívora oferecida é </span><span th:text="${cardapio.opcaoCarnivora}"></span><span>.</span>
                     </div>
 
                     <div>
                         <h5>Opção vegetariana</h5>
-                        <span>A opção vegetariana oferecida é *opcao*.</span>
+                        <span>A opção vegetariana oferecida é </span><span th:text="${cardapio.opcaoVegetariana}"></span><span>.</span>
                     </div>
 
                     <div class="mt-4">
                         <h5>Bebida</h5>
-                        <span>A bebida oferecida é *bebida*.</span>
+                        <span>A bebida oferecida é </span><span th:text="${cardapio.bebidas}"></span><span>.</span>
                     </div>
 
                 </div>

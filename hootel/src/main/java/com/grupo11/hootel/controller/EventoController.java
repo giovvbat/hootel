@@ -1,13 +1,9 @@
 package com.grupo11.hootel.controller;
 
-import com.grupo11.hootel.entity.Cardapio;
 import com.grupo11.hootel.entity.Evento;
-import com.grupo11.hootel.entity.HorarioCamareira;
 import com.grupo11.hootel.service.EventoService;
-import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +20,7 @@ public class EventoController {
     public String mostrarEventos(Model model) {
         List<Evento> eventos = eventoService.lerTodosEventos();
         model.addAttribute("eventos", eventos);
-        return "eventos";
+        return "eventos_rascunho";
     }
 
     @GetMapping("/evento")
@@ -37,7 +33,7 @@ public class EventoController {
             model.addAttribute("errorMessage", e.getMessage());
             return "teste";
         }
-        return "eventoEspecifico";
+        return "eventoEspecifico_rascunho";
     }
 
     @PostMapping("/evento/participacao/add")

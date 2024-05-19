@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Meta tags Obrigatórias -->
     <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <![endif]-->
 
     <!-- Estilo customizado -->
-    <link rel="stylesheet" type="text/css" href="css/style_eventos.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style_eventos.css}">
 
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/af46ebb8cd.js" crossorigin="anonymous"></script>
@@ -72,7 +72,7 @@
     <div class="container align-self-center capa">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <h1>Calendário de eventos <i class="fa-solid fa-circle-info"></i></h1>
+                <h1>Calendário de eventos></h1>
 
                 <h5>Tá afim de se divertir? Dá uma olhada nos eventos que planejamos!</h5>
 
@@ -88,15 +88,15 @@
                     </thead>
 
                     <tbody>
-                    <tr>
+                    <tr th:each="evento : ${eventos}">
 
-                        <td>Teste</td>
-                        <td>Teste</td>
-                        <td>Teste</td>
-                        <td>Teste</td>
+                        <td th:text="${evento.nome}"></td>
+                        <td th:text="${evento.lugar}"></td>
+                        <td th:text="${evento.dataInicio}"></td>
+                        <td th:text="${evento.horario}"></td>
 
                         <td>
-                            <a class="btn" id="btn-roxo">
+                            <a th:href="@{/evento(eventoId=${evento.id})}" class="btn" id="btn-roxo">
                                 Ver mais
                             </a>
                         </td>
