@@ -22,13 +22,8 @@ public class EventoController {
 
     @GetMapping("/eventos")
     public String mostrarEventos(Model model) {
-        try {
-            List<Evento> eventos = eventoService.lerTodosEventos();
-            model.addAttribute("eventos", eventos);
-        }catch (Exception e){
-            model.addAttribute("errorMessage", e.getMessage());
-            return "cardapio-error";
-        }
+        List<Evento> eventos = eventoService.lerTodosEventos();
+        model.addAttribute("eventos", eventos);
         return "eventos";
     }
 
@@ -45,7 +40,7 @@ public class EventoController {
         return "eventoEspecifico";
     }
 
-    @PostMapping("/evento123")
+    @PostMapping("/evento/participacao/add")
     public String cadastrarParticipacao(@ModelAttribute("evento_escolhido") Evento evento,
                                         @RequestParam("pin") Long pin,
                                         Model model){
@@ -56,7 +51,21 @@ public class EventoController {
             model.addAttribute("errorMessage", e.getMessage());
         }
 
-        return "redirect:eventos";
+        return "redirect:/eventos";
+    }
+
+    @PostMapping("/evento/participacao/rm")
+    public String removerParticipacao(@ModelAttribute("evento_escolhido") Evento evento,
+                                        @RequestParam("pin") Long pin,
+                                        Model model){
+
+        try {
+            eventoService.removerParticipante(pin, evento.getId());
+        }catch (Exception e){
+            model.addAttribute("errorMessage", e.getMessage());
+        }
+
+        return "redirect:/eventos";
     }
 
 }
