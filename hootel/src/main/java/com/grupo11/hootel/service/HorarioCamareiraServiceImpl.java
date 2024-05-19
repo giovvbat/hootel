@@ -27,7 +27,7 @@ public class HorarioCamareiraServiceImpl implements HorarioCamareiraService {
     }
 
     @Override
-    public List<HorarioCamareira> getHorariosPin(long pin) {
+    public List<HorarioCamareira> getHorariosPin(Long pin) {
         Reserva reserva = reservaService.lerReservaPin(pin);
 
         return horarioCamareiraRepository.findAllByReserva(reserva);
