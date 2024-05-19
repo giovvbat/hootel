@@ -20,7 +20,10 @@ public class InformacoesServiceImpl implements InformacoesService {
 
     @Override
     public Informacoes lerInformacoes() {
+        System.out.println("asdlskjad");
         Optional<Informacoes> informacoes = informacoesRepository.findById(1);
+
+        System.out.println(informacoes);
 
         if (informacoes.isEmpty()) {
             throw new RuntimeException("Não há informações cadastradas");

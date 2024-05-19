@@ -44,7 +44,6 @@ public class CamareiraController {
 
     ) {
         if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult.getAllErrors());
             return "camareiras";
         }
 
