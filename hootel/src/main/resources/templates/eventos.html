@@ -1,65 +1,5 @@
-<!--
-<!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    &lt;!&ndash; Required meta tags &ndash;&gt;
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    &lt;!&ndash; Bootstrap CSS &ndash;&gt;
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-    <title>Eventos</title>
-</head>
-
-<body>
-
-<div class="container">
-
-    <h3>Eventos</h3>
-    <hr>
-
-
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
-        <tr>
-            <th>Nome</th>
-            <th>Lugar</th>
-            <th>Data</th>
-            <th>Horario</th>
-            <th>Ver Evento</th>
-        </tr>
-        </thead>
-
-        <tbody>
-        <tr th:each="evento : ${eventos}">
-
-            <td th:text="${evento.nome}" />
-            <td th:text="${evento.lugar}" />
-            <td th:text="${evento.dataInicio}" />
-            <td th:text="${evento.horario}" />
-
-            &lt;!&ndash; Add update button/link &ndash;&gt;
-            <td>
-                <a th:href="@{/evento(eventoId=${evento.id})}"
-                   class="btn btn-info btn-sm">
-                    Ver mais
-                </a>
-            </td>
-
-        </tr>
-        </tbody>
-    </table>
-
-</div>
-
-</body>
-</html>-->
-
-
 <!DOCTYPE html>
-<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<html lang="pt-br">
 <head>
     <!-- Meta tags Obrigatórias -->
     <meta charset="utf-8">
@@ -78,13 +18,12 @@
     <![endif]-->
 
     <!-- Estilo customizado -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style_avaliacao.css}">
+    <link rel="stylesheet" type="text/css" href="css/style_eventos.css">
 
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/af46ebb8cd.js" crossorigin="anonymous"></script>
 
-    <title>Eventos</title>
-    <link rel="icon" href="imagens/favicon.png">
+    <title>eventos</title>
 
 </head>
 <body>
@@ -92,7 +31,7 @@
     <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
         <div class="container">
 
-            <a th:href="@{/home}" class="navbar-brand brand">
+            <a href="" class="navbar-brand brand">
                 <p>hootel</p>
             </a>
 
@@ -115,11 +54,11 @@
                     </li>
 
                     <li class="nav-item">
-                        <a th:href="@{/camareiras}" class="nav-link">Camareiras</a>
+                        <a href="camareiras.html" class="nav-link">Camareiras</a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="" class="nav-link">Mais informações</a>
+                        <a href="info.html" class="nav-link">Mais informações</a>
                     </li>
 
                 </ul>
@@ -129,55 +68,49 @@
     </nav>
 </header>
 
-<br><br>
-<br><br>
-<br><br>
-<br><br>
-<br><br>
+<section id="formulario" class="d-flex">
+    <div class="container align-self-center capa">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <h1>Calendário de eventos <i class="fa-solid fa-circle-info"></i></h1>
 
-<div class="container">
+                <h5>Tá afim de se divertir? Dá uma olhada nos eventos que planejamos!</h5>
 
-    <h3>Eventos</h3>
-    <hr>
+                <table class="table table-bordered table-striped mt-5" style="margin-bottom: 110px">
+                    <thead class="table-light">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Lugar</th>
+                        <th>Data</th>
+                        <th>Horário</th>
+                        <th>Detalhes</th>
+                    </tr>
+                    </thead>
 
+                    <tbody>
+                    <tr>
 
-    <table class="table table-bordered table-striped">
-        <thead class="table-dark">
-        <tr>
-            <th>Nome</th>
-            <th>Lugar</th>
-            <th>Data</th>
-            <th>Horario</th>
-            <th>Ver Evento</th>
-        </tr>
-        </thead>
+                        <td>Teste</td>
+                        <td>Teste</td>
+                        <td>Teste</td>
+                        <td>Teste</td>
 
-        <tbody>
-        <tr th:each="evento : ${eventos}">
+                        <td>
+                            <a class="btn" id="btn-roxo">
+                                Ver mais
+                            </a>
+                        </td>
 
-            <td th:text="${evento.nome}" />
-            <td th:text="${evento.lugar}" />
-            <td th:text="${evento.dataInicio}" />
-            <td th:text="${evento.horario}" />
+                    </tr>
+                    </tbody>
+                </table>
 
-            <td>
-                <a th:href="@{/evento(eventoId=${evento.id})}"
-                   class="btn btn-info btn-sm">
-                    Ver mais
-                </a>
-            </td>
-
-        </tr>
-        </tbody>
-    </table>
-    <br><br>
-    <br><br>
-    <br><br>
-    <br><br>
-    <br><br>
+            </div>
 
 
-</div>
+        </div>
+    </div>
+</section>
 
 <footer>
     <div class="container">
