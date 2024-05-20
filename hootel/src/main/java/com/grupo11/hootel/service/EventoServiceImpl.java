@@ -26,8 +26,12 @@ public class EventoServiceImpl implements EventoService {
     @Override
     @Transactional
 
-    //colocar excecoes pro caso do evento nao existir
     public void atualizarEvento(Evento evento) {
+
+        Optional<Evento> optionalEvento = eventoRepository.findById(evento.getId());
+        if(optionalEvento.isEmpty()) {
+            throw new EventoInvalidoException();
+        }
 
         eventoRepository.save(evento);
     }
@@ -53,16 +57,26 @@ public class EventoServiceImpl implements EventoService {
                 .orElseThrow(EventoInvalidoException::new);
     }
 
-    //colocar excecao pro caso de nenhum evento existir
     @Override
     public List<Evento> lerTodosEventos() {
 
-        return eventoRepository.findAll();
+        List<Evento> eventos = eventoRepository.findAll();
+        if(eventos.isEmpty()) {
+            throw new NenhumEventoException();
+        }
+
+        return eventos;
     }
 
     @Override
     public void deletarEvento(Evento evento) {
 
+        Optional<Evento> optionalEvento = eventoRepository.findById(evento.getId());
+        if(optionalEvento.isEmpty()) {
+            throw new EventoInvalidoException();
+        }
+
+        eventoRepository.delete(evento);
     }
 
     @Override

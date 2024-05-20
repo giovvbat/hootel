@@ -6,11 +6,11 @@ import java.util.List;
 
 public interface HorarioCamareiraService {
 
-    List<HorarioCamareira> getHorariosCamareiras();
+    List<HorarioCamareira> lerHorariosCamareiras();
 
-    List<HorarioCamareira> getHorariosPin(Long pin);
+    List<HorarioCamareira> lerHorariosPin(Long pin);
 
-    List<HorarioCamareira> getHorariosDisponiveis();
+    List<HorarioCamareira> lerHorariosDisponiveis();
 
     HorarioCamareira criarHorario(Integer id, Long pin, List<String> servicos);
 

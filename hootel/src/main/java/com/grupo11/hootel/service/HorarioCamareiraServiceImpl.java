@@ -3,10 +3,7 @@ package com.grupo11.hootel.service;
 import com.grupo11.hootel.dao.HorarioCamareiraRepository;
 import com.grupo11.hootel.entity.HorarioCamareira;
 import com.grupo11.hootel.entity.Reserva;
-import com.grupo11.hootel.exceptions.CamareiraNaoSolicitadaException;
-import com.grupo11.hootel.exceptions.CamareiraSolicitadaException;
-import com.grupo11.hootel.exceptions.HorarioInvalidoException;
-import com.grupo11.hootel.exceptions.HorarioReservadoException;
+import com.grupo11.hootel.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,20 +24,39 @@ public class HorarioCamareiraServiceImpl implements HorarioCamareiraService {
     }
 
     @Override
-    public List<HorarioCamareira> getHorariosCamareiras() {
-        return horarioCamareiraRepository.findAll();
+    public List<HorarioCamareira> lerHorariosCamareiras() {
+        List<HorarioCamareira> horarioCamareiras = horarioCamareiraRepository.findAll();
+
+        if(horarioCamareiras.isEmpty()) {
+            throw new CamareirasIndisponiveisException();
+        }
+
+        return horarioCamareiras;
     }
 
     @Override
-    public List<HorarioCamareira> getHorariosPin(Long pin) {
+    public List<HorarioCamareira> lerHorariosPin(Long pin) {
         Reserva reserva = reservaService.lerReservaPin(pin);
 
-        return horarioCamareiraRepository.findAllByReserva(reserva);
+        List<HorarioCamareira> horarioCamareiras = horarioCamareiraRepository.findAllByReserva(reserva);
+
+        if(horarioCamareiras.isEmpty()) {
+            throw new CamareiraNaoSolicitadaException();
+        }
+
+        return horarioCamareiras;
     }
 
     @Override
-    public List<HorarioCamareira> getHorariosDisponiveis() {
-        return horarioCamareiraRepository.findAllByReserva(null);
+    public List<HorarioCamareira> lerHorariosDisponiveis() {
+
+        List<HorarioCamareira> horarioCamareiras = horarioCamareiraRepository.findAllByReserva(null);
+
+        if(horarioCamareiras.isEmpty()) {
+            throw new CamareirasIndisponiveisException();
+        }
+
+        return horarioCamareiras;
     }
 
     @Override
@@ -64,20 +80,6 @@ public class HorarioCamareiraServiceImpl implements HorarioCamareiraService {
         return horarioCamareiraRepository.save(horarioCamareira);
     }
 
-
-//    @Override
-//    @Transactional
-//    public void updateHorario(Long pin) {
-//        Reserva reserva = reservaService.lerReservaPin(pin);
-//
-//        if(horarioCamareiraRepository.findAllByReserva(reserva).isEmpty()) {
-//            throw new CamareiraNaoSolicitadaException();
-//        }
-//
-//        horarioCamareiraRepository.findAllByReserva(reserva).getFirst();
-//
-//    }
-
     @Override
     @Transactional
     public void deletarHorario(Long pin) {
@@ -87,6 +89,8 @@ public class HorarioCamareiraServiceImpl implements HorarioCamareiraService {
             throw new CamareiraNaoSolicitadaException();
         }
 
-        horarioCamareiraRepository.delete(horarioCamareiraRepository.findAllByReserva(reserva).getFirst());
+        HorarioCamareira horarioCamareira = horarioCamareiraRepository.findAllByReserva(reserva).getFirst();
+        horarioCamareira.setReserva(null);
+        horarioCamareiraRepository.save(horarioCamareira);
     }
 }

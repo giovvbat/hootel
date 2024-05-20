@@ -58,6 +58,7 @@ public class ReservaServiceImpl implements ReservaService {
     @Override
     @Transactional
     public void criarReserva(Reserva reserva) {
+        //gerar Pin aleatório
 
         Optional<Reserva> reservaOptionalExistente = reservaRepository.findById(reserva.getPIN());
         if (!reservaOptionalExistente.isEmpty()) {
@@ -71,13 +72,15 @@ public class ReservaServiceImpl implements ReservaService {
     @Transactional
     public void updateReserva(Reserva reserva, Long pin) {
 
+        //gerar Pin aleatório
+
         Optional<Reserva> reservaOptional = reservaRepository.findById(reserva.getPIN());
-        if (reservaOptional.isEmpty()) {
+        if(reservaOptional.isEmpty()) {
             throw new PinInvalidoException();
         }
 
         Optional<Reserva> reservaOptionalExistente = reservaRepository.findById(pin);
-        if (!reservaOptionalExistente.isEmpty()) {
+        if(!reservaOptionalExistente.isEmpty()) {
             throw new PINExistenteException();
         }
 
