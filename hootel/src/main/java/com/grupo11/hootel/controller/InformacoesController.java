@@ -2,6 +2,7 @@ package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Cardapio;
 import com.grupo11.hootel.entity.Informacoes;
+import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.InformacoesService;
 import com.grupo11.hootel.service.InformacoesServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class InformacoesController {
         try {
             Informacoes informacoes = informacoesService.lerInformacoes();
             model.addAttribute("informacoes", informacoes);
-        }catch (Exception e){
+        }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
             return "info";
         }

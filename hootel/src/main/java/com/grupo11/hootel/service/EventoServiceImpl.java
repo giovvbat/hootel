@@ -3,6 +3,9 @@ package com.grupo11.hootel.service;
 import com.grupo11.hootel.dao.EventoRepository;
 import com.grupo11.hootel.entity.Evento;
 import com.grupo11.hootel.entity.Reserva;
+import com.grupo11.hootel.exceptions.EventoConfirmadoException;
+import com.grupo11.hootel.exceptions.EventoInvalidoException;
+import com.grupo11.hootel.exceptions.EventoNaoConfirmadoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +39,7 @@ public class EventoServiceImpl implements EventoService {
     @Override
     public Evento lerEventoId(Integer id) {
         return eventoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Evento inválido"));
+                .orElseThrow(EventoInvalidoException::new);
     }
 
     @Override
@@ -53,7 +56,7 @@ public class EventoServiceImpl implements EventoService {
             evento.addReserva(reserva);
             eventoRepository.save(evento);
         }else {
-            throw new RuntimeException("Você já confirmou presença nesse evento");
+            throw new EventoConfirmadoException();
         }
     }
 
@@ -66,7 +69,7 @@ public class EventoServiceImpl implements EventoService {
             evento.removeReserva(reserva);
             eventoRepository.save(evento);
         }else {
-            throw new RuntimeException("Sua presença não está confirmada para esse evento");
+            throw new EventoNaoConfirmadoException();
         }
     }
 

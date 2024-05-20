@@ -1,6 +1,7 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Reserva;
+import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.ReservaService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -50,7 +51,7 @@ public class ReservaController {
 
         try {
             reservaService.lerReservaPin(aReserva.getPIN());
-        } catch (Exception e) {
+        } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "login";
         }

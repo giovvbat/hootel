@@ -1,6 +1,7 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Cardapio;
+import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.CardapioService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,7 @@ public class CardapioController {
         try {
             Cardapio cardapio = cardapioService.lerCardapio();
             model.addAttribute("cardapio", cardapio);
-        }catch (Exception e){
+        }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
             return "cardapio-error";
         }

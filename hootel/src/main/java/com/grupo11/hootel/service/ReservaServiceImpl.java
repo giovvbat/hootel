@@ -2,6 +2,7 @@ package com.grupo11.hootel.service;
 
 import com.grupo11.hootel.dao.ReservaRepository;
 import com.grupo11.hootel.entity.Reserva;
+import com.grupo11.hootel.exceptions.PinInvalidoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,7 @@ public class ReservaServiceImpl implements ReservaService {
 
         Optional<Reserva> reservaOptional = reservaRepository.findById(pin);
         if (reservaOptional.isEmpty()) {
-            throw new RuntimeException("PIN inválido");
+            throw new PinInvalidoException();
         }
 
         return reservaOptional.get();

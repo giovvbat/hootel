@@ -2,6 +2,7 @@ package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Evento;
 import com.grupo11.hootel.entity.Reserva;
+import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.EventoService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,7 @@ public class EventoController {
             Reserva reserva = new Reserva();
             model.addAttribute("evento_escolhido", evento);
             model.addAttribute("reserva", reserva);
-        }catch (Exception e){
+        }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
             return "teste";
         }
@@ -54,7 +55,7 @@ public class EventoController {
 
         try {
             eventoService.adicionarParticipante(reserva.getPIN(), evento.getId());
-        }catch (Exception e){
+        }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
@@ -77,7 +78,7 @@ public class EventoController {
 
         try {
             eventoService.removerParticipante(reserva.getPIN(), evento.getId());
-        }catch (Exception e){
+        }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);

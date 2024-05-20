@@ -2,6 +2,7 @@ package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.HorarioCamareira;
 import com.grupo11.hootel.entity.Reserva;
+import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.HorarioCamareiraService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -52,7 +53,7 @@ public class CamareiraController {
                     horarioCamareira.getId(),
                     horarioCamareira.getReserva().getPIN(),
                     horarioCamareira.getServicos());
-        } catch(Exception e) {
+        } catch(HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "camareiras";
         }

@@ -3,6 +3,8 @@ package com.grupo11.hootel.service;
 import com.grupo11.hootel.dao.HorarioCamareiraRepository;
 import com.grupo11.hootel.entity.HorarioCamareira;
 import com.grupo11.hootel.entity.Reserva;
+import com.grupo11.hootel.exceptions.HorarioInvalidoException;
+import com.grupo11.hootel.exceptions.HorarioReservadoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,10 +45,10 @@ public class HorarioCamareiraServiceImpl implements HorarioCamareiraService {
         Reserva reserva = reservaService.lerReservaPin(pin);
 
         HorarioCamareira horarioCamareira = horarioCamareiraRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Horário inválido"));
+                .orElseThrow(HorarioInvalidoException::new);
 
         if (horarioCamareira.getReserva() != null) {
-            throw new RuntimeException("Horário já está reservado");
+            throw new HorarioReservadoException();
         }
 
         horarioCamareira.setReserva(reserva);
