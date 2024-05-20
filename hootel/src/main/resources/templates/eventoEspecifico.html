@@ -98,8 +98,8 @@
                     </tbody>
                 </table>
 
-                <form action="#" th:action="@{/evento/participacao/add}" th:object="${evento_escolhido}" method="POST">
-                    <input type="hidden" th:field="*{id}" />
+                <form action="#" th:action="@{/evento/participacao/add}" method="POST">
+                    <input type="hidden" th:field="${evento_escolhido.id}" />
                     <div class="input-group input-group-lg">
                         <input type="text" th:field="${reserva.PIN}" placeholder="Digite seu PIN" class="form-control">
                         <div class="input-group-append">
@@ -107,7 +107,6 @@
                         </div>
 
                     </div>
-                    <span style="color: #cb2d51" th:if="${#fields.hasErrors('reserva.PIN')}" th:errors="${reserva.PIN}"></span>
 
                 </form>
 
@@ -121,9 +120,10 @@
                         </div>
 
                     </div>
-                    <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
-                    <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
                 </form>
+
+                <span style="color: #cb2d51" th:if="${#fields.hasErrors('reserva.PIN')}" th:errors="${reserva.PIN}"></span>
+                <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
 
             </div>
 

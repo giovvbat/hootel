@@ -43,18 +43,10 @@ public class EventoController {
 
     @PostMapping("/evento/participacao/add")
     public String cadastrarParticipacao(@Valid @ModelAttribute("evento_escolhido") Evento evento,
-                                        BindingResult bindingResultEvento,
                                         @Valid @ModelAttribute("reserva") Reserva reserva,
                                         BindingResult bindingResultReserva, Model model){
 
-        if (bindingResultEvento.hasErrors()) {
-            System.out.println("entrou na função01");
-            return "eventoEspecifico";
-        }
-
         if (bindingResultReserva.hasErrors() ) {
-            System.out.println("entrou na função02");
-            System.out.println(model.toString());
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
             return "eventoEspecifico";
@@ -63,8 +55,9 @@ public class EventoController {
         try {
             eventoService.adicionarParticipante(reserva.getPIN(), evento.getId());
         }catch (Exception e){
-            System.out.println("entrou no catch");
             model.addAttribute("errorMessage", e.getMessage());
+            Evento eventoAtual = eventoService.lerEventoId(evento.getId());
+            model.addAttribute("evento_escolhido", eventoAtual);
             return "eventoEspecifico";
         }
 
@@ -73,24 +66,12 @@ public class EventoController {
 
     @PostMapping("/evento/participacao/rm")
     public String removerParticipacao(@Valid @ModelAttribute("evento_escolhido") Evento evento,
-                                      BindingResult bindingResultEvento,
                                       @Valid @ModelAttribute("reserva") Reserva reserva,
                                       BindingResult bindingResultReserva, Model model){
 
-        if (bindingResultEvento.hasErrors()) {
-            System.out.println("entrou na função01");
-            //model.addAttribute()
-            return "eventoEspecifico";
-        }
-
         if (bindingResultReserva.hasErrors()) {
-            System.out.println("entrou na função02");
-            System.out.println(model.toString());
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
-            //reserva = new Reserva();
-            //model.addAttribute("reserva", reserva);
-            System.out.println(model.toString());
             return "eventoEspecifico";
         }
 
@@ -98,6 +79,9 @@ public class EventoController {
             eventoService.removerParticipante(reserva.getPIN(), evento.getId());
         }catch (Exception e){
             model.addAttribute("errorMessage", e.getMessage());
+            Evento eventoAtual = eventoService.lerEventoId(evento.getId());
+            model.addAttribute("evento_escolhido", eventoAtual);
+            return "eventoEspecifico";
         }
 
         return "redirect:/eventos";

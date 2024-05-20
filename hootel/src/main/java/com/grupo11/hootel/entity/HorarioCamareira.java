@@ -1,6 +1,7 @@
 package com.grupo11.hootel.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 
 import java.text.DateFormat;
@@ -23,6 +24,7 @@ public class HorarioCamareira {
 
     @OneToOne
     @JoinColumn(name = "id_reserva")
+    @Valid
     private Reserva reserva;
 
     @ElementCollection(targetClass = String.class)
