@@ -10,4 +10,8 @@ public interface ReservaService {
     List<Reserva> lerTodasReservas();
 
     void deletarReserva(Reserva reserva);
+
+    void criarReserva(Reserva reserva);
+
+    void updateReserva(Reserva reserva, Long pin);
 }

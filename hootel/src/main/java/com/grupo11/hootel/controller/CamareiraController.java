@@ -1,7 +1,6 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.HorarioCamareira;
-import com.grupo11.hootel.entity.Reserva;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.HorarioCamareiraService;
 import jakarta.validation.Valid;
@@ -49,7 +48,7 @@ public class CamareiraController {
         }
 
         try {
-            camareiraService.atualizarHorario(
+            camareiraService.criarHorario(
                     horarioCamareira.getId(),
                     horarioCamareira.getReserva().getPIN(),
                     horarioCamareira.getServicos());

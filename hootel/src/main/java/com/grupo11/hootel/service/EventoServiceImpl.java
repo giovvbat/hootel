@@ -3,14 +3,13 @@ package com.grupo11.hootel.service;
 import com.grupo11.hootel.dao.EventoRepository;
 import com.grupo11.hootel.entity.Evento;
 import com.grupo11.hootel.entity.Reserva;
-import com.grupo11.hootel.exceptions.EventoConfirmadoException;
-import com.grupo11.hootel.exceptions.EventoInvalidoException;
-import com.grupo11.hootel.exceptions.EventoNaoConfirmadoException;
+import com.grupo11.hootel.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventoServiceImpl implements EventoService {
@@ -26,13 +25,25 @@ public class EventoServiceImpl implements EventoService {
 
     @Override
     @Transactional
+
+    //colocar excecoes pro caso do evento nao existir
     public void atualizarEvento(Evento evento) {
+
         eventoRepository.save(evento);
     }
+
 
     @Override
     @Transactional
     public void criarEvento(Evento evento) {
+
+        Optional<Evento> optionalEvento = eventoRepository.findById(evento.getId());
+        if(evento.getNome() == null || evento.getHorario() == null ||
+        evento.getLugar() == null || evento.getDataInicio() == null ||
+        evento.getDescricao() == null) {
+            throw new EventoIncompletoException();
+        }
+
         eventoRepository.save(evento);
     }
 
@@ -42,9 +53,16 @@ public class EventoServiceImpl implements EventoService {
                 .orElseThrow(EventoInvalidoException::new);
     }
 
+    //colocar excecao pro caso de nenhum evento existir
     @Override
     public List<Evento> lerTodosEventos() {
+
         return eventoRepository.findAll();
+    }
+
+    @Override
+    public void deletarEvento(Evento evento) {
+
     }
 
     @Override

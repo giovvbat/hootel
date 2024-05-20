@@ -13,6 +13,8 @@ public interface EventoService {
 
     List<Evento> lerTodosEventos();
 
+    void deletarEvento(Evento evento);
+
     void adicionarParticipante(Long pinReserva, int idEvento);
 
     void removerParticipante(Long pinReserva, int idEvento);

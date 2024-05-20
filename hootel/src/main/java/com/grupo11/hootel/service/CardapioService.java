@@ -4,7 +4,7 @@ import com.grupo11.hootel.entity.Cardapio;
 
 public interface CardapioService {
 
-    Cardapio atualizarCardapio(Cardapio cardapio);
+    void atualizarCardapio(Cardapio cardapio);
 
     Cardapio lerCardapio();
 }

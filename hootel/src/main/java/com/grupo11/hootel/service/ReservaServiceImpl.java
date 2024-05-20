@@ -2,6 +2,8 @@ package com.grupo11.hootel.service;
 
 import com.grupo11.hootel.dao.ReservaRepository;
 import com.grupo11.hootel.entity.Reserva;
+import com.grupo11.hootel.exceptions.NenhumaReservaException;
+import com.grupo11.hootel.exceptions.PINExistenteException;
 import com.grupo11.hootel.exceptions.PinInvalidoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,12 +35,53 @@ public class ReservaServiceImpl implements ReservaService {
 
     @Override
     public List<Reserva> lerTodasReservas() {
+        List<Reserva> reservas = reservaRepository.findAll();
+
+        if(reservas.isEmpty()) {
+            throw new NenhumaReservaException();
+        }
         return reservaRepository.findAll();
     }
 
     @Override
     @Transactional
     public void deletarReserva(Reserva reserva) {
+
+        Optional<Reserva> reservaOptional = reservaRepository.findById(reserva.getPIN());
+        if (reservaOptional.isEmpty()) {
+            throw new PinInvalidoException();
+        }
+
         reservaRepository.delete(reserva);
+    }
+
+    @Override
+    @Transactional
+    public void criarReserva(Reserva reserva) {
+
+        Optional<Reserva> reservaOptionalExistente = reservaRepository.findById(reserva.getPIN());
+        if (!reservaOptionalExistente.isEmpty()) {
+            throw new PINExistenteException();
+        }
+
+        reservaRepository.save(reserva);
+    }
+
+    @Override
+    @Transactional
+    public void updateReserva(Reserva reserva, Long pin) {
+
+        Optional<Reserva> reservaOptional = reservaRepository.findById(reserva.getPIN());
+        if (reservaOptional.isEmpty()) {
+            throw new PinInvalidoException();
+        }
+
+        Optional<Reserva> reservaOptionalExistente = reservaRepository.findById(pin);
+        if (!reservaOptionalExistente.isEmpty()) {
+            throw new PINExistenteException();
+        }
+
+        reserva.setPIN(pin);
+        reservaRepository.save(reserva);
     }
 }

@@ -46,11 +46,11 @@ public class Avaliacao {
         this.data = data;
     }
 
-    public int getId_avaliacao() {
+    public Integer getId_avaliacao() {
         return id_avaliacao;
     }
 
-    public void setId_avaliacao(int id_avaliacao) {
+    public void setId_avaliacao(Integer id_avaliacao) {
         this.id_avaliacao = id_avaliacao;
     }
 
