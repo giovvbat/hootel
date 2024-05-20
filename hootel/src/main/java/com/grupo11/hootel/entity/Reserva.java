@@ -1,6 +1,7 @@
 package com.grupo11.hootel.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ public class Reserva {
 
     @Id
     @Column(name="pin")
+    @NotNull(message = "está nulo porra!")
     private Long PIN;
 
     @ManyToMany
