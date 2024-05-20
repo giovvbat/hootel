@@ -101,38 +101,28 @@
                 <form action="#" th:action="@{/evento/participacao/add}" th:object="${evento_escolhido}" method="POST">
                     <input type="hidden" th:field="*{id}" />
                     <div class="input-group input-group-lg">
-                        <input type="text" name="pin" th:value="${pin}" placeholder="Digite seu PIN" class="form-control">
+                        <input type="text" th:field="${reserva.PIN}" placeholder="Digite seu PIN" class="form-control">
                         <div class="input-group-append">
                             <button type="submit" class="btn" id="btn-roxo" style="color: white">Confirmar presença</button>
                         </div>
 
                     </div>
+                    <span style="color: #cb2d51" th:if="${#fields.hasErrors('reserva.PIN')}" th:errors="${reserva.PIN}"></span>
+
                 </form>
 
-                <!--<form action="#" th:action="@{/evento/participacao/add}" th:object="${evento_escolhido}" method="POST">
-
-
-
-                    <input type="hidden" th:field="*{id}" />
-
-                    <div class="input-group input-group-lg">
-                        <input type="text" name="pin" th:value="${pin}" placeholder="Digite seu PIN" class="form-control">
-                        <div class="input-group-append">
-                            <button type="submit" class="btn" id="botao-logar" style="color: white">Confirmar presença</button>
-                        </div>
-                    </div>
-
-                </form>-->
 
                 <form action="#" th:action="@{/evento/participacao/rm}" th:object="${evento_escolhido}" method="POST">
                     <input type="hidden" th:field="*{id}" />
                     <div class="input-group input-group-lg">
-                        <input type="text" placeholder="Digite seu PIN" th:value="${pin}" class="form-control">
+                        <input type="text"  name="pin" placeholder="Digite seu PIN" th:field="${reserva.PIN}" class="form-control">
                         <div class="input-group-append">
-                            <button type="button" class="btn" id="btn-roxo" style="color: white">Cancelar presença</button>
+                            <button type="submit" class="btn" id="btn-roxo" style="color: white">Cancelar presença</button>
                         </div>
 
                     </div>
+                    <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
+                    <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
                 </form>
 
             </div>
