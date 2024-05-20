@@ -20,7 +20,7 @@ public class EventoController {
     public String mostrarEventos(Model model) {
         List<Evento> eventos = eventoService.lerTodosEventos();
         model.addAttribute("eventos", eventos);
-        return "eventos_rascunho";
+        return "eventos";
     }
 
     @GetMapping("/evento")
@@ -33,7 +33,7 @@ public class EventoController {
             model.addAttribute("errorMessage", e.getMessage());
             return "teste";
         }
-        return "eventoEspecifico_rascunho";
+        return "eventoEspecifico";
     }
 
     @PostMapping("/evento/participacao/add")

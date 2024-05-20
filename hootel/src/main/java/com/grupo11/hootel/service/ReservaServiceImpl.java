@@ -21,9 +21,9 @@ public class ReservaServiceImpl implements ReservaService {
 
     @Override
     public Reserva lerReservaPin(Long pin) {
-        if (pin == null) {
+        /*if (pin == null) {
             throw new RuntimeException("Digite um PIN!");
-        }
+        }*/
 
         Optional<Reserva> reservaOptional = reservaRepository.findById(pin);
         if (reservaOptional.isEmpty()) {
