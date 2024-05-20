@@ -42,8 +42,8 @@ public class ReservaController {
     @PostMapping("/reserva/checar")
     public String checarPIN(@Valid @ModelAttribute("reserva") Reserva aReserva,
                             BindingResult bindingResult,
-                            Model model
-    ) {
+                            Model model) {
+
         if (bindingResult.hasErrors()) {
             return "login";
         }
