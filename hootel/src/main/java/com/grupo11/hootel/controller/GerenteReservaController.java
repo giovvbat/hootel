@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,8 +24,13 @@ public class GerenteReservaController {
     }
 
     @ModelAttribute("todasReservas")
-    public List<Reserva> populateReservas() {
-        return reservaService.lerTodasReservas();
+    public List<Reserva> populateReservas(Model model) {
+        try {
+            return reservaService.lerTodasReservas();
+        } catch (HootelException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     @GetMapping("/mostrarReservas")

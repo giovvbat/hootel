@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -22,8 +23,13 @@ public class EventoController {
 
     @GetMapping("/eventos")
     public String mostrarEventos(Model model) {
-        List<Evento> eventos = eventoService.lerTodosEventos();
-        model.addAttribute("eventos", eventos);
+        try {
+            List<Evento> eventos = eventoService.lerTodosEventos();
+            model.addAttribute("eventos", eventos);
+        } catch (HootelException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("eventos", new ArrayList<>());
+        }
         return "eventos";
     }
 
@@ -37,13 +43,14 @@ public class EventoController {
             model.addAttribute("reserva", reserva);
         }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
-            return "teste";
+            model.addAttribute("evento_escolhido", new Evento());
+            model.addAttribute("reserva", new Reserva());
         }
         return "eventoEspecifico";
     }
 
     @PostMapping("/evento/participacao/add")
-    public String cadastrarParticipacao(@Valid @ModelAttribute("evento_escolhido") Evento evento,
+    public String cadastrarParticipacao(@ModelAttribute("evento_escolhido") Evento evento,
                                         @Valid @ModelAttribute("reserva") Reserva reserva,
                                         BindingResult bindingResultReserva, Model model){
 
@@ -66,7 +73,7 @@ public class EventoController {
     }
 
     @PostMapping("/evento/participacao/rm")
-    public String removerParticipacao(@Valid @ModelAttribute("evento_escolhido") Evento evento,
+    public String removerParticipacao(@ModelAttribute("evento_escolhido") Evento evento,
                                       @Valid @ModelAttribute("reserva") Reserva reserva,
                                       BindingResult bindingResultReserva, Model model){
 

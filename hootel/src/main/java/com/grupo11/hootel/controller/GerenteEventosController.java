@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -35,6 +36,7 @@ public class GerenteEventosController {
             return "eventos_gerente";
         }catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("eventos", new ArrayList<Evento>());
             return "add_evento_gerente";
         }
     }

@@ -105,6 +105,9 @@
                     </tbody>
                 </table>
 
+                <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
+                <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
+
             </div>
 
 

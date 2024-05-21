@@ -3,7 +3,6 @@ package com.grupo11.hootel.service;
 import com.grupo11.hootel.dao.ReservaRepository;
 import com.grupo11.hootel.entity.Reserva;
 import com.grupo11.hootel.exceptions.NenhumaReservaException;
-import com.grupo11.hootel.exceptions.PINExistenteException;
 import com.grupo11.hootel.exceptions.PinInvalidoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,21 +75,21 @@ public class ReservaServiceImpl implements ReservaService {
 
     @Override
     @Transactional
-    public void updateReserva(Reserva reserva, Long pin) {
+    public void updateReserva(Reserva reserva) {
 
-        //gerar Pin aleatório
+        Random random = new Random();
+        Long numeroAleatorio = 1000 + random.nextLong(9000);
+
+        while (reservaRepository.findById(numeroAleatorio).isPresent()) {
+            numeroAleatorio = 1000 + random.nextLong(9000);
+        }
 
         Optional<Reserva> reservaOptional = reservaRepository.findById(reserva.getPIN());
         if(reservaOptional.isEmpty()) {
             throw new PinInvalidoException();
         }
 
-        Optional<Reserva> reservaOptionalExistente = reservaRepository.findById(pin);
-        if(!reservaOptionalExistente.isEmpty()) {
-            throw new PINExistenteException();
-        }
-
-        reserva.setPIN(pin);
+        reserva.setPIN(numeroAleatorio);
         reservaRepository.save(reserva);
     }
 }

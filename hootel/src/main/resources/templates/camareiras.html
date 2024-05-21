@@ -158,8 +158,8 @@
               <div class="form-group">
                 <h6><label for="usuario">Qual é o seu PIN?</label></h6>
                 <input type="text" th:field="*{reserva.PIN}" class="form-control" id="usuario" placeholder="Digite seu PIN">
-                <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
-                <span style="color: #cb2d51" th:if="${#fields.hasErrors('reserva.PIN')}" th:errors="*{reserva.PIN}"></span>
+                <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span> <br>
+                <span style="color: #cb2d51" th:if="${#fields.hasErrors('reserva.PIN')}" th:errors="*{reserva.PIN}"></span> <br>
                 <span style="color: #cb2d51" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
               </div>
             </div>

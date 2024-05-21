@@ -27,7 +27,6 @@ public class GerenteCardapioController {
         try {
             Cardapio cardapio = cardapioService.lerCardapio();
             model.addAttribute("cardapio", cardapio);
-            System.out.println(cardapio);
         } catch (HootelException e) {
             model.addAttribute("cardapio", new Cardapio());
             model.addAttribute("errorMessage", e.getMessage());
