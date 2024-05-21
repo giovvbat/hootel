@@ -22,24 +22,25 @@ public class GerenteReservaController {
         this.reservaService = ReservaService;
     }
 
+    @ModelAttribute("todasReservas")
+    public List<Reserva> populateReservas() {
+        return reservaService.lerTodasReservas();
+    }
+
     @GetMapping("/mostrarReservas")
     public String mostrarReservas(Model model){
+        model.addAttribute("reserva", new Reserva());
 
-        List<Reserva> todasReservas = reservaService.lerTodasReservas();
-        model.addAttribute("todasReservas", todasReservas);
-        //model.addAttribute("reserva", new Reserva());
-
-        return "reservas";
+        return "reservas_gerente";
     }
 
     @PostMapping("/addReserva")
-    public String criarNovaReserva(@Valid @ModelAttribute("reserva") Reserva reserva,
-                                   Model model) {
+    public String criarNovaReserva(Model model) {
 
-        reserva = reservaService.criarReserva();
+        Reserva reserva = reservaService.criarReserva();
         model.addAttribute("novaReserva", reserva);
 
-        return "reservas";
+        return "redirect:/mostrarReservas";
     }
 
     @PostMapping("/removeReserva")
@@ -48,15 +49,16 @@ public class GerenteReservaController {
                                 Model model){
 
         if (bindingResult.hasErrors()){
-            return "reservas";
+            return "reservas_gerente";
         }
 
         try {
             reservaService.deletarReserva(reserva);
         }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
+            return "reservas_gerente";
         }
 
-        return "reservas";
+        return "redirect:/mostrarReservas";
     }
 }

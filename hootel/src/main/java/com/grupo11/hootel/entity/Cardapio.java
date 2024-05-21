@@ -1,6 +1,8 @@
 package com.grupo11.hootel.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "cardapio")
@@ -12,12 +14,18 @@ public class Cardapio {
     private Integer id;
 
     @Column(name = "bebidas")
+    @NotNull
+    @NotEmpty
     private String bebidas;
 
     @Column(name = "opcao_vegetariana")
+    @NotNull
+    @NotEmpty
     private String opcaoVegetariana;
 
     @Column(name = "opcao_carnivora")
+    @NotNull
+    @NotEmpty
     private String opcaoCarnivora;
 
     public Cardapio() {

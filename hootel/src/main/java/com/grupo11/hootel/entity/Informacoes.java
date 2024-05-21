@@ -4,6 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Informacoes")
@@ -14,24 +16,38 @@ public class Informacoes {
     private Integer id;
 
     @Column(name = "nome_wifi")
+    @NotNull
+    @NotEmpty
     private String nomeWifi;
 
     @Column(name = "senha_wifi")
+    @NotNull
+    @NotEmpty
     private String senhaWifi;
 
     @Column(name = "numero_recepcao")
+    @NotNull
+    @NotEmpty
     private String numeroRecepcao;
 
     @Column(name = "horario_inicio_piscina")
+    @NotNull
+    @NotEmpty
     private String inicioPiscina;
 
     @Column(name = "horario_final_piscina")
+    @NotNull
+    @NotEmpty
     private String finalPiscina;
 
     @Column(name = "horario_inicio_cafe")
+    @NotNull
+    @NotEmpty
     private String inicioCafe;
 
     @Column(name = "horario_final_cafe")
+    @NotNull
+    @NotEmpty
     private String finalCafe;
 
     public Informacoes() {

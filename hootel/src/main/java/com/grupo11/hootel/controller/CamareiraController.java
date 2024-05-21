@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,8 +24,14 @@ public class CamareiraController {
     }
 
     @ModelAttribute("horarios")
-    public List<HorarioCamareira> loadHorarios() {
-        return camareiraService.lerHorariosDisponiveis();
+    public List<HorarioCamareira> loadHorarios(Model model) {
+        try {
+            List<HorarioCamareira> horarios = camareiraService.lerHorariosDisponiveis();
+            return horarios;
+        } catch (HootelException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     @ModelAttribute("horarioCamareira")

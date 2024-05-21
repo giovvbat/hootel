@@ -22,7 +22,7 @@ public class CardapioController {
             model.addAttribute("cardapio", cardapio);
         }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
-            return "cardapio-error";
+            model.addAttribute("cardapio", new Cardapio());
         }
         return "cardapio";
     }

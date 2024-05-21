@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <title>cardapio</title>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h3>Cardapio</h3>
+  <hr>
+
+  <span th:text="${cardapio.id}"></span>
+  <span th:text="${cardapio.bebidas}"></span>
+  <span th:text="${cardapio.opcaoCarnivora}"></span>
+  <span th:text="${cardapio.opcaoVegetariana}"></span>
+
+
+
+  <form action="#" th:action="@{/atualizaCardapio}" th:object="${cardapio}" method="POST">
+
+    <div class="input-group input-group-lg">
+      <input type="text" th:field="*{bebidas}" placeholder="Bebidas" class="form-control">
+      <input type="text" th:field="*{opcaoCarnivora}" placeholder="Carnivora" class="form-control">
+      <input type="text" th:field="*{opcaoVegetariana}" placeholder="Vegetariana" class="form-control">
+      <div class="input-group-append">
+        <button type="submit" class="btn" id="botao-logar" style="color: white">Atualizar</button>
+      </div>
+
+
+    </div>
+
+    <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
+    <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
+
+  </form>
+
+</div>
+
+</body>
+</html>
