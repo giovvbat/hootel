@@ -11,7 +11,7 @@ public interface ReservaService {
 
     void deletarReserva(Reserva reserva);
 
-    void criarReserva(Reserva reserva);
+    Reserva criarReserva();
 
     void updateReserva(Reserva reserva, Long pin);
 }

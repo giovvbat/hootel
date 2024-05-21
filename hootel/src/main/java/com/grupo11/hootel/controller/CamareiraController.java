@@ -24,7 +24,7 @@ public class CamareiraController {
 
     @ModelAttribute("horarios")
     public List<HorarioCamareira> loadHorarios() {
-        return camareiraService.getHorariosDisponiveis();
+        return camareiraService.lerHorariosDisponiveis();
     }
 
     @ModelAttribute("horarioCamareira")
