@@ -13,7 +13,9 @@ public interface EventoService {
 
     List<Evento> lerTodosEventos();
 
-    void deletarEvento(Evento evento);
+    void deletarEvento(Integer idEvento);
+
+    int quantidadeParticipantes(Evento evento);
 
     void adicionarParticipante(Long pinReserva, int idEvento);
 

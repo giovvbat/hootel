@@ -2,6 +2,8 @@ package com.grupo11.hootel.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -11,22 +13,28 @@ import java.util.*;
 public class Evento {
 
 
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
     private Integer id;
 
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotEmpty(message = "Todos os campos devem ser preenchidos")
     @Column(name = "horario")
     private String horario;
 
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotEmpty(message = "Todos os campos devem ser preenchidos")
     @Column(name = "lugar")
     private String lugar;
 
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotEmpty(message = "Todos os campos devem ser preenchidos")
     @Column(name = "nome")
     private String nome;
 
+    @NotNull(message = "Todos os campos devem ser preenchidos")
     @Column(name = "data_inicio")
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dataInicio;
 
     @ManyToMany
@@ -37,6 +45,8 @@ public class Evento {
     )
     private List<Reserva> reservas;
 
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotEmpty(message = "Todos os campos devem ser preenchidos")
     @Column(name = "descricao")
     private String descricao;
 
@@ -111,6 +121,13 @@ public class Evento {
         if (reservas != null) {
             reservas.remove(reserva);
         }
+    }
+
+    public int quantidadeReservas(){
+        if (reservas == null) {
+            reservas = new ArrayList<>();
+        }
+        return reservas.size();
     }
 
     public String getDescricao() {
