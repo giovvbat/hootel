@@ -41,7 +41,7 @@ public class EventoServiceImpl implements EventoService {
     @Transactional
     public void criarEvento(Evento evento) {
 
-        Optional<Evento> optionalEvento = eventoRepository.findById(evento.getId());
+        //Optional<Evento> optionalEvento = eventoRepository.findById(evento.getId());
         if(evento.getNome() == null || evento.getHorario() == null ||
         evento.getLugar() == null || evento.getDataInicio() == null ||
         evento.getDescricao() == null) {
@@ -69,14 +69,19 @@ public class EventoServiceImpl implements EventoService {
     }
 
     @Override
-    public void deletarEvento(Evento evento) {
+    public void deletarEvento(Integer idEvento) {
 
-        Optional<Evento> optionalEvento = eventoRepository.findById(evento.getId());
+        Optional<Evento> optionalEvento = eventoRepository.findById(idEvento);
         if(optionalEvento.isEmpty()) {
             throw new EventoInvalidoException();
         }
 
-        eventoRepository.delete(evento);
+        eventoRepository.delete(optionalEvento.get());
+    }
+
+    @Override
+    public int quantidadeParticipantes(Evento evento){
+        return evento.quantidadeReservas();
     }
 
     @Override
