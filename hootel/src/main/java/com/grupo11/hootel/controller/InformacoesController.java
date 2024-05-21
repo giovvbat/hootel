@@ -26,6 +26,7 @@ public class InformacoesController {
             model.addAttribute("informacoes", informacoes);
         }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("informacoes", new Informacoes());
             return "info";
         }
         return "info";

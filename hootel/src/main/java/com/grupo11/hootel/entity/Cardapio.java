@@ -9,23 +9,22 @@ import jakarta.validation.constraints.NotNull;
 public class Cardapio {
 
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
     @Column(name = "bebidas")
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotEmpty(message = "Todos os campos devem ser preenchidos")
     private String bebidas;
 
     @Column(name = "opcao_vegetariana")
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotEmpty(message = "Todos os campos devem ser preenchidos")
     private String opcaoVegetariana;
 
     @Column(name = "opcao_carnivora")
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotEmpty(message = "Todos os campos devem ser preenchidos")
     private String opcaoCarnivora;
 
     public Cardapio() {

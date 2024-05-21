@@ -16,38 +16,38 @@ public class Informacoes {
     private Integer id;
 
     @Column(name = "nome_wifi")
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotEmpty(message = "Todos os campos devem ser preenchidos")
     private String nomeWifi;
 
     @Column(name = "senha_wifi")
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotEmpty(message = "Todos os campos devem ser preenchidos")
     private String senhaWifi;
 
     @Column(name = "numero_recepcao")
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotEmpty(message = "Todos os campos devem ser preenchidos")
     private String numeroRecepcao;
 
     @Column(name = "horario_inicio_piscina")
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotEmpty(message = "Todos os campos devem ser preenchidos")
     private String inicioPiscina;
 
     @Column(name = "horario_final_piscina")
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotEmpty(message = "Todos os campos devem ser preenchidos")
     private String finalPiscina;
 
     @Column(name = "horario_inicio_cafe")
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotEmpty(message = "Todos os campos devem ser preenchidos")
     private String inicioCafe;
 
     @Column(name = "horario_final_cafe")
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotEmpty(message = "Todos os campos devem ser preenchidos")
     private String finalCafe;
 
     public Informacoes() {
