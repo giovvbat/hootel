@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class ReservaServiceImpl implements ReservaService {
@@ -57,15 +58,20 @@ public class ReservaServiceImpl implements ReservaService {
 
     @Override
     @Transactional
-    public void criarReserva(Reserva reserva) {
-        //gerar Pin aleatório
+    public Reserva criarReserva() {
 
-        Optional<Reserva> reservaOptionalExistente = reservaRepository.findById(reserva.getPIN());
-        if (!reservaOptionalExistente.isEmpty()) {
-            throw new PINExistenteException();
+        Random random = new Random();
+        Long numeroAleatorio = 1000 + random.nextLong(9000);
+
+        while (reservaRepository.findById(numeroAleatorio).isPresent()) {
+            numeroAleatorio = 1000 + random.nextLong(9000);
         }
 
+        Reserva reserva = new Reserva();
+        reserva.setPIN(numeroAleatorio);
         reservaRepository.save(reserva);
+
+        return reserva;
     }
 
     @Override

@@ -89,7 +89,7 @@ public class HorarioCamareiraServiceImpl implements HorarioCamareiraService {
             throw new CamareiraNaoSolicitadaException();
         }
 
-        HorarioCamareira horarioCamareira = horarioCamareiraRepository.findAllByReserva(reserva).getFirst();
+        HorarioCamareira horarioCamareira = horarioCamareiraRepository.findAllByReserva(reserva).get(0);
         horarioCamareira.setReserva(null);
         horarioCamareiraRepository.save(horarioCamareira);
     }
