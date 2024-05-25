@@ -12,7 +12,7 @@ public interface HorarioCamareiraService {
 
     List<HorarioCamareira> lerHorariosDisponiveis();
 
-    HorarioCamareira criarHorario(Integer id, Long pin, List<String> servicos);
+    HorarioCamareira criarHorario(HorarioCamareira horarioCamareira);
 
     //void updateHorario(Long pin);
 

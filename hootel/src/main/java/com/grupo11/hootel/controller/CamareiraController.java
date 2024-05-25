@@ -55,10 +55,7 @@ public class CamareiraController {
         }
 
         try {
-            camareiraService.criarHorario(
-                    horarioCamareira.getId(),
-                    horarioCamareira.getReserva().getPIN(),
-                    horarioCamareira.getServicos());
+            camareiraService.criarHorario(horarioCamareira);
         } catch(HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "camareiras";

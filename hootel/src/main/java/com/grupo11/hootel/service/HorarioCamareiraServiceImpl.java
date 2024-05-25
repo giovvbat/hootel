@@ -61,22 +61,22 @@ public class HorarioCamareiraServiceImpl implements HorarioCamareiraService {
 
     @Override
     @Transactional
-    public HorarioCamareira criarHorario(Integer id, Long pin, List<String> servicos) {
-        Reserva reserva = reservaService.lerReservaPin(pin);
+    public HorarioCamareira criarHorario(HorarioCamareira horarioCamareira) {
+        Reserva reserva = reservaService.lerReservaPin(horarioCamareira.getReserva().getPIN());
 
         if(!horarioCamareiraRepository.findAllByReserva(reserva).isEmpty()) {
             throw new CamareiraSolicitadaException();
         }
 
-        HorarioCamareira horarioCamareira = horarioCamareiraRepository.findById(id)
+        HorarioCamareira horarioBD = horarioCamareiraRepository.findById(horarioCamareira.getId())
                 .orElseThrow(HorarioInvalidoException::new);
 
-        if (horarioCamareira.getReserva() != null) {
+        if (horarioBD.getReserva() != null) {
             throw new HorarioReservadoException();
         }
 
-        horarioCamareira.setReserva(reserva);
-        horarioCamareira.setServicos(servicos);
+        horarioBD.setReserva(reserva);
+        horarioBD.setServicos(horarioCamareira.getServicos());
         return horarioCamareiraRepository.save(horarioCamareira);
     }
 
