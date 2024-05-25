@@ -59,23 +59,45 @@
                 <input type="text" th:field="*{horario}" placeholder="horário" class="form-control">
                 <input type="text" th:field="*{descricao}" placeholder="descricao" class="form-control">
                 <div class="input-group-append">
-                    <button type="submit" class="btn" id="botao-logar" style="color: white">Adicionar Evento</button>
+                    <button type="submit" class="btn" id="botao-logar" style="color: mediumpurple">Adicionar Evento</button>
                 </div>
 
+            </div>
+
+            <div th:if="${errorMessageAdd}">
+                <span style="color: #cb2d51" th:text="${errorMessageAdd}">Error</span>
+            </div>
+            <div th:if="${#fields.hasErrors('lugar')}">
+                <span style="color: #cb2d51" th:errors="${evento.lugar}"></span>
+            </div>
+            <div th:if="${#fields.hasErrors('nome')}">
+                <span style="color: #cb2d51" th:errors="${evento.nome}"></span>
+            </div>
+            <div th:if="${#fields.hasErrors('dataInicio')}">
+                <span style="color: #cb2d51" th:errors="${evento.dataInicio}"></span>
+            </div>
+            <div th:if="${#fields.hasErrors('horario')}">
+                <span style="color: #cb2d51" th:errors="${evento.horario}"></span>
+            </div>
+            <div th:if="${#fields.hasErrors('descricao')}">
+                <span style="color: #cb2d51" th:errors="${evento.descricao}"></span>
             </div>
 
         </form>
 
         <br><br>
 
-        <form action="#" th:action="@{/removeEvento}" th:object="${evento}" method="POST">
+        <form action="#" th:action="@{/removeEvento}"  method="POST">
 
             <div class="input-group input-group-lg">
-                <input type="text" th:field="${evento.id}" placeholder="Digite seu PIN" class="form-control">
+                <input type="text" name="id_evento" placeholder="Digite seu PIN" class="form-control">
                 <div class="input-group-append">
-                    <button type="submit" class="btn" id="botao-logar" style="color: white">Remover Evento</button>
+                    <button type="submit" class="btn" id="botao-logar" style="color: mediumpurple">Remover Evento</button>
                 </div>
 
+            </div>
+            <div th:if="${errorMessageRemove}">
+                <span style="color: #cb2d51" th:text="${errorMessageRemove}">Error</span>
             </div>
 
         </form>
@@ -96,8 +118,26 @@
             </div>
 
         </div>
-        <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
-        <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
+        <!--<span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
+        <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>-->
+        <div th:if="${errorMessageUpdate}">
+            <span style="color: #cb2d51" th:text="${errorMessageUpdate}">Error</span>
+        </div>
+        <div th:if="${#fields.hasErrors('lugar')}">
+            <span style="color: #cb2d51" th:errors="${eventoAtualizar.lugar}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('nome')}">
+            <span style="color: #cb2d51" th:errors="${eventoAtualizar.nome}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('dataInicio')}">
+            <span style="color: #cb2d51" th:errors="${eventoAtualizar.dataInicio}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('horario')}">
+            <span style="color: #cb2d51" th:errors="${eventoAtualizar.horario}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('descricao')}">
+            <span style="color: #cb2d51" th:errors="${eventoAtualizar.descricao}"></span>
+        </div>
 
     </form>
 

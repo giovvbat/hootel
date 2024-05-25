@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +27,6 @@ public class GerenteEventosController {
     }
 
     public String popularModal(Model model){
-
-        model.addAttribute("evento", new Evento());
-        model.addAttribute("eventoRemover", new Evento());
-        model.addAttribute("eventoAtualizar", new Evento());
         try {
             List<Evento> eventos = eventoService.lerTodosEventos();
             model.addAttribute("eventos", eventos);
@@ -43,6 +40,8 @@ public class GerenteEventosController {
 
     @GetMapping("/mostrarEventos")
     public String mostrarEventos(Model model){
+        model.addAttribute("evento", new Evento());
+        model.addAttribute("eventoAtualizar", new Evento());
         return popularModal(model);
     }
 
@@ -51,34 +50,40 @@ public class GerenteEventosController {
                                   BindingResult bindingResult, Model model){
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("eventoAtualizar", new Evento());
             return popularModal(model);
         }
 
         try {
             eventoService.criarEvento(evento);
         }catch (HootelException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "eventos_gerente";
+            System.out.println("entrou aqui");
+            model.addAttribute("errorMessageAdd", e.getMessage());
+            return popularModal(model);
         }
 
         return "redirect:/mostrarEventos";
     }
 
     @PostMapping("/removeEvento")
-    public String removerEvento(@ModelAttribute("evento") Evento evento,
-                                 BindingResult bindingResult,
+    public String removerEvento(@RequestParam(value = "id_evento", required = false) Integer id_evento,
                                  Model model){
 
-        if (bindingResult.hasErrors()) {
+        if (id_evento == null) {
+            model.addAttribute("errorMessageRemove", "O ID do evento não deve ser vazio.");
+            model.addAttribute("evento", new Evento());
+            model.addAttribute("eventoAtualizar", new Evento());
             return popularModal(model);
         }
 
-
         try {
+            Evento evento = eventoService.lerEventoId(id_evento);
             eventoService.deletarEvento(evento.getId());
         }catch (HootelException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "eventos_gerente";
+            model.addAttribute("errorMessageRemove", e.getMessage());
+            model.addAttribute("evento", new Evento());
+            model.addAttribute("eventoAtualizar", new Evento());
+            return popularModal(model);
         }
         return "redirect:/mostrarEventos";
     }
@@ -88,14 +93,24 @@ public class GerenteEventosController {
                                 BindingResult bindingResult, Model model){
 
         if (bindingResult.hasErrors()) {
+            System.out.println("entrou aqui");
+            System.out.println(model.toString());
+            model.addAttribute("evento", new Evento());
+            return popularModal(model);
+        }
+
+        if (evento.getId() == null) {
+            model.addAttribute("errorMessageUpdate", "O ID do evento não deve ser vazio.");
+            model.addAttribute("evento", new Evento());
             return popularModal(model);
         }
 
         try {
             eventoService.atualizarEvento(evento);
         }catch (HootelException e) {
-            model.addAttribute("errorMessage", e.getMessage());
-            return "eventos_gerente";
+            model.addAttribute("errorMessageUpdate", e.getMessage());
+            model.addAttribute("evento", new Evento());
+            return popularModal(model);
         }
 
         return "redirect:/mostrarEventos";
