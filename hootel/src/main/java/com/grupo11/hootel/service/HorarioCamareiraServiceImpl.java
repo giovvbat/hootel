@@ -61,7 +61,7 @@ public class HorarioCamareiraServiceImpl implements HorarioCamareiraService {
 
     @Override
     @Transactional
-    public HorarioCamareira criarHorario(HorarioCamareira horarioCamareira) {
+    public void criarHorario(HorarioCamareira horarioCamareira) {
         Reserva reserva = reservaService.lerReservaPin(horarioCamareira.getReserva().getPIN());
 
         if(!horarioCamareiraRepository.findAllByReserva(reserva).isEmpty()) {
@@ -77,7 +77,7 @@ public class HorarioCamareiraServiceImpl implements HorarioCamareiraService {
 
         horarioBD.setReserva(reserva);
         horarioBD.setServicos(horarioCamareira.getServicos());
-        return horarioCamareiraRepository.save(horarioCamareira);
+        horarioCamareiraRepository.save(horarioBD);
     }
 
     @Override

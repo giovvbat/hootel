@@ -15,8 +15,6 @@ public interface EventoService {
 
     void deletarEvento(Integer idEvento);
 
-    int quantidadeParticipantes(Evento evento);
-
     void adicionarParticipante(Long pinReserva, int idEvento);
 
     void removerParticipante(Long pinReserva, int idEvento);

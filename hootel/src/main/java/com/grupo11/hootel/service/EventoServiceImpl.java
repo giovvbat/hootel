@@ -80,11 +80,6 @@ public class EventoServiceImpl implements EventoService {
     }
 
     @Override
-    public int quantidadeParticipantes(Evento evento){
-        return evento.quantidadeReservas();
-    }
-
-    @Override
     public void adicionarParticipante(Long pinReserva, int idEvento) {
         Evento evento = lerEventoId(idEvento);
         Reserva reserva = reservaService.lerReservaPin(pinReserva);
