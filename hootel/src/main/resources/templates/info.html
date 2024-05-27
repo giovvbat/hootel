@@ -31,7 +31,7 @@
     <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
         <div class="container">
 
-            <a href="" class="navbar-brand brand">
+            <a th:href="@{/home}" class="navbar-brand brand">
                 <p>hootel</p>
             </a>
 
@@ -42,23 +42,29 @@
             <div class="collapse navbar-collapse" id="nav-principal">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="" class="nav-link">Serviço de Quarto</a>
+                        <a th:href="@{/home}" class="nav-link">Serviço de Quarto</a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="" class="nav-link">Eventos</a>
+                        <a th:href="@{/eventos}" class="nav-link">Eventos</a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="" class="nav-link">Cardápio</a>
+                        <a th:href="@{/cardapio}" class="nav-link">Cardápio</a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="camareiras.html" class="nav-link">Camareiras</a>
+                        <a th:href="@{/camareiras}" class="nav-link">Camareiras</a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="info.html" class="nav-link">Mais informações</a>
+                        <a th:href="@{/informacoes}" class="nav-link">Mais informações</a>
+                    </li>
+
+                    <li class="nav-item divisor"></li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/avaliacao/formulario}" class="nav-link btn" id="btn-navbar">Sair</a>
                     </li>
 
                 </ul>
@@ -84,13 +90,13 @@
                     <span>Basta conectar-se e começar a navegar!</span>
 
                     <h5 class="mt-4">Como posso entrar em contato com a recepção do meu hotel? <i class="fa-solid fa-phone"></i></h5>
-                    <span>O número da recepção é</span> <span th:text="${informacoes.numeroRecepcao}"></span> <span>. Ligue, a partir do interfone em seu quarto, quando precisar!</span>
+                    <span>O número da recepção é</span> <span th:text="${informacoes.numeroRecepcao}"></span><span>. Ligue, a partir do interfone em seu quarto, quando precisar!</span>
 
-                    <h5 class="mt-4">Em qual o horário posso usufruir da psicina do meu hotel? <i class="fa-solid fa-person-swimming"></i></h5>
-                    <span>O horário de funcionamento da piscina é das</span> <span th:text="${informacoes.inicioPiscina}">h até as</span> <span th:text="${informacoes.finalPiscina}">h.</span> <span>Aproveite!</span>
+                    <h5 class="mt-4">Em qual o horário posso usufruir da piscina do meu hotel? <i class="fa-solid fa-person-swimming"></i></h5>
+                    <span>O horário de funcionamento da piscina é das</span> <span th:text="${informacoes.inicioPiscina}"></span> <span>até as </span> <span th:text="${informacoes.finalPiscina}"></span><span>h. Aproveite!</span>
 
                     <h5 class="mt-4">E o café da manhã? Em que horário está disponível? <i class="fa-solid fa-mug-saucer"></i></h5>
-                    <span>O café da manhã permanece aberto das</span> <span th:text="${informacoes.inicioCafe}"></span> <span>até as </span> <span th:text="${informacoes.finalCafe}"></span> <span>h. Bom apetite!</span>
+                    <span>O café da manhã permanece aberto das</span> <span th:text="${informacoes.inicioCafe}"></span> <span>até as </span> <span th:text="${informacoes.finalCafe}"></span><span>h. Bom apetite!</span>
                 </div>
 
 
