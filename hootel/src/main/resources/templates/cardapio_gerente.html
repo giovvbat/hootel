@@ -9,7 +9,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-  <title>cardapio</title>
+  <title>alimentacao</title>
 </head>
 
 <body>
@@ -19,14 +19,14 @@
   <h3>Cardapio</h3>
   <hr>
 
-  <span th:text="${cardapio.id}"></span>
-  <span th:text="${cardapio.bebidas}"></span>
-  <span th:text="${cardapio.opcaoCarnivora}"></span>
-  <span th:text="${cardapio.opcaoVegetariana}"></span>
+  <span th:text="${alimentacao.id}"></span>
+  <span th:text="${alimentacao.bebidas}"></span>
+  <span th:text="${alimentacao.opcaoCarnivora}"></span>
+  <span th:text="${alimentacao.opcaoVegetariana}"></span>
 
 
 
-  <form action="#" th:action="@{/atualizaCardapio}" th:object="${cardapio}" method="POST">
+  <form action="#" th:action="@{/atualizaCardapio}" th:object="${alimentacao}" method="POST">
 
     <div class="input-group input-group-lg">
       <input type="text" th:field="*{bebidas}" placeholder="Bebidas" class="form-control">

@@ -1,8 +1,8 @@
 package com.grupo11.hootel.controller;
 
-import com.grupo11.hootel.entity.Cardapio;
+import com.grupo11.hootel.entity.Alimentacao;
 import com.grupo11.hootel.exceptions.HootelException;
-import com.grupo11.hootel.service.CardapioService;
+import com.grupo11.hootel.service.AlimentacaoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,20 +15,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class GerenteCardapioController {
 
-    private final CardapioService cardapioService;
+    private final AlimentacaoService alimentacaoService;
 
     @Autowired
-    public GerenteCardapioController(CardapioService cardapioService) {
-        this.cardapioService = cardapioService;
+    public GerenteCardapioController(AlimentacaoService alimentacaoService) {
+        this.alimentacaoService = alimentacaoService;
     }
 
     @GetMapping("/mostrarCardapio")
     public String mostrarCardapio(Model model) {
         try {
-            Cardapio cardapio = cardapioService.lerCardapio();
-            model.addAttribute("cardapio", cardapio);
+            Alimentacao alimentacao = alimentacaoService.lerCardapios();
+            model.addAttribute("cardapio", alimentacao);
         } catch (HootelException e) {
-            model.addAttribute("cardapio", new Cardapio());
+            model.addAttribute("cardapio", new Alimentacao());
             model.addAttribute("errorMessage", e.getMessage());
         }
 
@@ -36,7 +36,7 @@ public class GerenteCardapioController {
     }
 
     @PostMapping("/atualizaCardapio")
-    public String atualizarCardapio(@Valid @ModelAttribute("cardapio") Cardapio cardapio,
+    public String atualizarCardapio(@Valid @ModelAttribute("cardapio") Alimentacao alimentacao,
                                     BindingResult bindingResult,
                                     Model model) {
 
@@ -45,7 +45,7 @@ public class GerenteCardapioController {
         }
 
         try {
-            cardapioService.atualizarCardapio(cardapio);
+            alimentacaoService.atualizarAlimentacao(alimentacao);
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }

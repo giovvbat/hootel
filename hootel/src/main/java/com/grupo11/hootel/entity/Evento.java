@@ -50,6 +50,12 @@ public class Evento {
     @Column(name = "descricao")
     private String descricao;
 
+    @ElementCollection(targetClass = String.class)
+    @CollectionTable(name = "categorias_eventos", joinColumns = @JoinColumn(name = "id_evento"))
+    @Column(name = "categoria", nullable = false)
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    private List<String> categorias;
+
     public Evento() { }
 
     public Evento(Integer id, String horario, String lugar, String nome, LocalDate dataInicio, String descricao) {
@@ -136,6 +142,14 @@ public class Evento {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public @NotNull(message = "Todos os campos devem ser preenchidos") List<String> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(@NotNull(message = "Todos os campos devem ser preenchidos") List<String> categorias) {
+        this.categorias = categorias;
     }
 
     @Override

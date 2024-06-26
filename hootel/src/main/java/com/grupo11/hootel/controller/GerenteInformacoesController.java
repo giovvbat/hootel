@@ -1,6 +1,5 @@
 package com.grupo11.hootel.controller;
 
-import com.grupo11.hootel.entity.Cardapio;
 import com.grupo11.hootel.entity.Informacoes;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.InformacoesService;

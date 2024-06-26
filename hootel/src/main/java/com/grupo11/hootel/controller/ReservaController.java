@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
+
 @Controller
 public class ReservaController {
 
@@ -50,10 +52,34 @@ public class ReservaController {
         }
 
         try {
-            reservaService.lerReservaPin(aReserva.getPIN());
+            Reserva reserva = reservaService.lerReservaPin(aReserva.getPIN());
+
+            if (reserva.getPreferenciasAlimentacao() == null || reserva.getPreferenciasEventos() == null) {
+                model.addAttribute("reserva", reserva);
+                return "preferencias";
+            }
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "login";
+        }
+
+        return "home";
+    }
+
+    @PostMapping("/reserva/preferencias")
+    public String checarPreferencias(@Valid @ModelAttribute("reserva") Reserva aReserva,
+                                     BindingResult bindingResult,
+                                     Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "preferencias";
+        }
+
+        try {
+            reservaService.lerReservaPin(aReserva.getPIN());
+        } catch (HootelException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "preferencias";
         }
 
         return "home";

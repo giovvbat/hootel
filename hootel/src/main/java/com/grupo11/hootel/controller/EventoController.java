@@ -3,7 +3,7 @@ package com.grupo11.hootel.controller;
 import com.grupo11.hootel.entity.Evento;
 import com.grupo11.hootel.entity.Reserva;
 import com.grupo11.hootel.exceptions.HootelException;
-import com.grupo11.hootel.service.EventoService;
+import com.grupo11.hootel.service.*;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +16,13 @@ import java.util.List;
 @Controller
 public class EventoController {
     private EventoService eventoService;
+    private ReservaService reservaService;
+    private RecomendacaoEventosService recomendacaoService;
 
-    public EventoController(EventoService eventoService) {
+    public EventoController(EventoService eventoService, ReservaService reservaService, RecomendacaoEventosService recomendacaoService) {
         this.eventoService = eventoService;
+        this.reservaService = reservaService;
+        this.recomendacaoService = recomendacaoService;
     }
 
     @GetMapping("/eventos")
@@ -95,4 +99,31 @@ public class EventoController {
         return "redirect:/eventos";
     }
 
+    @PostMapping("/evento/recomendacao")
+    public String recomendarEventos(@Valid @ModelAttribute("reserva") Reserva aReserva,
+                                    BindingResult bindingResult,
+                                    Model model) {
+
+        if(bindingResult.hasErrors()) {
+            List<Evento> eventos = eventoService.lerTodosEventos();
+            model.addAttribute("eventos", eventos);
+            return "eventos";
+        }
+
+        try {
+            Reserva reserva = reservaService.lerReservaPin(aReserva.getPIN());
+            EstrategiaRecomendacaoEventos estrategia = new HotelEstrategiaRecomendacaoEventos();
+            List<Evento> eventos = eventoService.lerTodosEventos();
+
+            List<Evento> recomendacao = recomendacaoService.recomendarEventos(estrategia, eventos, reserva);
+
+            model.addAttribute("recomendacao", recomendacao);
+            model.addAttribute("eventos", eventos);
+
+            return "eventos";
+        } catch (HootelException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "eventos";
+        }
+    }
 }
