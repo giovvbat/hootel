@@ -3,6 +3,7 @@ package com.grupo11.hootel.service;
 import com.grupo11.hootel.dao.EventoRepository;
 import com.grupo11.hootel.entity.Evento;
 import com.grupo11.hootel.entity.Reserva;
+import com.grupo11.hootel.entity.ReservaHotel;
 import com.grupo11.hootel.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,6 @@ public class EventoServiceImpl implements EventoService {
 
     @Override
     @Transactional
-
     public void atualizarEvento(Evento evento) {
 
         Optional<Evento> optionalEvento = eventoRepository.findById(evento.getId());
@@ -69,6 +69,7 @@ public class EventoServiceImpl implements EventoService {
     }
 
     @Override
+    @Transactional
     public void deletarEvento(Integer idEvento) {
 
         Optional<Evento> optionalEvento = eventoRepository.findById(idEvento);
@@ -80,12 +81,13 @@ public class EventoServiceImpl implements EventoService {
     }
 
     @Override
+    @Transactional
     public void adicionarParticipante(Long pinReserva, int idEvento) {
         Evento evento = lerEventoId(idEvento);
         Reserva reserva = reservaService.lerReservaPin(pinReserva);
 
         if (!evento.getReservas().contains(reserva)) {
-            evento.addReserva(reserva);
+            evento.addReserva((ReservaHotel) reserva);
             eventoRepository.save(evento);
         }else {
             throw new EventoConfirmadoException();
@@ -93,6 +95,7 @@ public class EventoServiceImpl implements EventoService {
     }
 
     @Override
+    @Transactional
     public void removerParticipante(Long pinReserva, int idEvento) {
         Evento evento = lerEventoId(idEvento);
         Reserva reserva = reservaService.lerReservaPin(pinReserva);

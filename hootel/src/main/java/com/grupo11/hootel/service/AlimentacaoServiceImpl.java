@@ -1,41 +1,43 @@
 package com.grupo11.hootel.service;
 
-import com.grupo11.hootel.dao.CardapioRepository;
+import com.grupo11.hootel.dao.AlimentacaoRepository;
 import com.grupo11.hootel.entity.Alimentacao;
-import com.grupo11.hootel.exceptions.CardapioIncompletoException;
-import com.grupo11.hootel.exceptions.CardapioNaoExisteException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AlimentacaoServiceImpl implements AlimentacaoService {
 
-    private final CardapioRepository cardapioRepository;
+    private final AlimentacaoRepository alimentacaoRepository;
 
     @Autowired
-    public AlimentacaoServiceImpl(CardapioRepository cardapioRepository) {
-        this.cardapioRepository = cardapioRepository;
+    public AlimentacaoServiceImpl(AlimentacaoRepository alimentacaoRepository) {
+        this.alimentacaoRepository = alimentacaoRepository;
+    }
+
+
+    @Override
+    @Transactional
+    public void addAlimentacao(Alimentacao alimentacao) {
+        alimentacaoRepository.save(alimentacao);
     }
 
     @Override
     @Transactional
     public void atualizarAlimentacao(Alimentacao alimentacao) {
-        alimentacao.setId(1);
-
-        if(alimentacao.getOpcaoVegetariana() == null || alimentacao.getBebidas() == null ||
-        alimentacao.getOpcaoCarnivora() == null) {
-            throw new CardapioIncompletoException();
+        if (alimentacaoRepository.existsById(alimentacao.getId())) {
+            alimentacaoRepository.save(alimentacao);
+        } else {
+            throw new EntityNotFoundException("Alimentacao with id " + alimentacao.getId() + " not found");
         }
-
-        cardapioRepository.save(alimentacao);
     }
 
     @Override
     public List<Alimentacao> listarAlimentacoes() {
-        return cardapioRepository.findAll();
+        return alimentacaoRepository.findAll();
     }
 }

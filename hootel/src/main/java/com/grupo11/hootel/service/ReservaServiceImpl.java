@@ -2,6 +2,7 @@ package com.grupo11.hootel.service;
 
 import com.grupo11.hootel.dao.ReservaRepository;
 import com.grupo11.hootel.entity.Reserva;
+import com.grupo11.hootel.entity.ReservaHotel;
 import com.grupo11.hootel.exceptions.NenhumaReservaException;
 import com.grupo11.hootel.exceptions.PinInvalidoException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,8 @@ public class ReservaServiceImpl implements ReservaService {
             numeroAleatorio = 1000 + random.nextLong(9000);
         }
 
-        Reserva reserva = new Reserva();
+        /*Reserva reserva = new Reserva();*/
+        Reserva reserva = new ReservaHotel();
         reserva.setPIN(numeroAleatorio);
         reservaRepository.save(reserva);
 

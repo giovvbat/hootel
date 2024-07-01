@@ -1,6 +1,7 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Reserva;
+import com.grupo11.hootel.entity.ReservaHotel;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.ReservaService;
 import jakarta.validation.Valid;
@@ -35,7 +36,8 @@ public class ReservaController {
     @GetMapping("/reserva/formulario")
     public String mostrarFormulario(Model theModel) {
 
-        Reserva reserva = new Reserva();
+        /*Reserva reserva = new Reserva();*/
+        Reserva reserva = new ReservaHotel();
 
         theModel.addAttribute("reserva", reserva);
 
@@ -43,7 +45,7 @@ public class ReservaController {
     }
 
     @PostMapping("/reserva/checar")
-    public String checarPIN(@Valid @ModelAttribute("reserva") Reserva aReserva,
+    public String checarPIN(@Valid @ModelAttribute("reserva") ReservaHotel aReserva,
                             BindingResult bindingResult,
                             Model model) {
 
@@ -52,7 +54,7 @@ public class ReservaController {
         }
 
         try {
-            Reserva reserva = reservaService.lerReservaPin(aReserva.getPIN());
+            ReservaHotel reserva = (ReservaHotel) reservaService.lerReservaPin(aReserva.getPIN());
 
             if (reserva.getPreferenciasAlimentacao() == null || reserva.getPreferenciasEventos() == null) {
                 model.addAttribute("reserva", reserva);

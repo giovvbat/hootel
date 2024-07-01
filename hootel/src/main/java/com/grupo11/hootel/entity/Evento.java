@@ -43,7 +43,7 @@ public class Evento {
             joinColumns = @JoinColumn(name = "evento_id"),
             inverseJoinColumns = @JoinColumn(name = "reserva_pin")
     )
-    private List<Reserva> reservas;
+    private List<ReservaHotel> reservas;
 
     @NotNull(message = "Todos os campos devem ser preenchidos")
     @NotEmpty(message = "Todos os campos devem ser preenchidos")
@@ -56,15 +56,22 @@ public class Evento {
     @NotNull(message = "Todos os campos devem ser preenchidos")
     private List<String> categorias;
 
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @Column(name = "idade_minima")
+    private Integer idadeMinimaRecomendada;
+
     public Evento() { }
 
-    public Evento(Integer id, String horario, String lugar, String nome, LocalDate dataInicio, String descricao) {
+    public Evento(Integer id, String horario, String lugar, String nome, LocalDate dataInicio, String descricao,
+                  List<String> categorias, Integer idadeMinimaRecomendada) {
         this.id = id;
         this.horario = horario;
         this.lugar = lugar;
         this.nome = nome;
         this.dataInicio = dataInicio;
         this.descricao = descricao;
+        this.categorias = categorias;
+        this.idadeMinimaRecomendada = idadeMinimaRecomendada;
     }
 
     public Integer getId() {
@@ -107,15 +114,15 @@ public class Evento {
         this.dataInicio = dataInicio;
     }
 
-    public List<Reserva> getReservas() {
+    public List<ReservaHotel> getReservas() {
         return reservas;
     }
 
-    public void setReservas(List<Reserva> reservas) {
+    public void setReservas(List<ReservaHotel> reservas) {
         this.reservas = reservas;
     }
 
-    public void addReserva(Reserva reserva) {
+    public void addReserva(ReservaHotel reserva) {
         if (reservas == null) {
             reservas = new ArrayList<>();
         }
@@ -152,6 +159,14 @@ public class Evento {
         this.categorias = categorias;
     }
 
+    public Integer getIdadeMinimaRecomendada() {
+        return idadeMinimaRecomendada;
+    }
+
+    public void setIdadeMinimaRecomendada(Integer idadeMinimaRecomendada) {
+        this.idadeMinimaRecomendada = idadeMinimaRecomendada;
+    }
+
     @Override
     public String toString() {
         return "Evento{" +
@@ -162,6 +177,8 @@ public class Evento {
                 ", dataInicio=" + dataInicio +
                 ", reservas=" + reservas +
                 ", descricao='" + descricao + '\'' +
+                ", categorias=" + categorias +
+                ", idadeMinimaRecomendada=" + idadeMinimaRecomendada +
                 '}';
     }
 }

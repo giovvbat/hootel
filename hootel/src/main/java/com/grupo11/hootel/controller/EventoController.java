@@ -2,6 +2,7 @@ package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Evento;
 import com.grupo11.hootel.entity.Reserva;
+import com.grupo11.hootel.entity.ReservaHotel;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.*;
 import jakarta.validation.Valid;
@@ -42,13 +43,15 @@ public class EventoController {
                               Model model) {
         try {
             Evento evento = eventoService.lerEventoId(theId);
-            Reserva reserva = new Reserva();
+            /*Reserva reserva = new Reserva();*/
+            ReservaHotel reserva = new ReservaHotel();
             model.addAttribute("evento_escolhido", evento);
             model.addAttribute("reserva", reserva);
         }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("evento_escolhido", new Evento());
-            model.addAttribute("reserva", new Reserva());
+            /*model.addAttribute("reserva", new Reserva());*/
+            model.addAttribute("reserva", new ReservaHotel());
         }
         return "eventoEspecifico";
     }

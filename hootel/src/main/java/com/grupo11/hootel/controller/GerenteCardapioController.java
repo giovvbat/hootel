@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class GerenteCardapioController {
 
@@ -25,7 +27,7 @@ public class GerenteCardapioController {
     @GetMapping("/mostrarCardapio")
     public String mostrarCardapio(Model model) {
         try {
-            Alimentacao alimentacao = alimentacaoService.lerCardapios();
+            List<Alimentacao> alimentacao = alimentacaoService.listarAlimentacoes();
             model.addAttribute("cardapio", alimentacao);
         } catch (HootelException e) {
             model.addAttribute("cardapio", new Alimentacao());
@@ -35,8 +37,26 @@ public class GerenteCardapioController {
         return "cardapio_gerente";
     }
 
+    @PostMapping("/adicionarCardapio")
+    public String addAlimentacaoEmCardapio(@Valid @ModelAttribute("cardapio") Alimentacao alimentacao,
+                                 BindingResult bindingResult,
+                                 Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "cardapio_gerente";
+        }
+
+        try {
+            alimentacaoService.addAlimentacao(alimentacao);
+        } catch (HootelException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+        }
+
+        return "cardapio_gerente";
+    }
+
     @PostMapping("/atualizaCardapio")
-    public String atualizarCardapio(@Valid @ModelAttribute("cardapio") Alimentacao alimentacao,
+    public String atualizarAlimentacaoEmCardapio(@Valid @ModelAttribute("cardapio") Alimentacao alimentacao,
                                     BindingResult bindingResult,
                                     Model model) {
 

@@ -1,7 +1,9 @@
 package com.grupo11.hootel.service;
 
 import com.grupo11.hootel.entity.Alimentacao;
+import com.grupo11.hootel.entity.Evento;
 import com.grupo11.hootel.entity.Reserva;
+import com.grupo11.hootel.entity.ReservaHotel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,16 +12,20 @@ public class HotelEstrategiaRecomendacaoAlimentacao implements EstrategiaRecomen
 
     @Override
     public List<Alimentacao> recomendarAlimentacao(List<Alimentacao> alimentacoes, Reserva reserva) {
-        List<Alimentacao> recomendados = new ArrayList<>();
+        if (reserva instanceof ReservaHotel) {
+            ReservaHotel reservaHotel = (ReservaHotel) reserva;
+            List<Alimentacao> recomendados = new ArrayList<>();
 
-        for (Alimentacao alimentacao : alimentacoes) {
-            for (String preferencia : reserva.getPreferenciasAlimentacao()) {
-                if(alimentacao.getCategorias().contains(preferencia) && !recomendados.contains(alimentacao)) {
+            for (Alimentacao alimentacao : alimentacoes) {
+                if (alimentacao.getCategorias().contains(reservaHotel.getPreferenciasAlimentacao())) {
                     recomendados.add(alimentacao);
                 }
             }
-        }
 
-        return recomendados;
+            return recomendados;
+        } else {
+            return new ArrayList<>();
+        }
     }
+
 }

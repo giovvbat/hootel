@@ -2,15 +2,14 @@ package com.grupo11.hootel.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name="reserva")
-public class Reserva {
+
+@MappedSuperclass
+public abstract  class Reserva {
 
     @Id
     @Column(name="pin")
@@ -26,26 +25,12 @@ public class Reserva {
     )
     private List<Evento> eventos;
 
-    @ElementCollection(targetClass = String.class)
-    @CollectionTable(name = "preferencias_alimentacao", joinColumns = @JoinColumn(name = "pin_reserva"))
-    @Column(name = "preferencia_alimentacao", nullable = false)
-    @NotNull(message = "Selecione suas preferências de alimentação")
-    private List<String> preferenciasAlimentacao;
-
-    @ElementCollection(targetClass = String.class)
-    @CollectionTable(name = "preferencias_eventos", joinColumns = @JoinColumn(name = "pin_reserva"))
-    @Column(name = "preferencia_evento", nullable = false)
-    @NotNull(message = "Selecione suas preferências de eventos")
-    private List<String> preferenciasEventos;
-
     public Reserva() {
 
     }
 
-    public Reserva(Long PIN, List<String> preferenciasAlimentacao, List<String> preferenciasEventos) {
+    public Reserva(Long PIN) {
         this.PIN = PIN;
-        this.preferenciasAlimentacao = preferenciasAlimentacao;
-        this.preferenciasEventos = preferenciasEventos;
     }
 
     public @NotNull(message = "Insira um PIN") @Positive(message = "O PIN deve ser um número positivo") Long getPIN() {
@@ -64,22 +49,6 @@ public class Reserva {
         this.eventos = eventos;
     }
 
-    public @NotNull List<String> getPreferenciasAlimentacao() {
-        return preferenciasAlimentacao;
-    }
-
-    public void setPreferenciasAlimentacao(@NotNull List<String> preferenciasAlimentacao) {
-        this.preferenciasAlimentacao = preferenciasAlimentacao;
-    }
-
-    public @NotNull List<String> getPreferenciasEventos() {
-        return preferenciasEventos;
-    }
-
-    public void setPreferenciasEventos(@NotNull List<String> preferenciasEventos) {
-        this.preferenciasEventos = preferenciasEventos;
-    }
-
     public void addEvento(Evento evento) {
         if (eventos == null) {
             eventos = new ArrayList<>();
@@ -93,8 +62,6 @@ public class Reserva {
         return "Reserva{" +
                 "PIN=" + PIN +
                 ", eventos=" + eventos +
-                ", preferenciasAlimentacao=" + preferenciasAlimentacao +
-                ", preferenciasEventos=" + preferenciasEventos +
                 '}';
     }
 }
