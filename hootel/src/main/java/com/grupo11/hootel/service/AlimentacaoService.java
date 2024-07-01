@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface AlimentacaoService {
 
+    void addAlimentacao(Alimentacao alimentacao);
+
     void atualizarAlimentacao(Alimentacao alimentacao);
 
     List<Alimentacao> listarAlimentacoes();

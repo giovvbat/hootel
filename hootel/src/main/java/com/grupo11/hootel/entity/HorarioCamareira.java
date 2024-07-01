@@ -25,7 +25,7 @@ public class HorarioCamareira {
     @OneToOne
     @JoinColumn(name = "id_reserva")
     @Valid
-    private Reserva reserva;
+    private ReservaHotel reserva;
 
     @ElementCollection(targetClass = String.class)
     @CollectionTable(name = "servicos", joinColumns = @JoinColumn(name = "id_servico"))
@@ -39,7 +39,7 @@ public class HorarioCamareira {
     public HorarioCamareira(Integer id, Date horario, Reserva reserva) {
         this.id = id;
         this.horario = horario;
-        this.reserva = reserva;
+        this.reserva = (ReservaHotel) reserva;
     }
 
     public Integer getId() {
@@ -63,7 +63,7 @@ public class HorarioCamareira {
     }
 
     public void setReserva(Reserva reserva) {
-        this.reserva = reserva;
+        this.reserva = (ReservaHotel) reserva;
     }
 
     public List<String> getServicos() {

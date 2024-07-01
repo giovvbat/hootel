@@ -4,6 +4,7 @@ import com.grupo11.hootel.entity.Alimentacao;
 import com.grupo11.hootel.entity.Reserva;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.*;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,7 +31,7 @@ public class CardapioController {
     @GetMapping("/cardapio")
     public String getCardapio(Model model) {
         try {
-            Alimentacao alimentacao = alimentacaoService.lerCardapios();
+            List<Alimentacao> alimentacao = alimentacaoService.listarAlimentacoes();
             model.addAttribute("cardapio", alimentacao);
         }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());

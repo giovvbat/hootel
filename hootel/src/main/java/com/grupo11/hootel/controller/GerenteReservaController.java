@@ -1,6 +1,7 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Reserva;
+import com.grupo11.hootel.entity.ReservaHotel;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.ReservaService;
 import jakarta.validation.Valid;
@@ -35,7 +36,8 @@ public class GerenteReservaController {
 
     @GetMapping("/mostrarReservas")
     public String mostrarReservas(Model model){
-        model.addAttribute("reserva", new Reserva());
+        /*model.addAttribute("reserva", new Reserva());*/
+        model.addAttribute("reserva", new ReservaHotel());
 
         return "reservas_gerente";
     }
