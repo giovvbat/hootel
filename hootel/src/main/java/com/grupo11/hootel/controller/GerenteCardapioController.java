@@ -1,6 +1,7 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Alimentacao;
+import com.grupo11.hootel.entity.AlimentacaoHotel;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.AlimentacaoService;
 import jakarta.validation.Valid;
@@ -30,7 +31,7 @@ public class GerenteCardapioController {
             List<Alimentacao> alimentacao = alimentacaoService.listarAlimentacoes();
             model.addAttribute("cardapio", alimentacao);
         } catch (HootelException e) {
-            model.addAttribute("cardapio", new Alimentacao());
+            model.addAttribute("cardapio", new AlimentacaoHotel());
             model.addAttribute("errorMessage", e.getMessage());
         }
 

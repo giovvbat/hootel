@@ -1,6 +1,7 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Alimentacao;
+import com.grupo11.hootel.entity.AlimentacaoHotel;
 import com.grupo11.hootel.entity.Reserva;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.*;
@@ -35,7 +36,7 @@ public class CardapioController {
             model.addAttribute("cardapio", alimentacao);
         }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("cardapio", new Alimentacao());
+            model.addAttribute("cardapio", new AlimentacaoHotel());
         }
         return "cardapio";
     }

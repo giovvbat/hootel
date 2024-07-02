@@ -5,6 +5,7 @@ import com.grupo11.hootel.entity.Reserva;
 import com.grupo11.hootel.entity.ReservaHotel;
 import com.grupo11.hootel.exceptions.NenhumaReservaException;
 import com.grupo11.hootel.exceptions.PinInvalidoException;
+import com.grupo11.hootel.exceptions.ReservaInvalidaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservaServiceImpl implements ReservaService {
@@ -35,13 +37,16 @@ public class ReservaServiceImpl implements ReservaService {
     }
 
     @Override
-    public List<Reserva> lerTodasReservas() {
-        List<Reserva> reservas = reservaRepository.findAll();
+    public List<Reserva> lerTodasReservas(Class<? extends Reserva> type) {
+        List<Reserva> reservas = reservaRepository.findAll()
+                .stream().filter(type::isInstance)
+                .map(type::cast)
+                .collect(Collectors.toList());
 
         if(reservas.isEmpty()) {
             throw new NenhumaReservaException();
         }
-        return reservaRepository.findAll();
+        return reservas;
     }
 
     @Override
@@ -58,7 +63,7 @@ public class ReservaServiceImpl implements ReservaService {
 
     @Override
     @Transactional
-    public Reserva criarReserva() {
+    public Reserva criarReserva(Reserva reserva) {
 
         Random random = new Random();
         Long numeroAleatorio = 1000 + random.nextLong(9000);
@@ -67,14 +72,17 @@ public class ReservaServiceImpl implements ReservaService {
             numeroAleatorio = 1000 + random.nextLong(9000);
         }
 
-        /*Reserva reserva = new Reserva();*/
-        Reserva reserva = new ReservaHotel();
+        if (!reserva.validar()) {
+            throw new ReservaInvalidaException();
+        }
+
         reserva.setPIN(numeroAleatorio);
         reservaRepository.save(reserva);
 
         return reserva;
     }
 
+    /*
     @Override
     @Transactional
     public void updateReserva(Reserva reserva) {
@@ -94,4 +102,5 @@ public class ReservaServiceImpl implements ReservaService {
         reserva.setPIN(numeroAleatorio);
         reservaRepository.save(reserva);
     }
+     */
 }

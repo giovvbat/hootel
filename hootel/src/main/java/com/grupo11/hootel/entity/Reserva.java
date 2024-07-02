@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract  class Reserva {
 
     @Id
@@ -16,14 +17,6 @@ public abstract  class Reserva {
     @NotNull(message = "Insira um PIN")
     @Positive(message = "O PIN deve ser um número positivo")
     private Long PIN;
-
-    @ManyToMany
-    @JoinTable(
-            name = "participantes_eventos",
-            joinColumns = @JoinColumn(name = "reserva_pin"),
-            inverseJoinColumns = @JoinColumn(name = "evento_id")
-    )
-    private List<Evento> eventos;
 
     public Reserva() {
 
@@ -33,35 +26,20 @@ public abstract  class Reserva {
         this.PIN = PIN;
     }
 
-    public @NotNull(message = "Insira um PIN") @Positive(message = "O PIN deve ser um número positivo") Long getPIN() {
+    public Long getPIN() {
         return PIN;
     }
 
-    public void setPIN(@NotNull(message = "Insira um PIN") @Positive(message = "O PIN deve ser um número positivo") Long PIN) {
+    public void setPIN(Long PIN) {
         this.PIN = PIN;
     }
 
-    public List<Evento> getEventos() {
-        return eventos;
-    }
-
-    public void setEventos(List<Evento> eventos) {
-        this.eventos = eventos;
-    }
-
-    public void addEvento(Evento evento) {
-        if (eventos == null) {
-            eventos = new ArrayList<>();
-        }
-
-        eventos.add(evento);
-    }
+    public abstract boolean validar();
 
     @Override
     public String toString() {
         return "Reserva{" +
                 "PIN=" + PIN +
-                ", eventos=" + eventos +
                 '}';
     }
 }

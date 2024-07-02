@@ -12,14 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
-
 @Controller
-public class ReservaController {
+public class ReservaHotelController {
 
     private ReservaService reservaService;
 
-    public ReservaController(ReservaService ReservaService) {
+    public ReservaHotelController(ReservaService ReservaService) {
         this.reservaService = ReservaService;
     }
 
@@ -56,7 +54,7 @@ public class ReservaController {
         try {
             ReservaHotel reserva = (ReservaHotel) reservaService.lerReservaPin(aReserva.getPIN());
 
-            if (reserva.getPreferenciasAlimentacao() == null || reserva.getPreferenciasEventos() == null) {
+            if (reserva.getPreferenciasEventos().isEmpty() || reserva.getPreferenciasAlimentares().isEmpty()) {
                 model.addAttribute("reserva", reserva);
                 return "preferencias";
             }

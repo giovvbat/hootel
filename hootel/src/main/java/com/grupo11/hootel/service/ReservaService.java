@@ -7,11 +7,13 @@ import java.util.List;
 public interface ReservaService {
     Reserva lerReservaPin(Long pin);
 
-    List<Reserva> lerTodasReservas();
+    List<Reserva> lerTodasReservas(Class<? extends Reserva> type);
 
     void deletarReserva(Reserva reserva);
 
-    Reserva criarReserva();
+    Reserva criarReserva(Reserva reserva);
 
+    /*
     void updateReserva(Reserva reserva);
+     */
 }

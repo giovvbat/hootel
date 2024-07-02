@@ -1,6 +1,7 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Evento;
+import com.grupo11.hootel.entity.EventoHotel;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.EventoService;
 import jakarta.validation.Valid;
@@ -38,8 +39,8 @@ public class GerenteEventosController {
 
     @GetMapping("/mostrarEventos")
     public String mostrarEventos(Model model){
-        model.addAttribute("evento", new Evento());
-        model.addAttribute("eventoAtualizar", new Evento());
+        model.addAttribute("evento", new EventoHotel());
+        model.addAttribute("eventoAtualizar", new EventoHotel());
         return popularModel(model);
     }
 
@@ -48,7 +49,7 @@ public class GerenteEventosController {
                                   BindingResult bindingResult, Model model){
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("eventoAtualizar", new Evento());
+            model.addAttribute("eventoAtualizar", new EventoHotel());
             return popularModel(model);
         }
 
@@ -69,8 +70,8 @@ public class GerenteEventosController {
 
         if (id_evento == null) {
             model.addAttribute("errorMessageRemove", "O ID do evento não deve ser vazio.");
-            model.addAttribute("evento", new Evento());
-            model.addAttribute("eventoAtualizar", new Evento());
+            model.addAttribute("evento", new EventoHotel());
+            model.addAttribute("eventoAtualizar", new EventoHotel());
             return popularModel(model);
         }
 
@@ -79,8 +80,8 @@ public class GerenteEventosController {
             eventoService.deletarEvento(evento.getId());
         }catch (HootelException e) {
             model.addAttribute("errorMessageRemove", e.getMessage());
-            model.addAttribute("evento", new Evento());
-            model.addAttribute("eventoAtualizar", new Evento());
+            model.addAttribute("evento", new EventoHotel());
+            model.addAttribute("eventoAtualizar", new EventoHotel());
             return popularModel(model);
         }
         return "redirect:/mostrarEventos";
@@ -93,13 +94,13 @@ public class GerenteEventosController {
         if (bindingResult.hasErrors()) {
             System.out.println("entrou aqui");
             System.out.println(model.toString());
-            model.addAttribute("evento", new Evento());
+            model.addAttribute("evento", new EventoHotel());
             return popularModel(model);
         }
 
         if (evento.getId() == null) {
             model.addAttribute("errorMessageUpdate", "O ID do evento não deve ser vazio.");
-            model.addAttribute("evento", new Evento());
+            model.addAttribute("evento", new EventoHotel());
             return popularModel(model);
         }
 
@@ -107,7 +108,7 @@ public class GerenteEventosController {
             eventoService.atualizarEvento(evento);
         }catch (HootelException e) {
             model.addAttribute("errorMessageUpdate", e.getMessage());
-            model.addAttribute("evento", new Evento());
+            model.addAttribute("evento", new EventoHotel());
             return popularModel(model);
         }
 

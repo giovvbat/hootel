@@ -1,10 +1,10 @@
 package com.grupo11.hootel.entity.enums;
 
-public enum PreferenciaAlimentar {
+public enum PreferenciaAlimentarHotel {
     VEGETARIANO,
     OVOLACTOVEGETARIANO,
     VEGANO,
-    PESACATERIANO,
+    PESCETARIANO,
     REGULAR,
     SEM_LACTOSE,
     SEM_GLUTEN

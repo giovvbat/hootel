@@ -1,6 +1,7 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Evento;
+import com.grupo11.hootel.entity.EventoHotel;
 import com.grupo11.hootel.entity.Reserva;
 import com.grupo11.hootel.entity.ReservaHotel;
 import com.grupo11.hootel.exceptions.HootelException;
@@ -49,7 +50,7 @@ public class EventoController {
             model.addAttribute("reserva", reserva);
         }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("evento_escolhido", new Evento());
+            model.addAttribute("evento_escolhido", new EventoHotel());
             /*model.addAttribute("reserva", new Reserva());*/
             model.addAttribute("reserva", new ReservaHotel());
         }

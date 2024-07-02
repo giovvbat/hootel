@@ -14,20 +14,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
-public class GerenteReservaController {
+public class GerenteReservaHotelController {
 
     private ReservaService reservaService;
 
-    public GerenteReservaController(ReservaService ReservaService) {
+    public GerenteReservaHotelController(ReservaService ReservaService) {
         this.reservaService = ReservaService;
     }
 
     @ModelAttribute("todasReservas")
     public List<Reserva> populateReservas(Model model) {
         try {
-            return reservaService.lerTodasReservas();
+            return reservaService.lerTodasReservas(ReservaHotel.class);
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return new ArrayList<>();
@@ -45,7 +46,7 @@ public class GerenteReservaController {
     @PostMapping("/addReserva")
     public String criarNovaReserva(Model model) {
 
-        Reserva reserva = reservaService.criarReserva();
+        Reserva reserva = reservaService.criarReserva(new ReservaHotel());
         model.addAttribute("novaReserva", reserva);
 
         return "redirect:/mostrarReservas";

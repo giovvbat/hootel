@@ -9,10 +9,8 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Entity
-@Table(name="evento")
-public class Evento {
-
-
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class Evento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id")
@@ -37,41 +35,31 @@ public class Evento {
     @Column(name = "data_inicio")
     private LocalDate dataInicio;
 
+    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotEmpty(message = "Todos os campos devem ser preenchidos")
+    @Column(name = "descricao")
+    private String descricao;
+
     @ManyToMany
     @JoinTable(
             name = "participantes_eventos",
             joinColumns = @JoinColumn(name = "evento_id"),
             inverseJoinColumns = @JoinColumn(name = "reserva_pin")
     )
-    private List<ReservaHotel> reservas;
+    private List<Reserva> reservas;
 
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    @NotEmpty(message = "Todos os campos devem ser preenchidos")
-    @Column(name = "descricao")
-    private String descricao;
+    public Evento() {
+        this.reservas = new ArrayList<>();
+    }
 
-    @ElementCollection(targetClass = String.class)
-    @CollectionTable(name = "categorias_eventos", joinColumns = @JoinColumn(name = "id_evento"))
-    @Column(name = "categoria", nullable = false)
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    private List<String> categorias;
-
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    @Column(name = "idade_minima")
-    private Integer idadeMinimaRecomendada;
-
-    public Evento() { }
-
-    public Evento(Integer id, String horario, String lugar, String nome, LocalDate dataInicio, String descricao,
-                  List<String> categorias, Integer idadeMinimaRecomendada) {
+    public Evento(Integer id, String horario, String lugar, String nome, LocalDate dataInicio, String descricao, List<Reserva> reservas) {
         this.id = id;
         this.horario = horario;
         this.lugar = lugar;
         this.nome = nome;
         this.dataInicio = dataInicio;
         this.descricao = descricao;
-        this.categorias = categorias;
-        this.idadeMinimaRecomendada = idadeMinimaRecomendada;
+        this.reservas = reservas;
     }
 
     public Integer getId() {
@@ -114,35 +102,6 @@ public class Evento {
         this.dataInicio = dataInicio;
     }
 
-    public List<ReservaHotel> getReservas() {
-        return reservas;
-    }
-
-    public void setReservas(List<ReservaHotel> reservas) {
-        this.reservas = reservas;
-    }
-
-    public void addReserva(ReservaHotel reserva) {
-        if (reservas == null) {
-            reservas = new ArrayList<>();
-        }
-
-        reservas.add(reserva);
-    }
-
-    public void removeReserva(Reserva reserva) {
-        if (reservas != null) {
-            reservas.remove(reserva);
-        }
-    }
-
-    public int quantidadeReservas(){
-        if (reservas == null) {
-            reservas = new ArrayList<>();
-        }
-        return reservas.size();
-    }
-
     public String getDescricao() {
         return descricao;
     }
@@ -151,20 +110,20 @@ public class Evento {
         this.descricao = descricao;
     }
 
-    public @NotNull(message = "Todos os campos devem ser preenchidos") List<String> getCategorias() {
-        return categorias;
+    public List<Reserva> getReservas() {
+        return reservas;
     }
 
-    public void setCategorias(@NotNull(message = "Todos os campos devem ser preenchidos") List<String> categorias) {
-        this.categorias = categorias;
+    public void setReservas(List<Reserva> reservas) {
+        this.reservas = reservas;
     }
 
-    public Integer getIdadeMinimaRecomendada() {
-        return idadeMinimaRecomendada;
+    public void addReserva(ReservaHotel reserva) {
+        reservas.add(reserva);
     }
 
-    public void setIdadeMinimaRecomendada(Integer idadeMinimaRecomendada) {
-        this.idadeMinimaRecomendada = idadeMinimaRecomendada;
+    public void removeReserva(Reserva reserva) {
+        reservas.remove(reserva);
     }
 
     @Override
@@ -175,10 +134,9 @@ public class Evento {
                 ", lugar='" + lugar + '\'' +
                 ", nome='" + nome + '\'' +
                 ", dataInicio=" + dataInicio +
-                ", reservas=" + reservas +
                 ", descricao='" + descricao + '\'' +
-                ", categorias=" + categorias +
-                ", idadeMinimaRecomendada=" + idadeMinimaRecomendada +
+                ", reservas=" + reservas +
                 '}';
     }
+
 }

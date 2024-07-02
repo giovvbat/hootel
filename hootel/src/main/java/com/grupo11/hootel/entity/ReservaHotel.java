@@ -1,6 +1,7 @@
 package com.grupo11.hootel.entity;
 
-import com.grupo11.hootel.entity.enums.PreferenciaAlimentar;
+import com.grupo11.hootel.entity.enums.PreferenciaAlimentarHotel;
+import com.grupo11.hootel.entity.enums.PreferenciaEventoHotel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -18,25 +19,31 @@ public class ReservaHotel extends Reserva {
     @Min(value = 0, message = "A idade minima é 0")
     private Integer idade;
 
-    @ElementCollection(targetClass = String.class)
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = PreferenciaEventoHotel.class)
     @CollectionTable(name = "preferencias_eventos", joinColumns = @JoinColumn(name = "pin_reserva"))
     @Column(name = "preferencia_evento", nullable = false)
     @NotNull(message = "Selecione suas preferências de eventos")
-    private List<String> preferenciasEventos;
+    private List<PreferenciaEventoHotel> preferenciasEventos;
 
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = PreferenciaAlimentarHotel.class)
+    @CollectionTable(name = "preferencias_alimentares", joinColumns = @JoinColumn(name = "pin_reserva"))
     @Column(name = "preferencia_alimentacao", nullable = false)
     @NotNull(message = "Selecione suas preferências de alimentação")
-    private PreferenciaAlimentar preferenciasAlimentacao;
+    private List<PreferenciaAlimentarHotel> preferenciasAlimentares;
 
     public ReservaHotel() {
         super();
         preferenciasEventos = new ArrayList<>();
+        preferenciasAlimentares = new ArrayList<>();
     }
 
-    public ReservaHotel(Integer idade, List<String> preferenciasEventos, String preferenciasAlimentacao) {
+    public ReservaHotel(Integer idade, List<PreferenciaEventoHotel> preferenciasEventos, List<PreferenciaAlimentarHotel> preferenciasAlimentares) {
         super();
         this.idade = idade;
         this.preferenciasEventos = preferenciasEventos;
+        this.preferenciasAlimentares = preferenciasAlimentares;
     }
 
     public Integer getIdade() {
@@ -47,20 +54,27 @@ public class ReservaHotel extends Reserva {
         this.idade = idade;
     }
 
-    public List<String> getPreferenciasEventos() {
+    public List<PreferenciaEventoHotel> getPreferenciasEventos() {
         return preferenciasEventos;
     }
 
-    public void setPreferenciasEventos(List<String> preferenciasEventos) {
+    public void setPreferenciasEventos(List<PreferenciaEventoHotel> preferenciasEventos) {
         this.preferenciasEventos = preferenciasEventos;
     }
 
-    public PreferenciaAlimentar getPreferenciasAlimentacao() {
-        return preferenciasAlimentacao;
+    public List<PreferenciaAlimentarHotel> getPreferenciasAlimentares() {
+        return preferenciasAlimentares;
     }
 
-    public void setPreferenciasAlimentacao(PreferenciaAlimentar preferenciasAlimentacao) {
-        this.preferenciasAlimentacao = preferenciasAlimentacao;
+    public void setPreferenciasAlimentares(List<PreferenciaAlimentarHotel> preferenciasAlimentares) {
+        this.preferenciasAlimentares = preferenciasAlimentares;
+    }
+
+    @Override
+    public boolean validar() {
+        return idade >= 0 &&
+                !preferenciasAlimentares.isEmpty() &&
+                !preferenciasEventos.isEmpty();
     }
 
     @Override
@@ -68,7 +82,7 @@ public class ReservaHotel extends Reserva {
         return "ReservaHotel{" +
                 "idade=" + idade +
                 ", preferenciasEventos=" + preferenciasEventos +
-                ", preferenciasAlimentacao='" + preferenciasAlimentacao + '\'' +
+                ", preferenciasAlimentares='" + preferenciasAlimentares + '\'' +
                 '}';
     }
 }
