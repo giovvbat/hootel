@@ -48,7 +48,6 @@ public class AgendamentoCamareiraHotelController {
             return "camareiras";
         }
 
-
         return "redirect:home";
     }
 }

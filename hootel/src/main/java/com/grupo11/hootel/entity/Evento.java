@@ -48,6 +48,8 @@ public abstract class Evento {
     )
     private List<Reserva> reservas;
 
+    public abstract boolean validar();
+
     public Evento() {
         this.reservas = new ArrayList<>();
     }
@@ -118,7 +120,7 @@ public abstract class Evento {
         this.reservas = reservas;
     }
 
-    public void addReserva(ReservaHotel reserva) {
+    public void addReserva(Reserva reserva) {
         reservas.add(reserva);
     }
 

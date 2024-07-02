@@ -16,12 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class EventoController {
+public class EventoHotelController {
     private EventoService eventoService;
     private ReservaService reservaService;
     private RecomendacaoEventosService recomendacaoService;
 
-    public EventoController(EventoService eventoService, ReservaService reservaService, RecomendacaoEventosService recomendacaoService) {
+    public EventoHotelController(EventoService eventoService, ReservaService reservaService, RecomendacaoEventosService recomendacaoService) {
         this.eventoService = eventoService;
         this.reservaService = reservaService;
         this.recomendacaoService = recomendacaoService;
@@ -30,7 +30,7 @@ public class EventoController {
     @GetMapping("/eventos")
     public String mostrarEventos(Model model) {
         try {
-            List<Evento> eventos = eventoService.lerTodosEventos();
+            List<Evento> eventos = eventoService.lerTodosEventos(EventoHotel.class);
             model.addAttribute("eventos", eventos);
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
@@ -44,14 +44,12 @@ public class EventoController {
                               Model model) {
         try {
             Evento evento = eventoService.lerEventoId(theId);
-            /*Reserva reserva = new Reserva();*/
             ReservaHotel reserva = new ReservaHotel();
             model.addAttribute("evento_escolhido", evento);
             model.addAttribute("reserva", reserva);
         }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("evento_escolhido", new EventoHotel());
-            /*model.addAttribute("reserva", new Reserva());*/
             model.addAttribute("reserva", new ReservaHotel());
         }
         return "eventoEspecifico";
@@ -109,7 +107,7 @@ public class EventoController {
                                     Model model) {
 
         if(bindingResult.hasErrors()) {
-            List<Evento> eventos = eventoService.lerTodosEventos();
+            List<Evento> eventos = eventoService.lerTodosEventos(EventoHotel.class);
             model.addAttribute("eventos", eventos);
             return "eventos";
         }
@@ -117,7 +115,7 @@ public class EventoController {
         try {
             Reserva reserva = reservaService.lerReservaPin(aReserva.getPIN());
             EstrategiaRecomendacaoEventos estrategia = new HotelEstrategiaRecomendacaoEventos();
-            List<Evento> eventos = eventoService.lerTodosEventos();
+            List<Evento> eventos = eventoService.lerTodosEventos(EventoHotel.class);
 
             List<Evento> recomendacao = recomendacaoService.recomendarEventos(estrategia, eventos, reserva);
 
