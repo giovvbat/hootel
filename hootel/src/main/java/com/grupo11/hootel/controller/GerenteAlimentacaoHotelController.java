@@ -16,19 +16,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class GerenteCardapioController {
+public class GerenteAlimentacaoHotelController {
 
     private final AlimentacaoService alimentacaoService;
 
     @Autowired
-    public GerenteCardapioController(AlimentacaoService alimentacaoService) {
+    public GerenteAlimentacaoHotelController(AlimentacaoService alimentacaoService) {
         this.alimentacaoService = alimentacaoService;
     }
 
     @GetMapping("/mostrarCardapio")
     public String mostrarCardapio(Model model) {
         try {
-            List<Alimentacao> alimentacao = alimentacaoService.listarAlimentacoes();
+            List<Alimentacao> alimentacao = alimentacaoService.listarAlimentacoes(AlimentacaoHotel.class);
             model.addAttribute("cardapio", alimentacao);
         } catch (HootelException e) {
             model.addAttribute("cardapio", new AlimentacaoHotel());
@@ -39,7 +39,7 @@ public class GerenteCardapioController {
     }
 
     @PostMapping("/adicionarCardapio")
-    public String addAlimentacaoEmCardapio(@Valid @ModelAttribute("cardapio") Alimentacao alimentacao,
+    public String addAlimentacaoEmCardapio(@Valid @ModelAttribute("cardapio") AlimentacaoHotel alimentacao,
                                  BindingResult bindingResult,
                                  Model model) {
 
@@ -57,7 +57,7 @@ public class GerenteCardapioController {
     }
 
     @PostMapping("/atualizaCardapio")
-    public String atualizarAlimentacaoEmCardapio(@Valid @ModelAttribute("cardapio") Alimentacao alimentacao,
+    public String atualizarAlimentacaoEmCardapio(@Valid @ModelAttribute("cardapio") AlimentacaoHotel alimentacao,
                                     BindingResult bindingResult,
                                     Model model) {
 

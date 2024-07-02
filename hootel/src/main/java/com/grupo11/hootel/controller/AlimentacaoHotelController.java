@@ -3,6 +3,7 @@ package com.grupo11.hootel.controller;
 import com.grupo11.hootel.entity.Alimentacao;
 import com.grupo11.hootel.entity.AlimentacaoHotel;
 import com.grupo11.hootel.entity.Reserva;
+import com.grupo11.hootel.entity.ReservaHotel;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.*;
 import jakarta.validation.Valid;
@@ -16,14 +17,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.List;
 
 @Controller
-public class CardapioController {
+public class AlimentacaoHotelController {
     private AlimentacaoService alimentacaoService;
     private ReservaService reservaService;
     private RecomendacaoAlimentacaoService recomendacaoService;
 
-    public CardapioController(AlimentacaoService alimentacaoService,
-                              ReservaService reservaService,
-                              RecomendacaoAlimentacaoService recomendacaoService) {
+    public AlimentacaoHotelController(AlimentacaoService alimentacaoService,
+                                      ReservaService reservaService,
+                                      RecomendacaoAlimentacaoService recomendacaoService) {
         this.alimentacaoService = alimentacaoService;
         this.reservaService = reservaService;
         this.recomendacaoService = recomendacaoService;
@@ -32,7 +33,7 @@ public class CardapioController {
     @GetMapping("/cardapio")
     public String getCardapio(Model model) {
         try {
-            List<Alimentacao> alimentacao = alimentacaoService.listarAlimentacoes();
+            List<Alimentacao> alimentacao = alimentacaoService.listarAlimentacoes(AlimentacaoHotel.class);
             model.addAttribute("cardapio", alimentacao);
         }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
@@ -42,19 +43,19 @@ public class CardapioController {
     }
 
     @PostMapping("/cardapio/recomendacao")
-    public String recomendacao(@Valid @ModelAttribute("reserva") Reserva aReserva,
+    public String recomendacao(@Valid @ModelAttribute("reserva") ReservaHotel aReserva,
                                BindingResult bindingResult,
                                Model model) {
 
         if(bindingResult.hasErrors()) {
-            model.addAttribute("alimentacoes", alimentacaoService.listarAlimentacoes());
+            model.addAttribute("alimentacoes", alimentacaoService.listarAlimentacoes(AlimentacaoHotel.class));
             return "cardapio";
         }
 
         try {
             Reserva reserva = reservaService.lerReservaPin(aReserva.getPIN());
             EstrategiaRecomendacaoAlimentacao estrategia = new HotelEstrategiaRecomendacaoAlimentacao();
-            List<Alimentacao> alimentacoes = alimentacaoService.listarAlimentacoes();
+            List<Alimentacao> alimentacoes = alimentacaoService.listarAlimentacoes(AlimentacaoHotel.class);
 
             model.addAttribute(
                     "recomendacao",
@@ -62,7 +63,7 @@ public class CardapioController {
             );
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("alimentacoes", alimentacaoService.listarAlimentacoes());
+            model.addAttribute("alimentacoes", alimentacaoService.listarAlimentacoes(AlimentacaoHotel.class));
         }
 
         return "cardapio";

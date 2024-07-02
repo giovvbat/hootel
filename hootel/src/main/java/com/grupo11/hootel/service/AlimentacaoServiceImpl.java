@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AlimentacaoServiceImpl implements AlimentacaoService {
@@ -23,7 +24,9 @@ public class AlimentacaoServiceImpl implements AlimentacaoService {
     @Override
     @Transactional
     public void addAlimentacao(Alimentacao alimentacao) {
-        alimentacaoRepository.save(alimentacao);
+        if (alimentacao.validar()) {
+            alimentacaoRepository.save(alimentacao);
+        }
     }
 
     @Override
@@ -37,7 +40,12 @@ public class AlimentacaoServiceImpl implements AlimentacaoService {
     }
 
     @Override
-    public List<Alimentacao> listarAlimentacoes() {
-        return alimentacaoRepository.findAll();
+    public List<Alimentacao> listarAlimentacoes(Class<? extends Alimentacao> type) {
+        List<Alimentacao> alimentacoes = alimentacaoRepository.findAll()
+                .stream().filter(type::isInstance)
+                .map(type::cast)
+                .collect(Collectors.toList());
+
+        return alimentacoes;
     }
 }

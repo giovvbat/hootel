@@ -36,6 +36,10 @@ public class AlimentacaoHotel extends Alimentacao{
         this.categorias = categorias;
     }
 
+    public boolean validar() {
+        return !categorias.isEmpty() && getConteudo() != null;
+    }
+
     @Override
     public String toString() {
         return "AlimentacaoHotel{" +

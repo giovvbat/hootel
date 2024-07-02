@@ -7,7 +7,8 @@ import jakarta.validation.constraints.NotNull;
 
 import java.util.List;
 
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Alimentacao {
 
     @Id
@@ -43,6 +44,8 @@ public abstract class Alimentacao {
     public void setConteudo(String conteudo) {
         this.conteudo = conteudo;
     }
+
+    public abstract boolean validar();
 
     @Override
     public String toString() {

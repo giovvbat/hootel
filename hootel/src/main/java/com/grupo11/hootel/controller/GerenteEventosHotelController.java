@@ -30,7 +30,7 @@ public class GerenteEventosHotelController {
             List<Evento> eventos = eventoService.lerTodosEventos(EventoHotel.class);
             model.addAttribute("eventos", eventos);
             return "eventos_gerente";
-        }catch (HootelException e) {
+        } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("eventos", new ArrayList<Evento>());
             return "add_evento_gerente";
@@ -45,7 +45,7 @@ public class GerenteEventosHotelController {
     }
 
     @PostMapping("/addEvento")
-    public String adicionarEvento(@Valid @ModelAttribute("evento") Evento evento,
+    public String adicionarEvento(@Valid @ModelAttribute("evento") EventoHotel evento,
                                   BindingResult bindingResult, Model model){
 
         if (bindingResult.hasErrors()) {
@@ -56,7 +56,6 @@ public class GerenteEventosHotelController {
         try {
             eventoService.criarEvento(evento);
         }catch (HootelException e) {
-            System.out.println("entrou aqui");
             model.addAttribute("errorMessageAdd", e.getMessage());
             return popularModel(model);
         }
@@ -88,11 +87,10 @@ public class GerenteEventosHotelController {
     }
 
     @PostMapping("/atualizaEvento")
-    public String atualizarEvento(@Valid @ModelAttribute("eventoAtualizar") Evento evento,
+    public String atualizarEvento(@Valid @ModelAttribute("eventoAtualizar") EventoHotel evento,
                                 BindingResult bindingResult, Model model){
 
         if (bindingResult.hasErrors()) {
-            System.out.println(model.toString());
             model.addAttribute("evento", new EventoHotel());
             return popularModel(model);
         }

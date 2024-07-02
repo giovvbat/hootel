@@ -1,9 +1,6 @@
 package com.grupo11.hootel.controller;
 
-import com.grupo11.hootel.entity.Evento;
-import com.grupo11.hootel.entity.EventoHotel;
-import com.grupo11.hootel.entity.Reserva;
-import com.grupo11.hootel.entity.ReservaHotel;
+import com.grupo11.hootel.entity.*;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.*;
 import jakarta.validation.Valid;
@@ -34,7 +31,7 @@ public class EventoHotelController {
             model.addAttribute("eventos", eventos);
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("eventos", new ArrayList<>());
+            model.addAttribute("eventos", new ArrayList<Evento>());
         }
         return "eventos";
     }
@@ -47,7 +44,7 @@ public class EventoHotelController {
             ReservaHotel reserva = new ReservaHotel();
             model.addAttribute("evento_escolhido", evento);
             model.addAttribute("reserva", reserva);
-        }catch (HootelException e){
+        } catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("evento_escolhido", new EventoHotel());
             model.addAttribute("reserva", new ReservaHotel());
@@ -56,7 +53,7 @@ public class EventoHotelController {
     }
 
     @PostMapping("/evento/participacao/add")
-    public String cadastrarParticipacao(@ModelAttribute("evento_escolhido") Evento evento,
+    public String cadastrarParticipacao(@ModelAttribute("evento_escolhido") EventoHotel evento,
                                         @Valid @ModelAttribute("reserva") Reserva reserva,
                                         BindingResult bindingResultReserva, Model model){
 
@@ -79,7 +76,7 @@ public class EventoHotelController {
     }
 
     @PostMapping("/evento/participacao/rm")
-    public String removerParticipacao(@ModelAttribute("evento_escolhido") Evento evento,
+    public String removerParticipacao(@ModelAttribute("evento_escolhido") EventoHotel evento,
                                       @Valid @ModelAttribute("reserva") Reserva reserva,
                                       BindingResult bindingResultReserva, Model model){
 
@@ -125,6 +122,7 @@ public class EventoHotelController {
             return "eventos";
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("eventos", eventoService.lerTodosEventos(EventoHotel.class));
             return "eventos";
         }
     }

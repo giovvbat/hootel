@@ -10,5 +10,5 @@ public interface AlimentacaoService {
 
     void atualizarAlimentacao(Alimentacao alimentacao);
 
-    List<Alimentacao> listarAlimentacoes();
+    List<Alimentacao> listarAlimentacoes(Class<? extends Alimentacao> type);
 }
