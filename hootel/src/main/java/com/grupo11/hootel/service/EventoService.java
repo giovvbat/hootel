@@ -11,7 +11,7 @@ public interface EventoService {
 
     Evento lerEventoId(Integer id);
 
-    List<Evento> lerTodosEventos();
+    List<Evento> lerTodosEventos(Class<? extends Evento> type);
 
     void deletarEvento(Integer idEvento);
 

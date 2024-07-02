@@ -13,7 +13,7 @@ import java.util.List;
 public class EventoHotel extends Evento {
 
     @Enumerated(EnumType.STRING)
-    @ElementCollection(targetClass = String.class)
+    @ElementCollection(targetClass = PreferenciaEventoHotel.class)
     @CollectionTable(name = "categorias_eventos", joinColumns = @JoinColumn(name = "id_evento"))
     @Column(name = "categoria", nullable = false)
     @NotNull(message = "Todos os campos devem ser preenchidos")
@@ -22,6 +22,12 @@ public class EventoHotel extends Evento {
     @NotNull(message = "Todos os campos devem ser preenchidos")
     @Column(name = "idade_minima")
     private Integer idadeMinimaRecomendada;
+
+    @Override
+    public boolean validar() {
+        return getHorario() != null && getLugar() != null && getNome() != null && getDataInicio() != null
+                && getDescricao() != null && !categorias.isEmpty() && idadeMinimaRecomendada != null;
+    }
 
     public EventoHotel() {
         super();

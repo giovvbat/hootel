@@ -17,17 +17,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class GerenteEventosController {
+public class GerenteEventosHotelController {
 
     private EventoService eventoService;
 
-    public GerenteEventosController(EventoService eventoService) {
+    public GerenteEventosHotelController(EventoService eventoService) {
         this.eventoService = eventoService;
     }
 
     public String popularModel(Model model){
         try {
-            List<Evento> eventos = eventoService.lerTodosEventos();
+            List<Evento> eventos = eventoService.lerTodosEventos(EventoHotel.class);
             model.addAttribute("eventos", eventos);
             return "eventos_gerente";
         }catch (HootelException e) {
@@ -92,7 +92,6 @@ public class GerenteEventosController {
                                 BindingResult bindingResult, Model model){
 
         if (bindingResult.hasErrors()) {
-            System.out.println("entrou aqui");
             System.out.println(model.toString());
             model.addAttribute("evento", new EventoHotel());
             return popularModel(model);

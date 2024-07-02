@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class EventoServiceImpl implements EventoService {
@@ -27,7 +28,9 @@ public class EventoServiceImpl implements EventoService {
     @Override
     @Transactional
     public void atualizarEvento(Evento evento) {
-
+        if (evento.validar()) {
+            throw new EventoInvalidoException();
+        }
         Optional<Evento> optionalEvento = eventoRepository.findById(evento.getId());
         if(optionalEvento.isEmpty()) {
             throw new EventoInvalidoException();
@@ -40,11 +43,7 @@ public class EventoServiceImpl implements EventoService {
     @Override
     @Transactional
     public void criarEvento(Evento evento) {
-
-        //Optional<Evento> optionalEvento = eventoRepository.findById(evento.getId());
-        if(evento.getNome() == null || evento.getHorario() == null ||
-        evento.getLugar() == null || evento.getDataInicio() == null ||
-        evento.getDescricao() == null) {
+        if(evento.validar()) {
             throw new EventoIncompletoException();
         }
 
@@ -58,9 +57,12 @@ public class EventoServiceImpl implements EventoService {
     }
 
     @Override
-    public List<Evento> lerTodosEventos() {
+    public List<Evento> lerTodosEventos(Class<? extends Evento> type) {
 
-        List<Evento> eventos = eventoRepository.findAll();
+        List<Evento> eventos = eventoRepository.findAll()
+                .stream().filter(type::isInstance)
+                .map(type::cast)
+                .collect(Collectors.toList());
         if(eventos.isEmpty()) {
             throw new NenhumEventoException();
         }
@@ -87,7 +89,7 @@ public class EventoServiceImpl implements EventoService {
         Reserva reserva = reservaService.lerReservaPin(pinReserva);
 
         if (!evento.getReservas().contains(reserva)) {
-            evento.addReserva((ReservaHotel) reserva);
+            evento.addReserva(reserva);
             eventoRepository.save(evento);
         }else {
             throw new EventoConfirmadoException();
