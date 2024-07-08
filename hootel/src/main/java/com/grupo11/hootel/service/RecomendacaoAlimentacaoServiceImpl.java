@@ -9,7 +9,8 @@ import java.util.List;
 @Service
 public class RecomendacaoAlimentacaoServiceImpl implements RecomendacaoAlimentacaoService {
     @Override
-    public List<Alimentacao> recomendarAlimentacao(EstrategiaRecomendacaoAlimentacao estrategia, List<Alimentacao> alimentacoes, Reserva reserva) {
+    public List<Alimentacao> recomendarAlimentacao(EstrategiaRecomendacaoAlimentacao estrategia,
+                                                   List<Alimentacao> alimentacoes, Reserva reserva) {
         return estrategia.recomendarAlimentacao(alimentacoes, reserva);
     }
 }
