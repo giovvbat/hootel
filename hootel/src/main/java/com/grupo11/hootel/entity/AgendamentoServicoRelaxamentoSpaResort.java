@@ -30,16 +30,16 @@ public class AgendamentoServicoRelaxamentoSpaResort extends AgendamentoServico {
         this.especificacoes = especificacoes;
     }
 
-    public @NotNull List<EspecificacoesRelaxamento> getEspecificacoes() {
+    public List<EspecificacoesRelaxamento> getEspecificacoes() {
         return especificacoes;
     }
 
-    public void setEspecificacoes(@NotNull List<EspecificacoesRelaxamento> especificacoes) {
+    public void setEspecificacoes(List<EspecificacoesRelaxamento> especificacoes) {
         this.especificacoes = especificacoes;
     }
 
     @Override
-    public boolean validar() {
+    protected boolean validarEspecifico() {
         return !especificacoes.isEmpty();
     }
 

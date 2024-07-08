@@ -2,6 +2,7 @@ package com.grupo11.hootel.entity;
 
 import com.grupo11.hootel.entity.enums.PreferenciaEventoHotel;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
@@ -20,13 +21,13 @@ public class EventoHotel extends Evento {
     private List<PreferenciaEventoHotel> categorias;
 
     @NotNull(message = "Todos os campos devem ser preenchidos")
+    @Min(value = 0, message = "A idade minima é 0")
     @Column(name = "idade_minima")
     private Integer idadeMinimaRecomendada;
 
     @Override
-    public boolean validar() {
-        return getHorario() != null && getLugar() != null && getNome() != null && getDataInicio() != null
-                && getDescricao() != null && !categorias.isEmpty() && idadeMinimaRecomendada != null;
+    protected boolean validarEspecifico() {
+        return !categorias.isEmpty() && idadeMinimaRecomendada != null && idadeMinimaRecomendada >= 0;
     }
 
     public EventoHotel() {

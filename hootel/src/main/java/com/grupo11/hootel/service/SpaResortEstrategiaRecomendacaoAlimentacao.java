@@ -1,7 +1,8 @@
 package com.grupo11.hootel.service;
 
-import com.grupo11.hootel.entity.Alimentacao;
-import com.grupo11.hootel.entity.Reserva;
+import com.grupo11.hootel.entity.*;
+import com.grupo11.hootel.entity.enums.ObjetivosSpaResort;
+import com.grupo11.hootel.entity.enums.PreferenciaAlimentarHotel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,27 @@ public class SpaResortEstrategiaRecomendacaoAlimentacao implements EstrategiaRec
 
     @Override
     public List<Alimentacao> recomendarAlimentacao(List<Alimentacao> alimentacoes, Reserva reserva) {
-        /*recomendar de acordo com os objetivos ou perguntar a preferência logo de cara?*/
-        return new ArrayList<>();
+        if (reserva instanceof ReservaSpaResort) {
+            ReservaSpaResort reservaSpa = (ReservaSpaResort) reserva;
+            List<Alimentacao> recomendados = new ArrayList<>();
+
+            for (Alimentacao alimentacao : alimentacoes) {
+                if (alimentacao instanceof AlimentacaoSpaResort) {
+                    AlimentacaoSpaResort alimentacaoSpa = (AlimentacaoSpaResort) alimentacao;
+
+                    for (ObjetivosSpaResort objetivo : alimentacaoSpa.getObjetivos()) {
+                        if(alimentacaoSpa.getObjetivos().contains(objetivo)) {
+                            recomendados.add(alimentacao);
+                            break;
+                        }
+                    }
+                }
+
+            }
+
+            return recomendados;
+        } else {
+            return new ArrayList<>();
+        }
     }
 }

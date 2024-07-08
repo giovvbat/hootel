@@ -56,7 +56,11 @@ public abstract class AgendamentoServico {
         this.horario = horario;
     }
 
-    public abstract boolean validar();
+    public boolean validar() {
+        return id != null && reserva != null && horario != null && validarEspecifico();
+    }
+
+    protected abstract boolean validarEspecifico();
 
     @Override
     public String toString() {

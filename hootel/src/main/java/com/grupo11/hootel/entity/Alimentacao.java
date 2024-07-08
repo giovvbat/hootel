@@ -45,7 +45,11 @@ public abstract class Alimentacao {
         this.conteudo = conteudo;
     }
 
-    public abstract boolean validar();
+    public boolean validar() {
+        return id != null && conteudo != null && validarEspecifico();
+    }
+
+    protected abstract boolean validarEspecifico();
 
     @Override
     public String toString() {

@@ -36,8 +36,8 @@ public class AlimentacaoHotel extends Alimentacao{
         this.categorias = categorias;
     }
 
-    public boolean validar() {
-        return !categorias.isEmpty() && getConteudo() != null;
+    protected boolean validarEspecifico() {
+        return !categorias.isEmpty();
     }
 
     @Override

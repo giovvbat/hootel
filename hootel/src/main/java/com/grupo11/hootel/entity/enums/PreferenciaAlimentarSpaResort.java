@@ -4,5 +4,5 @@ public enum PreferenciaAlimentarSpaResort {
     LOW_CARB,
     HIGH_PROTEIN,
     LOW_FAT,
-    JEJUM
+    JEJUM_INTERMITENTE
 }

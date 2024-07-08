@@ -1,6 +1,5 @@
 package com.grupo11.hootel.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -48,7 +47,11 @@ public abstract class Evento {
     )
     private List<Reserva> reservas;
 
-    public abstract boolean validar();
+    public boolean validar() {
+        return id != null && horario != null && lugar != null && nome != null && dataInicio != null && descricao != null && validarEspecifico();
+    }
+
+    protected abstract boolean validarEspecifico();
 
     public Evento() {
         this.reservas = new ArrayList<>();

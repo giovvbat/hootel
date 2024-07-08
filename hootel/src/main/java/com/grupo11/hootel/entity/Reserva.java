@@ -34,7 +34,11 @@ public abstract  class Reserva {
         this.PIN = PIN;
     }
 
-    public abstract boolean validar();
+    public boolean validar() {
+        return PIN != null && PIN > 0 && validarEspecifico();
+    }
+
+    protected abstract boolean validarEspecifico();
 
     @Override
     public String toString() {

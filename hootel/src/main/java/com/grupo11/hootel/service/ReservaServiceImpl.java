@@ -72,9 +72,6 @@ public class ReservaServiceImpl implements ReservaService {
             numeroAleatorio = 1000 + random.nextLong(9000);
         }
 
-        if (!reserva.validar()) {
-            throw new ReservaInvalidaException();
-        }
 
         reserva.setPIN(numeroAleatorio);
         reservaRepository.save(reserva);

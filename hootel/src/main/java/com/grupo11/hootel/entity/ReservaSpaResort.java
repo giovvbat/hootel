@@ -30,7 +30,7 @@ public class ReservaSpaResort extends Reserva {
     @ElementCollection(targetClass = ObjetivosSpaResort.class)
     @CollectionTable(name = "objetivos", joinColumns = @JoinColumn(name = "pin_reserva"))
     @Column(name = "objetivo", nullable = false)
-    @NotNull(message = "Selecione suas preferências de alimentação")
+    @NotNull(message = "Selecione seus objetivos")
     private List<ObjetivosSpaResort> objetivos;
 
     public ReservaSpaResort() {
@@ -70,11 +70,8 @@ public class ReservaSpaResort extends Reserva {
     }
 
     @Override
-    public boolean validar() {
-        if(objetivos.isEmpty() || preferenciasAlimentacao.isEmpty() || preferenciasEventos.isEmpty()) {
-            return false;
-        }
-        return true;
+    protected boolean validarEspecifico() {
+        return !objetivos.isEmpty() && !preferenciasAlimentacao.isEmpty() && !preferenciasEventos.isEmpty();
     }
 
     @Override

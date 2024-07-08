@@ -3,7 +3,6 @@ package com.grupo11.hootel.service;
 import com.grupo11.hootel.dao.EventoRepository;
 import com.grupo11.hootel.entity.Evento;
 import com.grupo11.hootel.entity.Reserva;
-import com.grupo11.hootel.entity.ReservaHotel;
 import com.grupo11.hootel.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

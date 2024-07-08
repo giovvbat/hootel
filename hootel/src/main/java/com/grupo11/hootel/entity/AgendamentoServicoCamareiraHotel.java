@@ -41,7 +41,7 @@ public class AgendamentoServicoCamareiraHotel extends AgendamentoServico {
     }
 
     @Override
-    public boolean validar() {
+    protected boolean validarEspecifico() {
         return !especificacoes.isEmpty();
     }
 

@@ -14,29 +14,30 @@ import java.util.List;
 public class ReservaHotel extends Reserva {
 
 
-    @NotNull
+    // @NotNull
     @Column(name = "idade")
-    @Min(value = 0, message = "A idade minima é 0")
+    // @Min(value = 0, message = "A idade minima é 0")
     private Integer idade;
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = PreferenciaEventoHotel.class)
     @CollectionTable(name = "preferencias_eventos", joinColumns = @JoinColumn(name = "pin_reserva"))
     @Column(name = "preferencia_evento", nullable = false)
-    @NotNull(message = "Selecione suas preferências de eventos")
+    // @NotNull(message = "Selecione suas preferências de eventos")
     private List<PreferenciaEventoHotel> preferenciasEventos;
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = PreferenciaAlimentarHotel.class)
     @CollectionTable(name = "preferencias_alimentares", joinColumns = @JoinColumn(name = "pin_reserva"))
     @Column(name = "preferencia_alimentacao", nullable = false)
-    @NotNull(message = "Selecione suas preferências de alimentação")
+    // @NotNull(message = "Selecione suas preferências de alimentação")
     private List<PreferenciaAlimentarHotel> preferenciasAlimentares;
 
     public ReservaHotel() {
         super();
         preferenciasEventos = new ArrayList<>();
         preferenciasAlimentares = new ArrayList<>();
+        idade = 0;
     }
 
     public ReservaHotel(Integer idade, List<PreferenciaEventoHotel> preferenciasEventos, List<PreferenciaAlimentarHotel> preferenciasAlimentares) {
@@ -71,7 +72,7 @@ public class ReservaHotel extends Reserva {
     }
 
     @Override
-    public boolean validar() {
+    protected boolean validarEspecifico() {
         return idade >= 0 &&
                 !preferenciasAlimentares.isEmpty() &&
                 !preferenciasEventos.isEmpty();

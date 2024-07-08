@@ -1,5 +1,6 @@
 package com.grupo11.hootel.entity;
 
+import com.grupo11.hootel.entity.enums.ObjetivosSpaResort;
 import com.grupo11.hootel.entity.enums.PreferenciaAlimentarSpaResort;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -17,6 +18,13 @@ public class AlimentacaoSpaResort extends Alimentacao {
     @Column(name = "categoria", nullable = false)
     @NotNull(message = "Todos os campos devem ser preenchidos")
     private List<PreferenciaAlimentarSpaResort> categorias;
+
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = ObjetivosSpaResort.class)
+    @CollectionTable(name = "objetivos", joinColumns = @JoinColumn(name = "id_alimentacao"))
+    @Column(name = "objetivo", nullable = false)
+    @NotNull(message = "Selecione seus objetivos")
+    private List<ObjetivosSpaResort> objetivos;
 
     public AlimentacaoSpaResort() {
         super();
@@ -36,12 +44,17 @@ public class AlimentacaoSpaResort extends Alimentacao {
         this.categorias = categorias;
     }
 
+    public List<ObjetivosSpaResort> getObjetivos() {
+        return objetivos;
+    }
+
+    public void setObjetivos(List<ObjetivosSpaResort> objetivos) {
+        this.objetivos = objetivos;
+    }
+
     @Override
-    public boolean validar() {
-        if(categorias.isEmpty() || getConteudo() == null || getConteudo().isEmpty()) {
-            return false;
-        }
-        return true;
+    protected boolean validarEspecifico() {
+        return !categorias.isEmpty() && !objetivos.isEmpty();
     }
 
     @Override
