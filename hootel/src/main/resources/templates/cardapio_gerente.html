@@ -20,27 +20,37 @@
   <hr>
 
   <span th:text="${alimentacao.id}"></span>
-  <span th:text="${alimentacao.bebidas}"></span>
-  <span th:text="${alimentacao.opcaoCarnivora}"></span>
-  <span th:text="${alimentacao.opcaoVegetariana}"></span>
+  <span th:text="${alimentacao.conteudo}"></span>
 
 
-
-  <form action="#" th:action="@{/atualizaCardapio}" th:object="${alimentacao}" method="POST">
+  <form action="#" th:action="@{/adicionarCardapio}" th:object="${alimentacao}" method="POST">
 
     <div class="input-group input-group-lg">
-      <input type="text" th:field="*{bebidas}" placeholder="Bebidas" class="form-control">
-      <input type="text" th:field="*{opcaoCarnivora}" placeholder="Carnivora" class="form-control">
-      <input type="text" th:field="*{opcaoVegetariana}" placeholder="Vegetariana" class="form-control">
-      <div class="input-group-append">
-        <button type="submit" class="btn" id="botao-logar" style="color: white">Atualizar</button>
+      <div class="input-group input-group-lg">
+        <input type="text" th:field="*{conteudo}" placeholder="Conteúdo" class="form-control">
       </div>
 
+      <div>
+        <label th:each="categoria : ${categorias}">
+          <input type="checkbox" th:field="*{categorias}" th:value="${categoria}" th:text="${categoria.name()}" style="margin: 10px"/>
+        </label>
+      </div>
+
+      <div class="input-group-append">
+        <button type="submit" class="btn" id="botao-logar" style="color: mediumpurple">Adicionar Alimentação</button>
+      </div>
+
+      <div th:if="${errorMessage}">
+        <span style="color: #cb2d51" th:text="${errorMessage}">Error</span>
+      </div>
+      <div th:if="${#fields.hasErrors('conteudo')}">
+        <span style="color: #cb2d51" th:errors="${alimentacao.conteudo}"></span>
+      </div>
+      <div th:if="${#fields.hasErrors('categorias')}">
+        <span style="color: #cb2d51" th:errors="${alimentacao.categorias}"></span>
+      </div>
 
     </div>
-
-    <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
-    <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
 
   </form>
 

@@ -2,6 +2,7 @@ package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Alimentacao;
 import com.grupo11.hootel.entity.AlimentacaoHotel;
+import com.grupo11.hootel.entity.enums.PreferenciaAlimentarHotel;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.AlimentacaoService;
 import jakarta.validation.Valid;
@@ -27,13 +28,8 @@ public class GerenteAlimentacaoHotelController {
 
     @GetMapping("/mostrarCardapio")
     public String mostrarCardapio(Model model) {
-        try {
-            List<Alimentacao> alimentacao = alimentacaoService.listarAlimentacoes(AlimentacaoHotel.class);
-            model.addAttribute("cardapio", alimentacao);
-        } catch (HootelException e) {
-            model.addAttribute("cardapio", new AlimentacaoHotel());
-            model.addAttribute("errorMessage", e.getMessage());
-        }
+        model.addAttribute("alimentacao", new AlimentacaoHotel());
+        model.addAttribute("categorias", PreferenciaAlimentarHotel.values());
 
         return "cardapio_gerente";
     }
@@ -44,6 +40,8 @@ public class GerenteAlimentacaoHotelController {
                                  Model model) {
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("alimentacao", new AlimentacaoHotel());
+            model.addAttribute("categorias", PreferenciaAlimentarHotel.values());
             return "cardapio_gerente";
         }
 
@@ -53,6 +51,8 @@ public class GerenteAlimentacaoHotelController {
             model.addAttribute("errorMessage", e.getMessage());
         }
 
+        model.addAttribute("alimentacao", new AlimentacaoHotel());
+        model.addAttribute("categorias", PreferenciaAlimentarHotel.values());
         return "cardapio_gerente";
     }
 

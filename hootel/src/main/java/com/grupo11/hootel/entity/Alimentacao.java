@@ -46,7 +46,7 @@ public abstract class Alimentacao {
     }
 
     public boolean validar() {
-        return id != null && conteudo != null && validarEspecifico();
+        return conteudo != null && validarEspecifico();
     }
 
     protected abstract boolean validarEspecifico();

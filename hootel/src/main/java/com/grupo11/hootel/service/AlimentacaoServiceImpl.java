@@ -2,6 +2,7 @@ package com.grupo11.hootel.service;
 
 import com.grupo11.hootel.dao.AlimentacaoRepository;
 import com.grupo11.hootel.entity.Alimentacao;
+import com.grupo11.hootel.exceptions.CardapioIncompletoException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,9 +25,11 @@ public class AlimentacaoServiceImpl implements AlimentacaoService {
     @Override
     @Transactional
     public void addAlimentacao(Alimentacao alimentacao) {
-        if (alimentacao.validar()) {
-            alimentacaoRepository.save(alimentacao);
+        if (!alimentacao.validar()) {
+            throw new CardapioIncompletoException();
         }
+
+        alimentacaoRepository.save(alimentacao);
     }
 
     @Override

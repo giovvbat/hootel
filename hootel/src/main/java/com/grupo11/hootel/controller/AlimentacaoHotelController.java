@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,26 +31,42 @@ public class AlimentacaoHotelController {
         this.recomendacaoService = recomendacaoService;
     }
 
-    @GetMapping("/cardapio")
-    public String getCardapio(Model model) {
+    @ModelAttribute("alimentacoes")
+    public List<AlimentacaoHotel> listarAlimentacoes() {
         try {
-            List<Alimentacao> alimentacao = alimentacaoService.listarAlimentacoes(AlimentacaoHotel.class);
-            model.addAttribute("cardapio", alimentacao);
-        }catch (HootelException e){
-            model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("cardapio", new AlimentacaoHotel());
+            List<Alimentacao> list = alimentacaoService.listarAlimentacoes(AlimentacaoHotel.class);
+            List<AlimentacaoHotel> alimentacoesHotel = new ArrayList<>();
+
+            for (Alimentacao alimentacao : list) {
+                alimentacoesHotel.add((AlimentacaoHotel) alimentacao);
+            }
+
+            return alimentacoesHotel;
+        } catch (HootelException e) {
+            return new ArrayList<>();
         }
-        return "cardapio";
     }
 
-    @PostMapping("/cardapio/recomendacao")
+    @GetMapping("/alimentacao")
+    public String getAlimentacao(Model model) {
+        try {
+            model.addAttribute("reserva", new ReservaHotel());
+            model.addAttribute("recomendacao", new ArrayList<>());
+        }catch (HootelException e){
+            model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("reserva", new ReservaHotel());
+            model.addAttribute("recomendacao", new ArrayList<>());
+        }
+        return "alimentacao";
+    }
+
+    @GetMapping("/alimentacao/recomendacao")
     public String recomendacao(@Valid @ModelAttribute("reserva") ReservaHotel aReserva,
                                BindingResult bindingResult,
                                Model model) {
 
         if(bindingResult.hasErrors()) {
-            model.addAttribute("alimentacoes", alimentacaoService.listarAlimentacoes(AlimentacaoHotel.class));
-            return "cardapio";
+            return "alimentacao";
         }
 
         try {
@@ -57,15 +74,18 @@ public class AlimentacaoHotelController {
             EstrategiaRecomendacaoAlimentacao estrategia = new HotelEstrategiaRecomendacaoAlimentacao();
             List<Alimentacao> alimentacoes = alimentacaoService.listarAlimentacoes(AlimentacaoHotel.class);
 
-            model.addAttribute(
-                    "recomendacao",
-                    recomendacaoService.recomendarAlimentacao(estrategia, alimentacoes, reserva)
-            );
+            List<Alimentacao> list = recomendacaoService.recomendarAlimentacao(estrategia, alimentacoes, reserva);
+            List<AlimentacaoHotel> recomendacoes = new ArrayList<>();
+
+            for (Alimentacao alimentacao : list) {
+                recomendacoes.add((AlimentacaoHotel) alimentacao);
+            }
+
+            model.addAttribute("recomendacao", recomendacoes);
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("alimentacoes", alimentacaoService.listarAlimentacoes(AlimentacaoHotel.class));
         }
 
-        return "cardapio";
+        return "alimentacao";
     }
 }
