@@ -80,100 +80,63 @@
         <div class="row justify-content-center">
           <div class="col-md-10">
             <h3>Serviço de Camareiras <i class="fa-solid fa-broom"></i></h3>
-              <p>Selecione o melhor horário para você, junto de suas preferências, e uma funcionária será designada para atender o pedido conforme foi solicitado!</p>
+            <p>Selecione o melhor horário para você, junto de suas preferências, e uma funcionária será designada para atender o pedido conforme foi solicitado!</p>
           </div>
 
 
-          <form th:action="@{/processarCamareiras}" th:object="${horarioCamareira}" method="POST">
+          <form th:action="@{/processarCamareiras}" th:object="${agendamentoCamareira}" method="POST">
 
-          <div class="row justify-content-center mt-3 no-gutters">
+            <div class="row justify-content-center mt-3 no-gutters">
 
-            <div class="col-md-4">
+              <div class="col-md-4">
 
                 <label>
-                  <input style="margin: 10px" type="radio" th:field="*{id}"
+                  <input style="margin: 10px" type="radio" th:field="*{horario}"
                          th:each="tempHorario : ${horarios}"
-                         th:value="${tempHorario.id}"
-                         th:text="${tempHorario}" />
+                         th:value="${tempHorario}"
+                         th:text="${tempHorario.time}" />
                 </label>
 
 
+              </div>
+
+              <div class="col-md-4">
+
+                <label>
+                  <th:block th:each="servico : ${servicos}">
+                    <input style="margin: 10px" type="checkbox" th:field="*{especificacoes}"
+                           th:value="${servico}"
+                           th:text="${servico.displayName}" />
+                    <br/>
+                  </th:block>
+                </label>
+
+              </div>
             </div>
 
 
-            <div class="col-md-4 d-flex">
-              <div class="row justify-content-end">
-                <div class="col-md-11 align-self-center">
 
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" th:field="*{servicos}" th:value="'Trocar as toalhas'" id="checkbox1">
-                    <h6><label class="form-check-label" for="checkbox1">
-                    Trocar as toalhas
-                    </label></h6>
-                  </div>
-
-                  <div class="form-check mt-3">
-                    <input class="form-check-input" type="checkbox" th:field="*{servicos}" th:value="'Trocar a roupa de cama'" id="checkbox2">
-                    <h6><label class="form-check-label" for="checkbox2">
-                    Trocar a roupa de cama
-                    </label></h6>
-                  </div>
-
-                  <div class="form-check mt-3">
-                    <input class="form-check-input" type="checkbox" th:field="*{servicos}" th:value="'Retirar o lixo'" id="checkbox3">
-                    <h6><label class="form-check-label" for="checkbox3">
-                    Retirar o lixo
-                    </label></h6>
-                  </div>
-
-                  <div class="form-check mt-3">
-                    <input class="form-check-input" type="checkbox" th:field="*{servicos}" th:value="'Limpar o banheiro (incluindo vaso sanitário, pia e chuveiro)'" id="checkbox4">
-                    <h6><label class="form-check-label" for="checkbox3">
-                    Limpar o banheiro (incluindo vaso sanitário, pia e chuveiro)
-                    </label></h6>
-                  </div>
-
-                  <div class="form-check mt-3">
-                    <input class="form-check-input" type="checkbox" th:field="*{servicos}" th:value="'Limpar o chão'" id="checkbox5">
-                    <h6><label class="form-check-label" for="checkbox3">
-                    Limpar o chão
-                    </label></h6>
-                  </div>
-
-                  <div class="form-check mt-3" style="margin-bottom: 0px;">
-                    <input class="form-check-input" type="checkbox" th:value="'Reabastecer suprimentos (toalhas de papel, sabonete, xampu, etc.)'" id="checkbox6">
-                    <h6><label class="form-check-label" for="checkbox3">
-                    Reabastecer suprimentos (toalhas de papel, sabonete, xampu, etc.)
-                    </label></h6>
-                  </div>
-                  
+            <div class="row mt-3 justify-content-center">
+              <div class="col-md-7">
+                <div class="form-group">
+                  <h6><label for="usuario">Qual é o seu PIN?</label></h6>
+                  <input type="text" th:field="*{reserva.PIN}" class="form-control" id="usuario" placeholder="Digite seu PIN">
+                  <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span> <br>
+                  <span style="color: #cb2d51" th:if="${#fields.hasErrors('reserva.PIN')}" th:errors="*{reserva.PIN}"></span> <br>
+                  <span style="color: #cb2d51" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
                 </div>
-
               </div>
             </div>
-          </div>
 
-          <div class="row mt-3 justify-content-center">
-            <div class="col-md-7">
-              <div class="form-group">
-                <h6><label for="usuario">Qual é o seu PIN?</label></h6>
-                <input type="text" th:field="*{reserva.PIN}" class="form-control" id="usuario" placeholder="Digite seu PIN">
-                <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span> <br>
-                <span style="color: #cb2d51" th:if="${#fields.hasErrors('reserva.PIN')}" th:errors="*{reserva.PIN}"></span> <br>
-                <span style="color: #cb2d51" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
+
+            <div class="row mt-4 justify-content-center">
+
+
+              <div class="col-md-1">
+                <input class="btn btn-lg btn-primary" type="submit" value="Solicitar serviço">
               </div>
+
             </div>
-          </div>
-
-
-          <div class="row mt-4 justify-content-center">
-
-
-            <div class="col-md-1">
-              <input class="btn btn-lg btn-primary" type="submit" value="Solicitar serviço">
-            </div>
-            
-          </div>
 
           </form>
 

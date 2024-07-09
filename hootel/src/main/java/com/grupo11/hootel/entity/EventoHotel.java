@@ -15,7 +15,7 @@ public class EventoHotel extends Evento {
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = PreferenciaEventoHotel.class)
-    @CollectionTable(name = "categorias_eventos", joinColumns = @JoinColumn(name = "id_evento"))
+    @CollectionTable(name = "categorias_eventos_hotel", joinColumns = @JoinColumn(name = "id_evento"))
     @Column(name = "categoria", nullable = false)
     @NotNull(message = "Todos os campos devem ser preenchidos")
     private List<PreferenciaEventoHotel> categorias;

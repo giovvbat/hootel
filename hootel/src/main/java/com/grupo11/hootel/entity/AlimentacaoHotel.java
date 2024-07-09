@@ -13,7 +13,7 @@ public class AlimentacaoHotel extends Alimentacao{
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = PreferenciaAlimentarHotel.class)
-    @CollectionTable(name = "categorias_alimentacao", joinColumns = @JoinColumn(name = "id_alimentacao"))
+    @CollectionTable(name = "categorias_alimentacao_hotel", joinColumns = @JoinColumn(name = "id_alimentacao"))
     @Column(name = "categoria", nullable = false)
     @NotNull(message = "Todos os campos devem ser preenchidos")
     private List<PreferenciaAlimentarHotel> categorias;

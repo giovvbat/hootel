@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract  class Reserva {
+public abstract class Reserva {
 
     @Id
     @Column(name="pin")

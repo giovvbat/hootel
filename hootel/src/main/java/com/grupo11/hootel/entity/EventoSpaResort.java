@@ -14,14 +14,14 @@ public class EventoSpaResort extends Evento {
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = PreferenciaEventoSpaResort.class)
-    @CollectionTable(name = "preferencias_eventos", joinColumns = @JoinColumn(name = "id_evento"))
-    @Column(name = "preferencia_evento", nullable = false)
+    @CollectionTable(name = "categorias_eventos_spa", joinColumns = @JoinColumn(name = "id_evento"))
+    @Column(name = "categoria", nullable = false)
     @NotNull(message = "Selecione suas preferências de eventos")
     private List<PreferenciaEventoSpaResort> categorias;
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = ObjetivosSpaResort.class)
-    @CollectionTable(name = "objetivos", joinColumns = @JoinColumn(name = "id_evento"))
+    @CollectionTable(name = "objetivos_evento_spa", joinColumns = @JoinColumn(name = "id_evento"))
     @Column(name = "objetivo", nullable = false)
     @NotNull(message = "Selecione seus objetivos")
     private List<ObjetivosSpaResort> objetivos;

@@ -17,7 +17,7 @@ public class AgendamentoServicoCamareiraHotel extends AgendamentoServico {
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = EspecificacoesCamareira.class)
-    @CollectionTable(name = "especificacoes", joinColumns = @JoinColumn(name = "agendamento_camareira"))
+    @CollectionTable(name = "especificacoes_camareira", joinColumns = @JoinColumn(name = "agendamento_camareira"))
     @Column(name = "especificacao", nullable = false)
     @NotNull
     private List<EspecificacoesCamareira> especificacoes;

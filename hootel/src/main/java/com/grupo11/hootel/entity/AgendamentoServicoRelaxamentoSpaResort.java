@@ -15,7 +15,7 @@ public class AgendamentoServicoRelaxamentoSpaResort extends AgendamentoServico {
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = EspecificacoesRelaxamento.class)
-    @CollectionTable(name = "especificacoes", joinColumns = @JoinColumn(name = "agendamento_relaxamento"))
+    @CollectionTable(name = "especificacoes_relaxamento", joinColumns = @JoinColumn(name = "agendamento_relaxamento"))
     @Column(name = "especificacao", nullable = false)
     @NotNull
     private List<EspecificacoesRelaxamento> especificacoes;

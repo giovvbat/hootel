@@ -20,6 +20,7 @@ public abstract class AgendamentoServico {
     @Valid
     private Reserva reserva;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(name = "horario")
     private HorarioAgendamento horario;
 
@@ -57,7 +58,7 @@ public abstract class AgendamentoServico {
     }
 
     public boolean validar() {
-        return id != null && reserva != null && horario != null && validarEspecifico();
+        return reserva != null && horario != null && validarEspecifico();
     }
 
     protected abstract boolean validarEspecifico();

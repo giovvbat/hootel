@@ -13,52 +13,20 @@ import java.util.List;
 public class ReservaSpaResort extends Reserva {
 
     @Enumerated(EnumType.STRING)
-    @ElementCollection(targetClass = PreferenciaEventoSpaResort.class)
-    @CollectionTable(name = "preferencias_eventos", joinColumns = @JoinColumn(name = "pin_reserva"))
-    @Column(name = "preferencia_evento", nullable = false)
-    @NotNull(message = "Selecione suas preferências de eventos")
-    private List<PreferenciaEventoSpaResort> preferenciasEventos;
-
-    @Enumerated(EnumType.STRING)
-    @ElementCollection(targetClass = PreferenciaAlimentarSpaResort.class)
-    @CollectionTable(name = "preferencias_alimentacao", joinColumns = @JoinColumn(name = "pin_reserva"))
-    @Column(name = "preferencia_alimentacao", nullable = false)
-    @NotNull(message = "Selecione suas preferências de alimentação")
-    private List<PreferenciaAlimentarSpaResort> preferenciasAlimentacao;
-
-    @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = ObjetivosSpaResort.class)
-    @CollectionTable(name = "objetivos", joinColumns = @JoinColumn(name = "pin_reserva"))
+    @CollectionTable(name = "objetivos_spa", joinColumns = @JoinColumn(name = "pin_reserva"))
     @Column(name = "objetivo", nullable = false)
     @NotNull(message = "Selecione seus objetivos")
     private List<ObjetivosSpaResort> objetivos;
 
     public ReservaSpaResort() {
         super();
-        preferenciasEventos = new ArrayList<>();
-        preferenciasAlimentacao = new ArrayList<>();
+        objetivos = new ArrayList<>();
     }
 
-    public ReservaSpaResort(Integer idade, List<PreferenciaEventoSpaResort> preferenciasEventos, List<PreferenciaAlimentarSpaResort> preferenciasAlimentares) {
-        super();
-        this.preferenciasEventos = preferenciasEventos;
-        this.preferenciasAlimentacao = preferenciasAlimentares;
-    }
-
-    public List<PreferenciaEventoSpaResort> getPreferenciasEventos() {
-        return preferenciasEventos;
-    }
-
-    public void setPreferenciasEventos(List<PreferenciaEventoSpaResort> preferenciasEventos) {
-        this.preferenciasEventos = preferenciasEventos;
-    }
-
-    public List<PreferenciaAlimentarSpaResort> getPreferenciasAlimentacao() {
-        return preferenciasAlimentacao;
-    }
-
-    public void setPreferenciasAlimentacao(List<PreferenciaAlimentarSpaResort> preferenciasAlimentacao) {
-        this.preferenciasAlimentacao = preferenciasAlimentacao;
+    public ReservaSpaResort(Long PIN, List<ObjetivosSpaResort> objetivos) {
+        super(PIN);
+        this.objetivos = objetivos;
     }
 
     public List<ObjetivosSpaResort> getObjetivos() {
@@ -71,15 +39,13 @@ public class ReservaSpaResort extends Reserva {
 
     @Override
     protected boolean validarEspecifico() {
-        return !objetivos.isEmpty() && !preferenciasAlimentacao.isEmpty() && !preferenciasEventos.isEmpty();
+        return !objetivos.isEmpty();
     }
 
     @Override
     public String toString() {
         return "ReservaSpaResort{" +
-                "preferenciasEventos=" + preferenciasEventos +
-                ", preferenciasAlimentacao=" + preferenciasAlimentacao +
-                ", objetivos=" + objetivos +
+                "objetivos=" + objetivos +
                 '}';
     }
 }

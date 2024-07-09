@@ -1,6 +1,7 @@
 package com.grupo11.hootel.service;
 
 import com.grupo11.hootel.entity.Reserva;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,7 +14,5 @@ public interface ReservaService {
 
     Reserva criarReserva(Reserva reserva);
 
-    /*
     void updateReserva(Reserva reserva);
-     */
 }

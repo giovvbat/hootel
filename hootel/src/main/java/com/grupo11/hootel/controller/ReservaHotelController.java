@@ -2,6 +2,8 @@ package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Reserva;
 import com.grupo11.hootel.entity.ReservaHotel;
+import com.grupo11.hootel.entity.enums.PreferenciaAlimentarHotel;
+import com.grupo11.hootel.entity.enums.PreferenciaEventoHotel;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.ReservaService;
 import jakarta.validation.Valid;
@@ -56,6 +58,8 @@ public class ReservaHotelController {
 
             if (reserva.getPreferenciasEventos().isEmpty() || reserva.getPreferenciasAlimentares().isEmpty()) {
                 model.addAttribute("reserva", reserva);
+                model.addAttribute("tiposPrefAlimentar", PreferenciaAlimentarHotel.values());
+                model.addAttribute("tiposPrefEvento", PreferenciaEventoHotel.values());
                 return "preferencias";
             }
         } catch (HootelException e) {
@@ -67,18 +71,20 @@ public class ReservaHotelController {
     }
 
     @PostMapping("/reserva/preferencias")
-    public String checarPreferencias(@Valid @ModelAttribute("reserva") Reserva aReserva,
+    public String checarPreferencias(@Valid @ModelAttribute("reserva") ReservaHotel aReserva,
                                      BindingResult bindingResult,
                                      Model model) {
 
         if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getAllErrors());
             return "preferencias";
         }
 
         try {
-            reservaService.lerReservaPin(aReserva.getPIN());
+            reservaService.updateReserva(aReserva);
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
+            System.out.println(e.getMessage());
             return "preferencias";
         }
 

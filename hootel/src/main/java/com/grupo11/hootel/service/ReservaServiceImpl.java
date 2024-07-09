@@ -2,7 +2,6 @@ package com.grupo11.hootel.service;
 
 import com.grupo11.hootel.dao.ReservaRepository;
 import com.grupo11.hootel.entity.Reserva;
-import com.grupo11.hootel.entity.ReservaHotel;
 import com.grupo11.hootel.exceptions.NenhumaReservaException;
 import com.grupo11.hootel.exceptions.PinInvalidoException;
 import com.grupo11.hootel.exceptions.ReservaInvalidaException;
@@ -79,25 +78,19 @@ public class ReservaServiceImpl implements ReservaService {
         return reserva;
     }
 
-    /*
     @Override
     @Transactional
     public void updateReserva(Reserva reserva) {
-
-        Random random = new Random();
-        Long numeroAleatorio = 1000 + random.nextLong(9000);
-
-        while (reservaRepository.findById(numeroAleatorio).isPresent()) {
-            numeroAleatorio = 1000 + random.nextLong(9000);
-        }
 
         Optional<Reserva> reservaOptional = reservaRepository.findById(reserva.getPIN());
         if(reservaOptional.isEmpty()) {
             throw new PinInvalidoException();
         }
 
-        reserva.setPIN(numeroAleatorio);
+        if (!reserva.validar()) {
+            throw new ReservaInvalidaException();
+        }
+
         reservaRepository.save(reserva);
     }
-     */
 }

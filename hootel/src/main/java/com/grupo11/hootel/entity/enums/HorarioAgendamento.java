@@ -38,7 +38,7 @@ public enum HorarioAgendamento {
         this.time = time;
     }
 
-    private LocalTime getTime() {
+    public LocalTime getTime() {
         return time;
     }
 }
