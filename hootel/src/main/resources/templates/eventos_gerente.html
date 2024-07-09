@@ -19,7 +19,6 @@
     <h3>Eventos</h3>
     <hr>
 
-
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
         <tr>
@@ -30,12 +29,13 @@
             <th>Horário</th>
             <th>Detalhes</th>
             <th>Quantidade Participantes</th>
+            <th>Idade Minima</th>
+            <th>Categorias</th>
         </tr>
         </thead>
 
         <tbody>
         <tr th:each="eventoTabela : ${eventos}">
-
             <td th:text="${eventoTabela.id}"></td>
             <td th:text="${eventoTabela.nome}"></td>
             <td th:text="${eventoTabela.lugar}"></td>
@@ -43,68 +43,79 @@
             <td th:text="${eventoTabela.horario}"></td>
             <td th:text="${eventoTabela.descricao}"></td>
             <td th:text="${eventoTabela.quantidadeReservas()}"></td>
-
-            <!-- Add update button/link -->
-
+            <td th:text="${eventoTabela.idadeMinimaRecomendada}"></td>
+            <td th:text="${eventoTabela.categorias}"></td>
         </tr>
         </tbody>
     </table>
 
-        <form action="#" th:action="@{/addEvento}" th:object="${evento}" method="POST">
+    <form action="#" th:action="@{/addEvento}" th:object="${evento}" method="POST">
 
-            <div class="input-group input-group-lg">
-                <input type="text" th:field="*{lugar}" placeholder="lugar" class="form-control">
-                <input type="text" th:field="*{nome}" placeholder="nome" class="form-control">
-                <input type="date" th:field="*{dataInicio}" placeholder="data" class="form-control">
-                <input type="text" th:field="*{horario}" placeholder="horário" class="form-control">
-                <input type="text" th:field="*{descricao}" placeholder="descricao" class="form-control">
-                <div class="input-group-append">
-                    <button type="submit" class="btn" id="botao-logar" style="color: mediumpurple">Adicionar Evento</button>
-                </div>
+        <div class="input-group input-group-lg">
+            <input type="text" th:field="*{lugar}" placeholder="lugar" class="form-control">
+            <input type="text" th:field="*{nome}" placeholder="nome" class="form-control">
+            <input type="date" th:field="*{dataInicio}" placeholder="data" class="form-control">
+            <input type="text" th:field="*{horario}" placeholder="horário" class="form-control">
+            <input type="text" th:field="*{descricao}" placeholder="descricao" class="form-control">
+            <input type="number" min="0" th:field="*{idadeMinimaRecomendada}" placeholder="Idade Mínima Recomendada" class="form-control">
+        </div>
 
-            </div>
+        <div>
+            <label th:each="categoria : ${categorias}">
+                <input type="checkbox" th:field="*{categorias}" th:value="${categoria}" th:text="${categoria.name()}" style="margin: 10px"/>
+            </label>
+        </div>
 
-            <div th:if="${errorMessageAdd}">
-                <span style="color: #cb2d51" th:text="${errorMessageAdd}">Error</span>
-            </div>
-            <div th:if="${#fields.hasErrors('lugar')}">
-                <span style="color: #cb2d51" th:errors="${evento.lugar}"></span>
-            </div>
-            <div th:if="${#fields.hasErrors('nome')}">
-                <span style="color: #cb2d51" th:errors="${evento.nome}"></span>
-            </div>
-            <div th:if="${#fields.hasErrors('dataInicio')}">
-                <span style="color: #cb2d51" th:errors="${evento.dataInicio}"></span>
-            </div>
-            <div th:if="${#fields.hasErrors('horario')}">
-                <span style="color: #cb2d51" th:errors="${evento.horario}"></span>
-            </div>
-            <div th:if="${#fields.hasErrors('descricao')}">
-                <span style="color: #cb2d51" th:errors="${evento.descricao}"></span>
-            </div>
+        <div class="input-group-append">
+            <button type="submit" class="btn" id="botao-logar" style="color: mediumpurple">Adicionar Evento</button>
+        </div>
 
-        </form>
+        <div th:if="${errorMessageAdd}">
+            <span style="color: #cb2d51" th:text="${errorMessageAdd}">Error</span>
+        </div>
+        <div th:if="${#fields.hasErrors('lugar')}">
+            <span style="color: #cb2d51" th:errors="${evento.lugar}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('nome')}">
+            <span style="color: #cb2d51" th:errors="${evento.nome}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('dataInicio')}">
+            <span style="color: #cb2d51" th:errors="${evento.dataInicio}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('horario')}">
+            <span style="color: #cb2d51" th:errors="${evento.horario}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('descricao')}">
+            <span style="color: #cb2d51" th:errors="${evento.descricao}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('idadeMinimaRecomendada')}">
+            <span style="color: #cb2d51" th:errors="${evento.idadeMinimaRecomendada}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('categorias')}">
+            <span style="color: #cb2d51" th:errors="${evento.categorias}"></span>
+        </div>
 
-        <br><br>
-
-        <form action="#" th:action="@{/removeEvento}"  method="POST">
-
-            <div class="input-group input-group-lg">
-                <input type="text" name="id_evento" placeholder="Digite seu PIN" class="form-control">
-                <div class="input-group-append">
-                    <button type="submit" class="btn" id="botao-logar" style="color: mediumpurple">Remover Evento</button>
-                </div>
-
-            </div>
-            <div th:if="${errorMessageRemove}">
-                <span style="color: #cb2d51" th:text="${errorMessageRemove}">Error</span>
-            </div>
-
-        </form>
+    </form>
 
     <br><br>
 
-    <form action="#" th:action="@{/atualizaEvento}" th:object="${eventoAtualizar}" method="POST">
+    <form action="#" th:action="@{/removeEvento}"  method="POST">
+
+        <div class="input-group input-group-lg">
+            <input type="text" name="id_evento" placeholder="Digite seu PIN" class="form-control">
+            <div class="input-group-append">
+                <button type="submit" class="btn" id="botao-logar" style="color: mediumpurple">Remover Evento</button>
+            </div>
+        </div>
+        <div th:if="${errorMessageRemove}">
+            <span style="color: #cb2d51" th:text="${errorMessageRemove}">Error</span>
+        </div>
+
+    </form>
+
+    <br><br>
+
+    <form action="#" th:action="@{/atualizaEvento}" th:object="${eventoAtualizar}" method="POST" class="mb-5">
 
         <div class="input-group input-group-lg">
             <input type="text" th:field="*{id}" placeholder="Digite seu PIN" class="form-control">
@@ -113,13 +124,19 @@
             <input type="date" th:field="*{dataInicio}" placeholder="data" class="form-control">
             <input type="text" th:field="*{horario}" placeholder="horário" class="form-control">
             <input type="text" th:field="*{descricao}" placeholder="descricao" class="form-control">
-            <div class="input-group-append">
-                <button type="submit" class="btn" id="botao-logar" style="color: white">Atualizar Evento</button>
-            </div>
-
+            <input type="number" th:field="*{idadeMinimaRecomendada}" placeholder="Idade Mínima Recomendada" class="form-control">
         </div>
-        <!--<span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
-        <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>-->
+
+        <div>
+            <label th:each="categoria : ${categorias}">
+                <input type="checkbox" th:field="*{categorias}" th:value="${categoria}" th:text="${categoria.name()}" style="margin: 10px"/>
+            </label>
+        </div>
+
+        <div class="input-group-append">
+            <button type="submit" class="btn" id="botao-logar" style="color: white">Atualizar Evento</button>
+        </div>
+
         <div th:if="${errorMessageUpdate}">
             <span style="color: #cb2d51" th:text="${errorMessageUpdate}">Error</span>
         </div>
@@ -137,6 +154,12 @@
         </div>
         <div th:if="${#fields.hasErrors('descricao')}">
             <span style="color: #cb2d51" th:errors="${eventoAtualizar.descricao}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('idadeMinimaRecomendada')}">
+            <span style="color: #cb2d51" th:errors="${eventoAtualizar.idadeMinimaRecomendada}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('categorias')}">
+            <span style="color: #cb2d51" th:errors="${eventoAtualizar.categorias}"></span>
         </div>
 
     </form>

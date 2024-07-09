@@ -29,6 +29,9 @@ public class EventoHotelController {
         try {
             List<Evento> eventos = eventoService.lerTodosEventos(EventoHotel.class);
             model.addAttribute("eventos", eventos);
+            model.addAttribute("reserva", new ReservaHotel());
+            model.addAttribute("recomendacao", new ArrayList<Evento>());
+
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("eventos", new ArrayList<Evento>());
@@ -54,7 +57,7 @@ public class EventoHotelController {
 
     @PostMapping("/evento/participacao/add")
     public String cadastrarParticipacao(@ModelAttribute("evento_escolhido") EventoHotel evento,
-                                        @Valid @ModelAttribute("reserva") Reserva reserva,
+                                        @Valid @ModelAttribute("reserva") ReservaHotel reserva,
                                         BindingResult bindingResultReserva, Model model){
 
         if (bindingResultReserva.hasErrors() ) {
@@ -77,7 +80,7 @@ public class EventoHotelController {
 
     @PostMapping("/evento/participacao/rm")
     public String removerParticipacao(@ModelAttribute("evento_escolhido") EventoHotel evento,
-                                      @Valid @ModelAttribute("reserva") Reserva reserva,
+                                      @Valid @ModelAttribute("reserva") ReservaHotel reserva,
                                       BindingResult bindingResultReserva, Model model){
 
         if (bindingResultReserva.hasErrors()) {
@@ -98,8 +101,8 @@ public class EventoHotelController {
         return "redirect:/eventos";
     }
 
-    @PostMapping("/evento/recomendacao")
-    public String recomendarEventos(@Valid @ModelAttribute("reserva") Reserva aReserva,
+    @GetMapping("/evento/recomendacao")
+    public String recomendarEventos(@Valid @ModelAttribute("reserva") ReservaHotel aReserva,
                                     BindingResult bindingResult,
                                     Model model) {
 

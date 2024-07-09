@@ -77,10 +77,62 @@
 <section id="formulario" class="d-flex">
     <div class="container align-self-center capa">
         <div class="row justify-content-center">
-            <div class="col-md-10">
-                <h1>Calendário de eventos</h1>
+            <h1>Calendário de eventos</h1>
+            <div th:if="${recomendacao.isEmpty()}" class="col-md-10">
+                <form th:action="@{/evento/recomendacao}" th:object="${reserva}" method="GET" class="text-center my-3">
+                    <div class="form-group">
+                        <label for="pin">Insira o PIN para mostrar recomendações personalizadas:</label>
+                        <input type="text" th:field="*{PIN}" id="pin" name="PIN" class="form-control" required />
+                    </div>
+                    <button type="submit" class="btn btn-roxo" id="btn-roxo">Ir para Nova Página</button>
 
-                <h5>Tá afim de se divertir? Dá uma olhada nos eventos que planejamos!</h5>
+                    <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
+                    <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
+                </form>
+            </div>
+
+            <div class="col-md-10" th:if="${!recomendacao.isEmpty()}">
+
+                <h5>Tá afim de se divertir? Dá uma olhada nos eventos que recomendamos para você</h5>
+
+                <table class="table table-bordered table-striped mt-5" style="margin-bottom: 110px">
+                    <thead class="table-light">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Lugar</th>
+                        <th>Data</th>
+                        <th>Horário</th>
+                        <th>Detalhes</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="evento : ${recomendacao}">
+
+                        <td th:text="${evento.nome}"></td>
+                        <td th:text="${evento.lugar}"></td>
+                        <td th:text="${evento.dataInicio}"></td>
+                        <td th:text="${evento.horario}"></td>
+
+                        <td>
+                            <a th:href="@{/evento(eventoId=${evento.id})}" class="btn" id="btn-roxo">
+                                Ver mais
+                            </a>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+                <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
+                <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
+
+            </div>
+
+
+            <div class="col-md-10" th:if="${!eventos.isEmpty()}">
+
+                <h5>Tá afim de se divertir? Dá uma olhada em todos os eventos que planejamos!</h5>
 
                 <table class="table table-bordered table-striped mt-5" style="margin-bottom: 110px">
                     <thead class="table-light">
@@ -115,7 +167,6 @@
                 <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
 
             </div>
-
 
         </div>
     </div>

@@ -48,10 +48,14 @@ public abstract class Evento {
     private List<Reserva> reservas;
 
     public boolean validar() {
-        return id != null && horario != null && lugar != null && nome != null && dataInicio != null && descricao != null && validarEspecifico();
+        return horario != null && lugar != null && nome != null && dataInicio != null && descricao != null && validarEspecifico();
     }
 
     protected abstract boolean validarEspecifico();
+
+    public Integer quantidadeReservas() {
+        return reservas.size();
+    }
 
     public Evento() {
         this.reservas = new ArrayList<>();

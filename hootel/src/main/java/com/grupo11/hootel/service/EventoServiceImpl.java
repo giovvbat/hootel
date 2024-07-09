@@ -27,7 +27,7 @@ public class EventoServiceImpl implements EventoService {
     @Override
     @Transactional
     public void atualizarEvento(Evento evento) {
-        if (evento.validar()) {
+        if (!evento.validar()) {
             throw new EventoInvalidoException();
         }
         Optional<Evento> optionalEvento = eventoRepository.findById(evento.getId());
@@ -42,7 +42,7 @@ public class EventoServiceImpl implements EventoService {
     @Override
     @Transactional
     public void criarEvento(Evento evento) {
-        if(evento.validar()) {
+        if(!evento.validar()) {
             throw new EventoIncompletoException();
         }
 
