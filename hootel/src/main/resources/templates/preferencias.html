@@ -1,38 +1,3 @@
-<!--
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Preferências</title>
-</head>
-<body>
-<h1>Preferências</h1>
-<form th:action="@{/reserva/preferencias}" th:object="${reserva}" method="post">
-    <input type="hidden" th:field="*{PIN}">
-    <fieldset>
-        <legend>Preferências alimentares:</legend>
-        <div th:each="tipo : ${tiposPrefAlimentar}">
-            <input type="checkbox" th:field="*{preferenciasAlimentares}" th:value="${tipo}" th:id="${tipo}" />
-            <label th:for="${tipo}" th:text="${tipo}"></label>
-        </div>
-    </fieldset>
-    <br>
-    <fieldset>
-        <legend>Preferências de evento:</legend>
-        <div th:each="tipo : ${tiposPrefEvento}">
-            <input type="checkbox" th:field="*{preferenciasEventos}" th:value="${tipo}" th:id="${tipo}" />
-            <label th:for="${tipo}" th:text="${tipo}"></label>
-        </div>
-    </fieldset>
-    <br>
-    <input type="number" th:field="*{idade}" min="0">
-    <br>
-    <button type="submit">Salvar</button>
-</form>
-</body>
-</html>
--->
-
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>

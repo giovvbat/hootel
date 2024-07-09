@@ -2,6 +2,7 @@ package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Evento;
 import com.grupo11.hootel.entity.EventoHotel;
+import com.grupo11.hootel.entity.enums.PreferenciaEventoHotel;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.EventoService;
 import jakarta.validation.Valid;
@@ -28,11 +29,16 @@ public class GerenteEventosHotelController {
     public String popularModel(Model model){
         try {
             List<Evento> eventos = eventoService.lerTodosEventos(EventoHotel.class);
-            model.addAttribute("eventos", eventos);
+            List<EventoHotel> eventoHotels = new ArrayList<>();
+            for (Evento evento : eventos){
+                eventoHotels.add((EventoHotel) evento);
+            }
+            model.addAttribute("eventos", eventoHotels);
+            model.addAttribute("categorias", PreferenciaEventoHotel.values());
             return "eventos_gerente";
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("eventos", new ArrayList<Evento>());
+            model.addAttribute("eventos", new ArrayList<EventoHotel>());
             return "add_evento_gerente";
         }
     }
