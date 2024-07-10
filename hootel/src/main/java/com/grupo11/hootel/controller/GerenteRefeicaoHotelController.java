@@ -1,10 +1,9 @@
 package com.grupo11.hootel.controller;
 
-import com.grupo11.hootel.entity.Alimentacao;
-import com.grupo11.hootel.entity.AlimentacaoHotel;
+import com.grupo11.hootel.entity.RefeicaoHotel;
 import com.grupo11.hootel.entity.enums.PreferenciaAlimentarHotel;
 import com.grupo11.hootel.exceptions.HootelException;
-import com.grupo11.hootel.service.AlimentacaoService;
+import com.grupo11.hootel.service.RefeicaoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,50 +13,48 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-
 @Controller
-public class GerenteAlimentacaoHotelController {
+public class GerenteRefeicaoHotelController {
 
-    private final AlimentacaoService alimentacaoService;
+    private final RefeicaoService refeicaoService;
 
     @Autowired
-    public GerenteAlimentacaoHotelController(AlimentacaoService alimentacaoService) {
-        this.alimentacaoService = alimentacaoService;
+    public GerenteRefeicaoHotelController(RefeicaoService refeicaoService) {
+        this.refeicaoService = refeicaoService;
     }
 
     @GetMapping("/mostrarCardapio")
     public String mostrarCardapio(Model model) {
-        model.addAttribute("alimentacao", new AlimentacaoHotel());
+        model.addAttribute("refeicao", new RefeicaoHotel());
         model.addAttribute("categorias", PreferenciaAlimentarHotel.values());
 
         return "cardapio_gerente";
     }
 
     @PostMapping("/adicionarCardapio")
-    public String addAlimentacaoEmCardapio(@Valid @ModelAttribute("cardapio") AlimentacaoHotel alimentacao,
+    public String addrefeicaoEmCardapio(@Valid @ModelAttribute("cardapio") RefeicaoHotel refeicao,
                                  BindingResult bindingResult,
                                  Model model) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("alimentacao", new AlimentacaoHotel());
+            model.addAttribute("refeicao", new RefeicaoHotel());
             model.addAttribute("categorias", PreferenciaAlimentarHotel.values());
             return "cardapio_gerente";
         }
 
         try {
-            alimentacaoService.addAlimentacao(alimentacao);
+            refeicaoService.addRefeicao(refeicao);
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
 
-        model.addAttribute("alimentacao", new AlimentacaoHotel());
+        model.addAttribute("refeicao", new RefeicaoHotel());
         model.addAttribute("categorias", PreferenciaAlimentarHotel.values());
         return "cardapio_gerente";
     }
 
     @PostMapping("/atualizaCardapio")
-    public String atualizarAlimentacaoEmCardapio(@Valid @ModelAttribute("cardapio") AlimentacaoHotel alimentacao,
+    public String atualizarrefeicaoEmCardapio(@Valid @ModelAttribute("cardapio") RefeicaoHotel refeicao,
                                     BindingResult bindingResult,
                                     Model model) {
 
@@ -66,7 +63,7 @@ public class GerenteAlimentacaoHotelController {
         }
 
         try {
-            alimentacaoService.atualizarAlimentacao(alimentacao);
+            refeicaoService.atualizarRefeicao(refeicao);
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }

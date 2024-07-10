@@ -1,15 +1,12 @@
 package com.grupo11.hootel.entity;
 
-import com.grupo11.hootel.entity.enums.PreferenciaAlimentarHotel;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
-import java.util.List;
-
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Alimentacao {
+public abstract class Refeicao {
 
     @Id
     @Column(name = "id")
@@ -21,10 +18,10 @@ public abstract class Alimentacao {
     @NotEmpty(message = "Todos os campos devem ser preenchidos")
     private String conteudo;
 
-    public Alimentacao() {
+    public Refeicao() {
     }
 
-    public Alimentacao(Integer id, String conteudo) {
+    public Refeicao(Integer id, String conteudo) {
         this.id = id;
         this.conteudo = conteudo;
     }

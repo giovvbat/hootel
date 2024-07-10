@@ -8,22 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "AlimentacaoHotel")
-public class AlimentacaoHotel extends Alimentacao{
+@Table(name = "RefeicaoHotel")
+public class RefeicaoHotel extends Refeicao {
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = PreferenciaAlimentarHotel.class)
-    @CollectionTable(name = "categorias_alimentacao_hotel", joinColumns = @JoinColumn(name = "id_alimentacao"))
+    @CollectionTable(name = "categorias_refeicao_hotel", joinColumns = @JoinColumn(name = "id_refeicao"))
     @Column(name = "categoria", nullable = false)
     @NotNull(message = "Todos os campos devem ser preenchidos")
     private List<PreferenciaAlimentarHotel> categorias;
 
-    public AlimentacaoHotel() {
+    public RefeicaoHotel() {
         super();
         this.categorias = new ArrayList<>();
     }
 
-    public AlimentacaoHotel(Integer id, String conteudo, List<PreferenciaAlimentarHotel> categorias) {
+    public RefeicaoHotel(Integer id, String conteudo, List<PreferenciaAlimentarHotel> categorias) {
         super(id, conteudo);
         this.categorias = categorias;
     }
@@ -42,7 +42,7 @@ public class AlimentacaoHotel extends Alimentacao{
 
     @Override
     public String toString() {
-        return "AlimentacaoHotel{" +
+        return "RefeicaoHotel{" +
                 "categorias=" + categorias +
                 '}';
     }

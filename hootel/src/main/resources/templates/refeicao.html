@@ -50,7 +50,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a th:href="@{/alimentacao}" class="nav-link">Cardápio</a>
+                        <a th:href="@{/refeicao}" class="nav-link">Cardápio</a>
                     </li>
 
                     <li class="nav-item">
@@ -74,78 +74,13 @@
     </nav>
 </header>
 
-<!--<section id="formulario" class="d-flex">
-    <div class="container align-self-center capa">
-        <div class="row justify-content-center">
-            <h1>Cárdapios do dia </h1>
-            <div class="col-md-10">
-                <div th:if="${recomendacao.isEmpty()}" class="col-md-10">
-                    <form th:action="@{/alimentacao/recomendacao}" th:object="${reserva}" method="GET" class="text-center my-3">
-                        <div class="form-group">
-                            <label for="pin">Insira o PIN para mostrar recomendações personalizadas:</label>
-                            <input type="text" th:field="*{PIN}" id="pin" name="PIN" class="form-control" required />
-                        </div>
-                        <button type="submit" class="btn btn-roxo" id="btn-roxo">Mostrar Recomendações</button>
-
-                        <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
-                        <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
-                    </form>
-                </div>
-
-                <div class="col-md-10" th:if="${!recomendacao.isEmpty()}">
-                    <h5>Tá afim de se divertir? Dá uma olhada nas refeições que recomendamos para você</h5>
-                    <table class="table table-bordered table-striped mt-5" style="margin-bottom: 110px">
-                        <thead class="table-light">
-                        <tr>
-                            <th>Conteúdo</th>
-                            <th>Categorias</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="alimentacao : ${recomendacao}">
-                            <td th:text="${alimentacao.conteudo}"></td>
-                            <td th:text="${alimentacao.categorias}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
-                    <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
-                </div>
-
-                <div class="col-md-10" th:if="${!alimentacoes.isEmpty()}">
-                    <h5>Confira também nossas outras opções de cardápios!</h5>
-                    <table class="table table-bordered table-striped mt-5" style="margin-bottom: 110px">
-                        <thead class="table-light">
-                        <tr>
-                            <th>Conteúdo</th>
-                            <th>Categorias</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="alimentacao : ${alimentacoes}">
-                            <td th:text="${alimentacao.conteudo}"></td>
-                            <td th:text="${alimentacao.categorias}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
-                    <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>-->
-
-
 <section id="formulario" class="d-flex">
     <div class="container align-self-center capa">
         <div class="row justify-content-center">
             <h1 class="text-center">Cárdapios do dia</h1>
             <div class="col-md-10">
                 <div th:if="${recomendacao.isEmpty()}" class="d-flex justify-content-center">
-                    <form th:action="@{/alimentacao/recomendacao}" th:object="${reserva}" method="GET" class="text-center my-3">
+                    <form th:action="@{/refeicao/recomendacao}" th:object="${reserva}" method="GET" class="text-center my-3">
                         <div class="form-group">
                             <label for="pin">Insira o PIN para mostrar recomendações personalizadas:</label>
                             <input type="text" th:field="*{PIN}" id="pin" name="PIN" class="form-control" required />
@@ -167,9 +102,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="alimentacao : ${recomendacao}">
-                                <td th:text="${alimentacao.conteudo}"></td>
-                                <td th:text="${alimentacao.categorias}"></td>
+                            <tr th:each="refeicao : ${recomendacao}">
+                                <td th:text="${refeicao.conteudo}"></td>
+                                <td th:text="${refeicao.categorias}"></td>
                             </tr>
                             </tbody>
                         </table>
@@ -178,7 +113,7 @@
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-center" th:if="${!alimentacoes.isEmpty()}">
+                <div class="d-flex justify-content-center" th:if="${!refeicoes.isEmpty()}">
                     <div class="col-md-10 text-center">
                         <h5>Confira também nossas outras opções de cardápios!</h5>
                         <table class="table table-bordered table-striped mt-5" style="margin-bottom: 110px">
@@ -189,9 +124,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="alimentacao : ${alimentacoes}">
-                                <td th:text="${alimentacao.conteudo}"></td>
-                                <td th:text="${alimentacao.categorias}"></td>
+                            <tr th:each="refeicao : ${refeicoes}">
+                                <td th:text="${refeicao.conteudo}"></td>
+                                <td th:text="${refeicao.categorias}"></td>
                             </tr>
                             </tbody>
                         </table>

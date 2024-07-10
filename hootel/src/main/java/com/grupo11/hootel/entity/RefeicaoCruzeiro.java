@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "AlimentacaoCruzeiro")
-public class AlimentacaoCruzeiro extends Alimentacao {
+@Table(name = "RefeicaoCruzeiro")
+public class RefeicaoCruzeiro extends Refeicao {
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = PreferenciaAlimentarCruzeiro.class)
-    @CollectionTable(name = "categorias_alimentacao_cruzeiro", joinColumns = @JoinColumn(name = "id_alimentacao"))
+    @CollectionTable(name = "categorias_refeicao_cruzeiro", joinColumns = @JoinColumn(name = "id_refeicao"))
     @Column(name = "categoria", nullable = false)
     @NotNull(message = "Todos os campos devem ser preenchidos")
     private List<PreferenciaAlimentarCruzeiro> categorias;
@@ -24,13 +24,13 @@ public class AlimentacaoCruzeiro extends Alimentacao {
     @Column(name = "idade_minima")
     private Integer idadeMinimaRecomendada;
 
-    public AlimentacaoCruzeiro() {
+    public RefeicaoCruzeiro() {
         super();
         this.categorias = new ArrayList<>();
         this.idadeMinimaRecomendada = 0;
     }
 
-    public AlimentacaoCruzeiro(Integer id, String conteudo, List<PreferenciaAlimentarCruzeiro> categorias, Integer idadeMinimaRecomendada) {
+    public RefeicaoCruzeiro(Integer id, String conteudo, List<PreferenciaAlimentarCruzeiro> categorias, Integer idadeMinimaRecomendada) {
         super(id, conteudo);
         this.categorias = categorias;
         this.idadeMinimaRecomendada = idadeMinimaRecomendada;
@@ -59,7 +59,7 @@ public class AlimentacaoCruzeiro extends Alimentacao {
 
     @Override
     public String toString() {
-        return "AlimentacaoCruzeiro{" +
+        return "RefeicaoCruzeiro{" +
                 "categorias=" + categorias +
                 ", idadeMinimaRecomendada=" + idadeMinimaRecomendada +
                 '}';
