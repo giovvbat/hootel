@@ -2,6 +2,7 @@ package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Reserva;
 import com.grupo11.hootel.entity.ReservaSpaResort;
+import com.grupo11.hootel.entity.enums.ObjetivosSpaResort;
 import com.grupo11.hootel.entity.enums.PreferenciaAlimentarSpaResort;
 import com.grupo11.hootel.entity.enums.PreferenciaEventoSpaResort;
 import com.grupo11.hootel.exceptions.HootelException;
@@ -59,8 +60,7 @@ public class ReservaSpaResortController {
 
             if (reserva.getObjetivos().isEmpty()) {
                 model.addAttribute("reserva", reserva);
-                model.addAttribute("tiposPrefAlimentar", PreferenciaAlimentarSpaResort.values());
-                model.addAttribute("tiposPrefEvento", PreferenciaEventoSpaResort.values());
+                model.addAttribute("objetivos", ObjetivosSpaResort.values());
                 return "spa/preferencias";
             }
         } catch (HootelException e) {

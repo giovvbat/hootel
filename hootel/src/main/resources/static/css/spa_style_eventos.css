@@ -1,0 +1,248 @@
+body {
+    background: #FFF;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+th, td {
+    text-align: center;
+}
+
+.custom-table th, .custom-table td {
+    border: 2px solid #DB7093; /* Cor personalizada das bordas */
+}
+
+/*
+
+.custom-table thead th {
+    border-bottom: 3px solid #DB7093;
+}
+
+*/
+
+
+
+.custom-table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+nav.navbar-transparente {
+    padding: 15px 0px;
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid;
+    border-color: #DB7093;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #DB7093;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #A05270;
+}
+
+.navbar-light .navbar-toggler {
+    color: #DB7093;
+    border-color: #DB7093;
+}
+
+.divisor {
+    width: 1px;
+    background: #DB7093;
+    margin: 10px 21px 10px 12px;
+}
+
+#btn-navbar {
+    background: #DB7093;
+    color: white;
+}
+
+
+#btn-navbar:hover {
+    background: #A05270;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+h1 {
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    color: #DB7093;
+}
+
+h3 {
+    font-size: 2em;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+}
+
+h5, h4 {
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: #DB7093;
+}
+
+@media (max-width: 575.98px) {
+    h1 {
+        font-size: 3em;
+    }
+    .btn-custom {
+        margin: 10px 15px;
+        font-size: 3em;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+    h1 {
+        font-size: 3em;
+    }
+    .btn-custom {
+        margin: 10px 15px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    h1 {
+        font-size: 4em;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    h1 {
+        font-size: 4em;
+    }
+}
+
+@media (min-width: 1200px) {
+    h1 {
+        font-size: 4em;
+    }
+}
+
+.capa {
+    margin-top: 160px;
+    margin-bottom: 58px;
+}
+
+.capa form {
+    margin-top: 25px;
+}
+
+.capa span, .capa label {
+    color: #DB7093;
+}
+
+h6 a {
+    color: #DB7093;
+}
+
+h6 a:hover {
+    color: #A05270;
+    text-decoration: underline;
+}
+
+footer {
+    border-top: 1px solid;
+    border-color: #DB7093;
+    background: rgba(255, 255, 255, 1.0);
+    padding: 20px 0px 20px 0;
+    position: relative;
+}
+
+footer h4 {
+    color: #919496;
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+
+footer .navbar-nav a {
+    color: #DB7093;
+    font-size: 0.8em;
+}
+
+#redes a {
+    color: #DB7093;
+    font-size: 0.8em;
+    margin: 5px;
+}
+
+footer .navbar-nav a:hover {
+    color: #A05270;
+    text-decoration: none;
+}
+
+#redes a:hover {
+    color: #A05270;
+    font-size: 0.8em;
+}
+
+footer ul {
+    list-style: none;
+}
+
+footer ul li {
+    float: right;
+    margin: 0 5px;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 5%;
+}
+
+@font-face {
+    font-family: Super Sunday;
+    src: url('../fonts/KGRedHands.ttf')
+}
+
+
+.brand p {
+    color: #DB7093;
+    font-size: 2.5em;
+    margin: 0px;
+    padding: 0px;
+    font-family: Super Sunday, sans-serif;
+}
+
+#btn-roxo {
+    background: #DB7093;
+    color: white;
+}
+
+
+#btn-roxo:hover {
+    transition: background 0.3s, color 0.4s;
+    background: #A05270;
+}
+
+/*customizando range*/
+
+.custom-range::-webkit-slider-thumb {
+    background-color: #DB7093 !important; /* Cor do controle de deslizamento em navegadores WebKit (Chrome, Safari, etc.) */
+    border: 1px solid #DB7093 !important; /* Borda do controle de deslizamento em navegadores WebKit */
+}
+
+.custom-range::-moz-range-thumb {
+    background-color: #DB7093 !important; /* Cor do controle de deslizamento em navegadores Mozilla (Firefox) */
+    border: 1px solid #DB7093 !important; /* Borda do controle de deslizamento em navegadores Mozilla */
+}
+
+.custom-range::-ms-thumb {
+    background-color: #DB7093 !important; /* Cor do controle de deslizamento em navegadores Microsoft (Internet Explorer, Edge) */
+    border: 1px solid #DB7093 !important; /* Borda do controle de deslizamento em navegadores Microsoft */
+}
+
+/* Estilos personalizados para a "barrinha" do controle de range */
+.custom-range::-webkit-slider-runnable-track {
+    background-color: #A05270; /* Cor da "barrinha" em navegadores WebKit */
+}
+
+.custom-range::-moz-range-track {
+    background-color: #A05270; /* Cor da "barrinha" em navegadores Mozilla */
+}
+
+.custom-range::-ms-track {
+    background-color: #A05270; /* Cor da "barrinha" em navegadores Microsoft */
+}

@@ -2,7 +2,7 @@ package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.AgendamentoServicoRelaxamentoSpaResort;
 import com.grupo11.hootel.entity.ReservaSpaResort;
-import com.grupo11.hootel.entity.enums.EspecificacoesCamareira;
+import com.grupo11.hootel.entity.enums.EspecificacoesRelaxamento;
 import com.grupo11.hootel.entity.enums.HorarioAgendamento;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.AgendamentoServicoService;
@@ -26,37 +26,37 @@ public class AgendamentoRelaxamentoSpaResortController {
     }
 
 
-    @ModelAttribute("agendamentoCamareira")
-    public AgendamentoServicoRelaxamentoSpaResort carregarAgendamentoCamareira() {
+    @ModelAttribute("agendamentoRelaxamento")
+    public AgendamentoServicoRelaxamentoSpaResort carregarAgendamentoRelaxamento() {
         AgendamentoServicoRelaxamentoSpaResort agendamento = new AgendamentoServicoRelaxamentoSpaResort();
         agendamento.setReserva(new ReservaSpaResort());
         return agendamento;
     }
 
-    @GetMapping("/camareiras")
-    public String mostrarCamareiras(Model model) {
+    @GetMapping("/relaxamento")
+    public String mostrarRelaxamento(Model model) {
         model.addAttribute("horarios", HorarioAgendamento.values());
-        model.addAttribute("servicos", EspecificacoesCamareira.values());
-        return "spa/camareiras";
+        model.addAttribute("servicos", EspecificacoesRelaxamento.values());
+        return "spa/relaxamento";
     }
 
-    @PostMapping("/processarCamareiras")
-    public String processarCamareiras(@Valid @ModelAttribute("agendamentoCamareira") AgendamentoServicoRelaxamentoSpaResort agendamentoCamareira,
+    @PostMapping("/processarRelaxamento")
+    public String processarRelaxamento(@Valid @ModelAttribute("agendamentoRelaxamento") AgendamentoServicoRelaxamentoSpaResort agendamentoRelaxamento,
                                       BindingResult bindingResult,
                                       Model model
 
     ) {
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors());
-            return "spa/camareiras";
+            return "spa/relaxamento";
         }
 
         try {
-            agendamentoService.criarAgendamento(agendamentoCamareira);
+            agendamentoService.criarAgendamento(agendamentoRelaxamento);
         } catch(HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             System.out.println(e.getMessage());
-            return "spa/camareiras";
+            return "spa/relaxamento";
         }
 
         return "redirect:/spa/home";

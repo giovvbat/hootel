@@ -1,6 +1,6 @@
 body {
 	background: linear-gradient(50deg, #3c32a8, #7c26f8);
-				font-family: Helvetica,Arial, sans-serif;
+	font-family: Helvetica,Arial, sans-serif;
 }
 
 nav.navbar-transparente {
@@ -177,8 +177,8 @@ footer ul li {
 }
 
 @font-face {
-    font-family: Super Sunday;
-    src: url('../fonts/KGRedHands.ttf')
+	font-family: Super Sunday;
+	src: url('../fonts/KGRedHands.ttf')
 }
 
 

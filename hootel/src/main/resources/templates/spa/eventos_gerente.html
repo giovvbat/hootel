@@ -29,8 +29,8 @@
             <th>Horário</th>
             <th>Detalhes</th>
             <th>Quantidade Participantes</th>
-            <th>Idade Minima</th>
             <th>Categorias</th>
+            <th>Objetivos</th>
         </tr>
         </thead>
 
@@ -43,13 +43,13 @@
             <td th:text="${eventoTabela.horario}"></td>
             <td th:text="${eventoTabela.descricao}"></td>
             <td th:text="${eventoTabela.quantidadeReservas()}"></td>
-            <td th:text="${eventoTabela.idadeMinimaRecomendada}"></td>
             <td th:text="${eventoTabela.categorias}"></td>
+            <td th:text="${eventoTabela.objetivos}"></td>
         </tr>
         </tbody>
     </table>
 
-    <form action="#" th:action="@{/hotel/addEvento}" th:object="${evento}" method="POST">
+    <form action="#" th:action="@{/spa/addEvento}" th:object="${evento}" method="POST">
 
         <div class="input-group input-group-lg">
             <input type="text" th:field="*{lugar}" placeholder="lugar" class="form-control">
@@ -57,12 +57,17 @@
             <input type="date" th:field="*{dataInicio}" placeholder="data" class="form-control">
             <input type="text" th:field="*{horario}" placeholder="horário" class="form-control">
             <input type="text" th:field="*{descricao}" placeholder="descricao" class="form-control">
-            <input type="number" min="0" th:field="*{idadeMinimaRecomendada}" placeholder="Idade Mínima Recomendada" class="form-control">
         </div>
 
         <div>
             <label th:each="categoria : ${categorias}">
                 <input type="checkbox" th:field="*{categorias}" th:value="${categoria}" th:text="${categoria.name()}" style="margin: 10px"/>
+            </label>
+        </div>
+
+        <div>
+            <label th:each="objetivo : ${objetivos}">
+                <input type="checkbox" th:field="*{objetivos}" th:value="${objetivo}" th:text="${objetivo.name()}" style="margin: 10px"/>
             </label>
         </div>
 
@@ -88,8 +93,8 @@
         <div th:if="${#fields.hasErrors('descricao')}">
             <span style="color: #cb2d51" th:errors="${evento.descricao}"></span>
         </div>
-        <div th:if="${#fields.hasErrors('idadeMinimaRecomendada')}">
-            <span style="color: #cb2d51" th:errors="${evento.idadeMinimaRecomendada}"></span>
+        <div th:if="${#fields.hasErrors('objetivos')}">
+            <span style="color: #cb2d51" th:errors="${evento.objetivos}"></span>
         </div>
         <div th:if="${#fields.hasErrors('categorias')}">
             <span style="color: #cb2d51" th:errors="${evento.categorias}"></span>
@@ -99,7 +104,7 @@
 
     <br><br>
 
-    <form action="#" th:action="@{/hotel/removeEvento}"  method="POST">
+    <form action="#" th:action="@{/spa/removeEvento}"  method="POST">
 
         <div class="input-group input-group-lg">
             <input type="text" name="id_evento" placeholder="Digite seu PIN" class="form-control">
@@ -115,7 +120,7 @@
 
     <br><br>
 
-    <form action="#" th:action="@{/hotel/atualizaEvento}" th:object="${eventoAtualizar}" method="POST" class="mb-5">
+    <form action="#" th:action="@{/spa/atualizaEvento}" th:object="${eventoAtualizar}" method="POST" class="mb-5">
 
         <div class="input-group input-group-lg">
             <input type="text" th:field="*{id}" placeholder="Digite seu PIN" class="form-control">
@@ -124,12 +129,17 @@
             <input type="date" th:field="*{dataInicio}" placeholder="data" class="form-control">
             <input type="text" th:field="*{horario}" placeholder="horário" class="form-control">
             <input type="text" th:field="*{descricao}" placeholder="descricao" class="form-control">
-            <input type="number" th:field="*{idadeMinimaRecomendada}" placeholder="Idade Mínima Recomendada" class="form-control">
         </div>
 
         <div>
             <label th:each="categoria : ${categorias}">
                 <input type="checkbox" th:field="*{categorias}" th:value="${categoria}" th:text="${categoria.name()}" style="margin: 10px"/>
+            </label>
+        </div>
+
+        <div>
+            <label th:each="objetivo : ${objetivos}">
+                <input type="checkbox" th:field="*{objetivos}" th:value="${objetivo}" th:text="${objetivo.name()}" style="margin: 10px"/>
             </label>
         </div>
 
@@ -155,8 +165,8 @@
         <div th:if="${#fields.hasErrors('descricao')}">
             <span style="color: #cb2d51" th:errors="${eventoAtualizar.descricao}"></span>
         </div>
-        <div th:if="${#fields.hasErrors('idadeMinimaRecomendada')}">
-            <span style="color: #cb2d51" th:errors="${eventoAtualizar.idadeMinimaRecomendada}"></span>
+        <div th:if="${#fields.hasErrors('objetivos')}">
+            <span style="color: #cb2d51" th:errors="${eventoAtualizar.objetivos}"></span>
         </div>
         <div th:if="${#fields.hasErrors('categorias')}">
             <span style="color: #cb2d51" th:errors="${eventoAtualizar.categorias}"></span>

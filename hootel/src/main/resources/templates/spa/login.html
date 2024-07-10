@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style_login.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/spa_style_login.css}">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
@@ -26,8 +26,8 @@
       <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
         <div class="container">
 
-          <a th:href="@{/hotel/index}" class="navbar-brand brand">
-            <p>hootel</p>
+          <a th:href="@{/spa/index}" class="navbar-brand brand">
+            <p>Spar Resort</p>
           </a> 
 
           <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
@@ -65,7 +65,7 @@
               <p style="color: white;">Já fez o check-in? Beleza! <br> 
               Certifique o recebimento do seu PIN e tenha ele em mãos. Te ajudaremos com tudo!</p>
 
-              <form action="#" th:action="@{/hotel/reserva/checar}" th:object="${reserva}" method="POST">
+              <form action="#" th:action="@{/spa/reserva/checar}" th:object="${reserva}" method="POST">
 
                 <div class="input-group input-group-lg">
                   <input type="text" th:field="*{PIN}" placeholder="Digite seu PIN" class="form-control">
@@ -100,7 +100,7 @@
       <div class="container">
         <div class="row d-flex">
           <div class="col-md-2 brand align-self-center">
-            <p>hootel</p>
+            <p>Spar Resort</p>
           </div>
 
           <div class="col-md-2">

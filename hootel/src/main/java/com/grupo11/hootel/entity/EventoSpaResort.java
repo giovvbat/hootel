@@ -10,6 +10,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "EventoSpaResort")
 public class EventoSpaResort extends Evento {
 
     @Enumerated(EnumType.STRING)
