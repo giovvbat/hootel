@@ -13,64 +13,62 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/hotel")
-public class EventoHotelController {
+@RequestMapping("/cruzeiro")
+public class EventoCruzeiroController {
     private EventoService eventoService;
     private ReservaService reservaService;
     private RecomendacaoEventosService recomendacaoService;
-    private HotelEstrategiaRecomendacaoEventos estrategia;
+    private CruzeiroEstrategiaRecomendacaoEventos estrategia;
 
-    public EventoHotelController(EventoService eventoService, ReservaService reservaService, RecomendacaoEventosService recomendacaoService) {
+    public EventoCruzeiroController(EventoService eventoService, ReservaService reservaService, RecomendacaoEventosService recomendacaoService) {
         this.eventoService = eventoService;
         this.reservaService = reservaService;
         this.recomendacaoService = recomendacaoService;
-        this.estrategia = new HotelEstrategiaRecomendacaoEventos();
+        this.estrategia = new CruzeiroEstrategiaRecomendacaoEventos();
     }
 
     @GetMapping("/eventos")
     public String mostrarEventos(Model model) {
         try {
-            List<Evento> eventos = eventoService.lerTodosEventos(EventoHotel.class);
+            List<Evento> eventos = eventoService.lerTodosEventos(EventoCruzeiro.class);
             model.addAttribute("eventos", eventos);
-            model.addAttribute("reserva", new ReservaHotel());
+            model.addAttribute("reserva", new ReservaCruzeiro());
             model.addAttribute("recomendacao", new ArrayList<Evento>());
-            System.out.println("entrou aqui 01");
 
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("eventos", new ArrayList<Evento>());
             model.addAttribute("recomendacao", new ArrayList<Evento>());
-            model.addAttribute("reserva", new ReservaHotel());
-            System.out.println("entrou aqui 02");
+            model.addAttribute("reserva", new ReservaCruzeiro());
         }
-        return "hotel/eventos";
+        return "cruzeiro/eventos";
     }
 
     @GetMapping("/evento")
     public String mostrarEventoPorId(@RequestParam("eventoId") int theId,
-                              Model model) {
+                                     Model model) {
         try {
             Evento evento = eventoService.lerEventoId(theId);
-            ReservaHotel reserva = new ReservaHotel();
+            ReservaCruzeiro reserva = new ReservaCruzeiro();
             model.addAttribute("evento_escolhido", evento);
             model.addAttribute("reserva", reserva);
         } catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("evento_escolhido", new EventoHotel());
-            model.addAttribute("reserva", new ReservaHotel());
+            model.addAttribute("evento_escolhido", new EventoCruzeiro());
+            model.addAttribute("reserva", new ReservaCruzeiro());
         }
-        return "hotel/eventoEspecifico";
+        return "cruzeiro/eventoEspecifico";
     }
 
     @PostMapping("/evento/participacao/add")
-    public String cadastrarParticipacao(@ModelAttribute("evento_escolhido") EventoHotel evento,
-                                        @Valid @ModelAttribute("reserva") ReservaHotel reserva,
+    public String cadastrarParticipacao(@ModelAttribute("evento_escolhido") EventoCruzeiro evento,
+                                        @Valid @ModelAttribute("reserva") ReservaCruzeiro reserva,
                                         BindingResult bindingResultReserva, Model model){
 
         if (bindingResultReserva.hasErrors() ) {
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
-            return "hotel/eventoEspecifico";
+            return "cruzeiro/eventoEspecifico";
         }
 
         try {
@@ -79,21 +77,21 @@ public class EventoHotelController {
             model.addAttribute("errorMessage", e.getMessage());
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
-            return "hotel/eventoEspecifico";
+            return "cruzeiro/eventoEspecifico";
         }
 
-        return "redirect:/hotel/eventos";
+        return "redirect:/cruzeiro/eventos";
     }
 
     @PostMapping("/evento/participacao/rm")
-    public String removerParticipacao(@ModelAttribute("evento_escolhido") EventoHotel evento,
-                                      @Valid @ModelAttribute("reserva") ReservaHotel reserva,
+    public String removerParticipacao(@ModelAttribute("evento_escolhido") EventoCruzeiro evento,
+                                      @Valid @ModelAttribute("reserva") ReservaCruzeiro reserva,
                                       BindingResult bindingResultReserva, Model model){
 
         if (bindingResultReserva.hasErrors()) {
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
-            return "hotel/eventoEspecifico";
+            return "cruzeiro/eventoEspecifico";
         }
 
         try {
@@ -102,37 +100,37 @@ public class EventoHotelController {
             model.addAttribute("errorMessage", e.getMessage());
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
-            return "hotel/eventoEspecifico";
+            return "cruzeiro/eventoEspecifico";
         }
 
-        return "redirect:/hotel/eventos";
+        return "redirect:/cruzeiro/eventos";
     }
 
     @GetMapping("/evento/recomendacao")
-    public String recomendarEventos(@Valid @ModelAttribute("reserva") ReservaHotel aReserva,
+    public String recomendarEventos(@Valid @ModelAttribute("reserva") ReservaCruzeiro aReserva,
                                     BindingResult bindingResult,
                                     Model model) {
 
         if(bindingResult.hasErrors()) {
-            List<Evento> eventos = eventoService.lerTodosEventos(EventoHotel.class);
+            List<Evento> eventos = eventoService.lerTodosEventos(EventoCruzeiro.class);
             model.addAttribute("eventos", eventos);
-            return "hotel/eventos";
+            return "cruzeiro/eventos";
         }
 
         try {
             Reserva reserva = reservaService.lerReservaPin(aReserva.getPIN());
-            List<Evento> eventos = eventoService.lerTodosEventos(EventoHotel.class);
+            List<Evento> eventos = eventoService.lerTodosEventos(EventoCruzeiro.class);
 
             List<Evento> recomendacao = recomendacaoService.recomendarEventos(estrategia, eventos, reserva);
 
             model.addAttribute("recomendacao", recomendacao);
             model.addAttribute("eventos", eventos);
 
-            return "hotel/eventos";
+            return "cruzeiro/eventos";
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("eventos", eventoService.lerTodosEventos(EventoHotel.class));
-            return "hotel/eventos";
+            model.addAttribute("eventos", eventoService.lerTodosEventos(EventoCruzeiro.class));
+            return "cruzeiro/eventos";
         }
     }
 }

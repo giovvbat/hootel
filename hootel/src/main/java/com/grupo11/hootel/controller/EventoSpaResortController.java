@@ -21,11 +21,13 @@ public class EventoSpaResortController {
     private EventoService eventoService;
     private ReservaService reservaService;
     private RecomendacaoEventosService recomendacaoService;
+    private SpaResortEstrategiaRecomendacaoEventos estrategia;
 
     public EventoSpaResortController(EventoService eventoService, ReservaService reservaService, RecomendacaoEventosService recomendacaoService) {
         this.eventoService = eventoService;
         this.reservaService = reservaService;
         this.recomendacaoService = recomendacaoService;
+        this.estrategia = new SpaResortEstrategiaRecomendacaoEventos();
     }
 
     @GetMapping("/eventos")
@@ -120,7 +122,6 @@ public class EventoSpaResortController {
 
         try {
             Reserva reserva = reservaService.lerReservaPin(aReserva.getPIN());
-            EstrategiaRecomendacaoEventos estrategia = new SpaResortEstrategiaRecomendacaoEventos();
             List<Evento> eventos = eventoService.lerTodosEventos(EventoSpaResort.class);
 
             List<Evento> recomendacao = recomendacaoService.recomendarEventos(estrategia, eventos, reserva);

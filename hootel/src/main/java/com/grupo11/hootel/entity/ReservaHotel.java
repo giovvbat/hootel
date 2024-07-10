@@ -23,14 +23,14 @@ public class ReservaHotel extends Reserva {
     @ElementCollection(targetClass = PreferenciaEventoHotel.class)
     @CollectionTable(name = "preferencias_eventos_hotel", joinColumns = @JoinColumn(name = "pin_reserva"))
     @Column(name = "preferencia_evento", nullable = false)
-    // @NotNull(message = "Selecione suas preferências de eventos")
+    @NotNull(message = "Selecione suas preferências de eventos")
     private List<PreferenciaEventoHotel> preferenciasEventos;
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = PreferenciaAlimentarHotel.class)
     @CollectionTable(name = "preferencias_alimentares_hotel", joinColumns = @JoinColumn(name = "pin_reserva"))
     @Column(name = "preferencia_refeicao", nullable = false)
-    // @NotNull(message = "Selecione suas preferências de alimentação")
+    @NotNull(message = "Selecione suas preferências de alimentação")
     private List<PreferenciaAlimentarHotel> preferenciasAlimentares;
 
     public ReservaHotel() {

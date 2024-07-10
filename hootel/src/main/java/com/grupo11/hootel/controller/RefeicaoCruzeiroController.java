@@ -1,8 +1,6 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.*;
-import com.grupo11.hootel.entity.RefeicaoHotel;
-import com.grupo11.hootel.entity.Refeicao;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.*;
 import jakarta.validation.Valid;
@@ -17,33 +15,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/hotel")
-public class RefeicaoHotelController {
+@RequestMapping("/cruzeiro")
+public class RefeicaoCruzeiroController {
     private RefeicaoService refeicaoService;
     private ReservaService reservaService;
     private RecomendacaoRefeicaoService recomendacaoService;
-    private HotelEstrategiaRecomendacaoRefeicao estrategia;
+    private CruzeiroEstrategiaRecomendacaoRefeicao estrategia;
 
-    public RefeicaoHotelController(RefeicaoService refeicaoService,
+    public RefeicaoCruzeiroController(RefeicaoService refeicaoService,
                                    ReservaService reservaService,
                                    RecomendacaoRefeicaoService recomendacaoService) {
         this.refeicaoService = refeicaoService;
         this.reservaService = reservaService;
         this.recomendacaoService = recomendacaoService;
-        this.estrategia = new HotelEstrategiaRecomendacaoRefeicao();
+        this.estrategia = new CruzeiroEstrategiaRecomendacaoRefeicao();
     }
 
     @ModelAttribute("refeicoes")
-    public List<RefeicaoHotel> listarRefeicoes() {
+    public List<RefeicaoCruzeiro> listarRefeicoes() {
         try {
-            List<Refeicao> list = refeicaoService.listarRefeicoes(RefeicaoHotel.class);
-            List<RefeicaoHotel> refeicoesHotel = new ArrayList<>();
+            List<Refeicao> list = refeicaoService.listarRefeicoes(RefeicaoCruzeiro.class);
+            List<RefeicaoCruzeiro> refeicoesCruzeiro = new ArrayList<>();
 
             for (Refeicao refeicao : list) {
-                refeicoesHotel.add((RefeicaoHotel) refeicao);
+                refeicoesCruzeiro.add((RefeicaoCruzeiro) refeicao);
             }
 
-            return refeicoesHotel;
+            return refeicoesCruzeiro;
         } catch (HootelException e) {
             return new ArrayList<>();
         }
@@ -52,34 +50,34 @@ public class RefeicaoHotelController {
     @GetMapping("/refeicao")
     public String getrefeicao(Model model) {
         try {
-            model.addAttribute("reserva", new ReservaHotel());
+            model.addAttribute("reserva", new RefeicaoCruzeiro());
             model.addAttribute("recomendacao", new ArrayList<>());
         }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("reserva", new ReservaHotel());
+            model.addAttribute("reserva", new RefeicaoCruzeiro());
             model.addAttribute("recomendacao", new ArrayList<>());
         }
-        return "hotel/refeicao";
+        return "cruzeiro/refeicao";
     }
 
     @GetMapping("/refeicao/recomendacao")
-    public String recomendacao(@Valid @ModelAttribute("reserva") ReservaHotel aReserva,
+    public String recomendacao(@Valid @ModelAttribute("reserva") ReservaCruzeiro aReserva,
                                BindingResult bindingResult,
                                Model model) {
 
         if(bindingResult.hasErrors()) {
-            return "hotel/refeicao";
+            return "cruzeiro/refeicao";
         }
 
         try {
             Reserva reserva = reservaService.lerReservaPin(aReserva.getPIN());
-            List<Refeicao> refeicoes = refeicaoService.listarRefeicoes(RefeicaoHotel.class);
+            List<Refeicao> refeicoes = refeicaoService.listarRefeicoes(RefeicaoCruzeiro.class);
 
             List<Refeicao> list = recomendacaoService.recomendarRefeicao(estrategia, refeicoes, reserva);
-            List<RefeicaoHotel> recomendacoes = new ArrayList<>();
+            List<RefeicaoCruzeiro> recomendacoes = new ArrayList<>();
 
             for (Refeicao refeicao : list) {
-                recomendacoes.add((RefeicaoHotel) refeicao);
+                recomendacoes.add((RefeicaoCruzeiro) refeicao);
             }
 
             model.addAttribute("recomendacao", recomendacoes);
@@ -87,6 +85,6 @@ public class RefeicaoHotelController {
             model.addAttribute("errorMessage", e.getMessage());
         }
 
-        return "hotel/refeicao";
+        return "cruzeiro/refeicao";
     }
 }

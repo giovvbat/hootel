@@ -3,6 +3,7 @@ package com.grupo11.hootel.entity;
 import com.grupo11.hootel.entity.enums.PreferenciaAlimentarCruzeiro;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
@@ -19,21 +20,21 @@ public class RefeicaoCruzeiro extends Refeicao {
     @NotNull(message = "Todos os campos devem ser preenchidos")
     private List<PreferenciaAlimentarCruzeiro> categorias;
 
+    @Column(name = "conteudo")
     @NotNull(message = "Todos os campos devem ser preenchidos")
-    @Min(value = 0, message = "A idade minima é 0")
-    @Column(name = "idade_minima")
-    private Integer idadeMinimaRecomendada;
+    @NotEmpty(message = "Todos os campos devem ser preenchidos")
+    private String restaurante;
 
     public RefeicaoCruzeiro() {
         super();
         this.categorias = new ArrayList<>();
-        this.idadeMinimaRecomendada = 0;
+        this.restaurante = "";
     }
 
-    public RefeicaoCruzeiro(Integer id, String conteudo, List<PreferenciaAlimentarCruzeiro> categorias, Integer idadeMinimaRecomendada) {
+    public RefeicaoCruzeiro(Integer id, String conteudo, List<PreferenciaAlimentarCruzeiro> categorias, String restaurante) {
         super(id, conteudo);
         this.categorias = categorias;
-        this.idadeMinimaRecomendada = idadeMinimaRecomendada;
+        this.restaurante = restaurante;
     }
 
     public List<PreferenciaAlimentarCruzeiro> getCategorias() {
@@ -44,24 +45,24 @@ public class RefeicaoCruzeiro extends Refeicao {
         this.categorias = categorias;
     }
 
-    public Integer getIdadeMinimaRecomendada() {
-        return idadeMinimaRecomendada;
+    public String getRestaurante() {
+        return restaurante;
     }
 
-    public void setIdadeMinimaRecomendada(Integer idadeMinimaRecomendada) {
-        this.idadeMinimaRecomendada = idadeMinimaRecomendada;
+    public void setRestaurante(String restaurante) {
+        this.restaurante = restaurante;
     }
 
     @Override
     protected boolean validarEspecifico() {
-        return !categorias.isEmpty() && idadeMinimaRecomendada != null && idadeMinimaRecomendada >= 0;
+        return !categorias.isEmpty() && restaurante != null && !restaurante.isEmpty();
     }
 
     @Override
     public String toString() {
         return "RefeicaoCruzeiro{" +
                 "categorias=" + categorias +
-                ", idadeMinimaRecomendada=" + idadeMinimaRecomendada +
+                ", restaurante='" + restaurante + '\'' +
                 '}';
     }
 }

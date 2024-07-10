@@ -23,6 +23,7 @@ public class RefeicaoSpaResortController {
     private RefeicaoService refeicaoService;
     private ReservaService reservaService;
     private RecomendacaoRefeicaoService recomendacaoService;
+    private SpaResortEstrategiaRecomendacaoRefeicao estrategia;
 
     public RefeicaoSpaResortController(RefeicaoService refeicaoService,
                                    ReservaService reservaService,
@@ -30,6 +31,7 @@ public class RefeicaoSpaResortController {
         this.refeicaoService = refeicaoService;
         this.reservaService = reservaService;
         this.recomendacaoService = recomendacaoService;
+        this.estrategia = new SpaResortEstrategiaRecomendacaoRefeicao();
     }
 
     @ModelAttribute("refeicoes")
@@ -72,7 +74,6 @@ public class RefeicaoSpaResortController {
 
         try {
             Reserva reserva = reservaService.lerReservaPin(aReserva.getPIN());
-            EstrategiaRecomendacaoRefeicao estrategia = new SpaResortEstrategiaRecomendacaoRefeicao();
             List<Refeicao> refeicoes = refeicaoService.listarRefeicoes(RefeicaoSpaResort.class);
 
             List<Refeicao> list = recomendacaoService.recomendarRefeicao(estrategia, refeicoes, reserva);

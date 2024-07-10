@@ -1,90 +1,91 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Reserva;
-import com.grupo11.hootel.entity.ReservaHotel;
-import com.grupo11.hootel.entity.enums.PreferenciaAlimentarHotel;
-import com.grupo11.hootel.entity.enums.PreferenciaEventoHotel;
+import com.grupo11.hootel.entity.ReservaCruzeiro;
+import com.grupo11.hootel.entity.enums.PreferenciaAlimentarCruzeiro;
+import com.grupo11.hootel.entity.enums.PreferenciaEventoCruzeiro;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.ReservaService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/hotel")
-public class ReservaHotelController {
-
+@RequestMapping("/cruzeiro")
+public class ReservaCruzeiroController {
     private ReservaService reservaService;
 
-    public ReservaHotelController(ReservaService ReservaService) {
+    public ReservaCruzeiroController(ReservaService ReservaService) {
         this.reservaService = ReservaService;
     }
 
     @GetMapping("/index")
     public String mostrarInicial(){
-        return "hotel/index";
+        return "cruzeiro/index";
     }
 
     @GetMapping("/home")
     public String mostrarHome(){
-        return "hotel/home";
+        return "cruzeiro/home";
     }
 
     @GetMapping("/reserva/formulario")
     public String mostrarFormulario(Model theModel) {
 
-        Reserva reserva = new ReservaHotel();
+        Reserva reserva = new ReservaCruzeiro();
 
         theModel.addAttribute("reserva", reserva);
 
-        return "hotel/login";
+        return "cruzeiro/login";
     }
 
     @PostMapping("/reserva/checar")
-    public String checarPIN(@Valid @ModelAttribute("reserva") ReservaHotel aReserva,
+    public String checarPIN(@Valid @ModelAttribute("reserva") ReservaCruzeiro aReserva,
                             BindingResult bindingResult,
                             Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "hotel/login";
+            return "cruzeiro/login";
         }
 
         try {
-            ReservaHotel reserva = (ReservaHotel) reservaService.lerReservaPin(aReserva.getPIN());
+            ReservaCruzeiro reserva = (ReservaCruzeiro) reservaService.lerReservaPin(aReserva.getPIN());
 
             if (reserva.getPreferenciasEventos().isEmpty() || reserva.getPreferenciasAlimentares().isEmpty()) {
                 model.addAttribute("reserva", reserva);
-                model.addAttribute("tiposPrefAlimentar", PreferenciaAlimentarHotel.values());
-                model.addAttribute("tiposPrefEvento", PreferenciaEventoHotel.values());
-                return "hotel/preferencias";
+                model.addAttribute("tiposPrefAlimentar", PreferenciaAlimentarCruzeiro.values());
+                model.addAttribute("tiposPrefEvento", PreferenciaEventoCruzeiro.values());
+                return "cruzeiro/preferencias";
             }
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "hotel/login";
+            return "cruzeiro/login";
         }
 
-        return "hotel/home";
+        return "cruzeiro/home";
     }
 
     @PostMapping("/reserva/preferencias")
-    public String checarPreferencias(@Valid @ModelAttribute("reserva") ReservaHotel aReserva,
+    public String checarPreferencias(@Valid @ModelAttribute("reserva") ReservaCruzeiro aReserva,
                                      BindingResult bindingResult,
                                      Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "hotel/preferencias";
+            return "cruzeiro/preferencias";
         }
 
         try {
             reservaService.updateReserva(aReserva);
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            System.out.println(e.getMessage());
-            return "hotel/preferencias";
+            return "cruzeiro/preferencias";
         }
 
-        return "hotel/home";
+        return "cruzeiro/home";
     }
 }

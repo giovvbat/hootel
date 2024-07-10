@@ -9,5 +9,6 @@ public enum PreferenciaEventoSpaResort {
     TRILHA,
     YOGA,
     ZUMBA,
-    FIT_DANCE
+    FIT_DANCE,
+    MUSCULACAO
 }
