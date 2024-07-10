@@ -18,7 +18,7 @@ public class SpaResortEstrategiaRecomendacaoRefeicao implements EstrategiaRecome
                 if (refeicao instanceof RefeicaoSpaResort) {
                     RefeicaoSpaResort refeicaoSpa = (RefeicaoSpaResort) refeicao;
 
-                    for (ObjetivosSpaResort objetivo : refeicaoSpa.getObjetivos()) {
+                    for (ObjetivosSpaResort objetivo : reservaSpa.getObjetivos()) {
                         if(refeicaoSpa.getObjetivos().contains(objetivo)) {
                             recomendados.add(refeicao);
                             break;

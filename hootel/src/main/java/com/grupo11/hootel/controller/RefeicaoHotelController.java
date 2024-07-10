@@ -11,11 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/hotel")
 public class RefeicaoHotelController {
     private RefeicaoService refeicaoService;
     private ReservaService reservaService;
@@ -55,7 +57,7 @@ public class RefeicaoHotelController {
             model.addAttribute("reserva", new ReservaHotel());
             model.addAttribute("recomendacao", new ArrayList<>());
         }
-        return "refeicao";
+        return "hotel/refeicao";
     }
 
     @GetMapping("/refeicao/recomendacao")
@@ -64,7 +66,7 @@ public class RefeicaoHotelController {
                                Model model) {
 
         if(bindingResult.hasErrors()) {
-            return "refeicao";
+            return "hotel/refeicao";
         }
 
         try {
@@ -84,6 +86,6 @@ public class RefeicaoHotelController {
             model.addAttribute("errorMessage", e.getMessage());
         }
 
-        return "refeicao";
+        return "hotel/refeicao";
     }
 }

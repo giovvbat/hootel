@@ -11,8 +11,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/hotel")
 public class GerenteInformacoesController {
     private final InformacoesService informacoesService;
 
@@ -31,7 +33,7 @@ public class GerenteInformacoesController {
             model.addAttribute("errorMessage", e.getMessage());
         }
 
-        return "info_gerente";
+        return "hotel/info_gerente";
     }
 
     @PostMapping("/atualizaInfo")
@@ -40,7 +42,7 @@ public class GerenteInformacoesController {
                                     Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "info_gerente";
+            return "hotel/info_gerente";
         }
 
         try {
@@ -49,6 +51,6 @@ public class GerenteInformacoesController {
             model.addAttribute("errorMessage", e.getMessage());
         }
 
-        return "info_gerente";
+        return "hotel/info_gerente";
     }
 }

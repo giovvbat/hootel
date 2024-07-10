@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Date;
 
 @Controller
+@RequestMapping("/hotel")
 public class AvaliacaoController {
 
     private AvaliacaoService avaliacaoService;
@@ -27,7 +28,7 @@ public class AvaliacaoController {
 
         theModel.addAttribute("avaliacao", theAvaliacao);
 
-        return "avaliacao";
+        return "hotel/avaliacao";
     }
 
     @PostMapping("/avaliacao/salvar")
@@ -36,6 +37,6 @@ public class AvaliacaoController {
         theAvaliacao.setData(new Date());
         avaliacaoService.criarAvaliacao(theAvaliacao);
 
-        return "index";
+        return "hotel/index";
     }
 }

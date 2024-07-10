@@ -13,8 +13,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/hotel")
 public class AgendamentoCamareiraHotelController {
 
     private AgendamentoServicoService agendamentoService;
@@ -35,7 +37,7 @@ public class AgendamentoCamareiraHotelController {
     public String mostrarCamareiras(Model model) {
         model.addAttribute("horarios", HorarioAgendamento.values());
         model.addAttribute("servicos", EspecificacoesCamareira.values());
-        return "camareiras";
+        return "hotel/camareiras";
     }
 
     @PostMapping("/processarCamareiras")
@@ -46,7 +48,7 @@ public class AgendamentoCamareiraHotelController {
     ) {
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors());
-            return "camareiras";
+            return "hotel/camareiras";
         }
 
         try {
@@ -54,10 +56,10 @@ public class AgendamentoCamareiraHotelController {
         } catch(HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             System.out.println(e.getMessage());
-            return "camareiras";
+            return "hotel/camareiras";
         }
 
-        return "redirect:home";
+        return "redirect:/hotel/home";
     }
 }
 

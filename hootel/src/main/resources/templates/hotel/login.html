@@ -26,7 +26,7 @@
       <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
         <div class="container">
 
-          <a th:href="@{/index}" class="navbar-brand brand">
+          <a th:href="@{/hotel/index}" class="navbar-brand brand">
             <p>hootel</p>
           </a> 
 
@@ -65,7 +65,7 @@
               <p style="color: white;">Já fez o check-in? Beleza! <br> 
               Certifique o recebimento do seu PIN e tenha ele em mãos. Te ajudaremos com tudo!</p>
 
-              <form action="#" th:action="@{/reserva/checar}" th:object="${reserva}" method="POST">
+              <form action="#" th:action="@{/hotel/reserva/checar}" th:object="${reserva}" method="POST">
 
                 <div class="input-group input-group-lg">
                   <input type="text" th:field="*{PIN}" placeholder="Digite seu PIN" class="form-control">

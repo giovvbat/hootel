@@ -12,8 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/hotel")
 public class GerenteRefeicaoHotelController {
 
     private final RefeicaoService refeicaoService;
@@ -28,7 +30,7 @@ public class GerenteRefeicaoHotelController {
         model.addAttribute("refeicao", new RefeicaoHotel());
         model.addAttribute("categorias", PreferenciaAlimentarHotel.values());
 
-        return "cardapio_gerente";
+        return "hotel/cardapio_gerente";
     }
 
     @PostMapping("/adicionarCardapio")
@@ -39,7 +41,7 @@ public class GerenteRefeicaoHotelController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("refeicao", new RefeicaoHotel());
             model.addAttribute("categorias", PreferenciaAlimentarHotel.values());
-            return "cardapio_gerente";
+            return "hotel/cardapio_gerente";
         }
 
         try {
@@ -50,7 +52,7 @@ public class GerenteRefeicaoHotelController {
 
         model.addAttribute("refeicao", new RefeicaoHotel());
         model.addAttribute("categorias", PreferenciaAlimentarHotel.values());
-        return "cardapio_gerente";
+        return "hotel/cardapio_gerente";
     }
 
     @PostMapping("/atualizaCardapio")
@@ -59,7 +61,7 @@ public class GerenteRefeicaoHotelController {
                                     Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "cardapio_gerente";
+            return "hotel/cardapio_gerente";
         }
 
         try {
@@ -68,6 +70,6 @@ public class GerenteRefeicaoHotelController {
             model.addAttribute("errorMessage", e.getMessage());
         }
 
-        return "cardapio_gerente";
+        return "hotel/cardapio_gerente";
     }
 }

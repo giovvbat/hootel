@@ -31,7 +31,7 @@
     <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
         <div class="container">
 
-            <a th:href="@{/home}" class="navbar-brand brand">
+            <a th:href="@{/hotel/home}" class="navbar-brand brand">
                 <p>hootel</p>
             </a>
 
@@ -42,29 +42,29 @@
             <div class="collapse navbar-collapse" id="nav-principal">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a th:href="@{/home}" class="nav-link">Serviço de Quarto</a>
+                        <a th:href="@{/hotel/home}" class="nav-link">Serviço de Quarto</a>
                     </li>
 
                     <li class="nav-item">
-                        <a th:href="@{/eventos}" class="nav-link">Eventos</a>
+                        <a th:href="@{/hotel/eventos}" class="nav-link">Eventos</a>
                     </li>
 
                     <li class="nav-item">
-                        <a th:href="@{/refeicao}" class="nav-link">Cardápio</a>
+                        <a th:href="@{/hotel/refeicao}" class="nav-link">Cardápio</a>
                     </li>
 
                     <li class="nav-item">
-                        <a th:href="@{/camareiras}" class="nav-link">Camareiras</a>
+                        <a th:href="@{/hotel/camareiras}" class="nav-link">Camareiras</a>
                     </li>
 
                     <li class="nav-item">
-                        <a th:href="@{/informacoes}" class="nav-link">Mais informações</a>
+                        <a th:href="@{/hotel/informacoes}" class="nav-link">Mais informações</a>
                     </li>
 
                     <li class="nav-item divisor"></li>
 
                     <li class="nav-item">
-                        <a th:href="@{/avaliacao/formulario}" class="nav-link btn" id="btn-navbar">Sair</a>
+                        <a th:href="@{/hotel/avaliacao/formulario}" class="nav-link btn" id="btn-navbar">Sair</a>
                     </li>
 
                 </ul>
@@ -104,7 +104,7 @@
                     </tbody>
                 </table>
 
-                <form action="#" th:action="@{/evento/participacao/add}" method="POST">
+                <form action="#" th:action="@{/hotel/evento/participacao/add}" method="POST">
                     <input type="hidden" th:field="${evento_escolhido.id}" />
                     <div class="input-group input-group-lg">
                         <input type="text" th:field="${reserva.PIN}" placeholder="Digite seu PIN" class="form-control">
@@ -117,7 +117,7 @@
                 </form>
 
 
-                <form action="#" th:action="@{/evento/participacao/rm}" th:object="${evento_escolhido}" method="POST">
+                <form action="#" th:action="@{/hotel/evento/participacao/rm}" th:object="${evento_escolhido}" method="POST">
                     <input type="hidden" th:field="*{id}" />
                     <div class="input-group input-group-lg">
                         <input type="text"  name="pin" placeholder="Digite seu PIN" th:field="${reserva.PIN}" class="form-control">

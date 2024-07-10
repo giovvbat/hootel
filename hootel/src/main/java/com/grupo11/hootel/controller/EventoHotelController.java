@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/hotel")
 public class EventoHotelController {
     private EventoService eventoService;
     private ReservaService reservaService;
@@ -31,12 +32,16 @@ public class EventoHotelController {
             model.addAttribute("eventos", eventos);
             model.addAttribute("reserva", new ReservaHotel());
             model.addAttribute("recomendacao", new ArrayList<Evento>());
+            System.out.println("entrou aqui 01");
 
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("eventos", new ArrayList<Evento>());
+            model.addAttribute("recomendacao", new ArrayList<Evento>());
+            model.addAttribute("reserva", new ReservaHotel());
+            System.out.println("entrou aqui 02");
         }
-        return "eventos";
+        return "hotel/eventos";
     }
 
     @GetMapping("/evento")
@@ -52,7 +57,7 @@ public class EventoHotelController {
             model.addAttribute("evento_escolhido", new EventoHotel());
             model.addAttribute("reserva", new ReservaHotel());
         }
-        return "eventoEspecifico";
+        return "hotel/eventoEspecifico";
     }
 
     @PostMapping("/evento/participacao/add")
@@ -63,7 +68,7 @@ public class EventoHotelController {
         if (bindingResultReserva.hasErrors() ) {
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
-            return "eventoEspecifico";
+            return "hotel/eventoEspecifico";
         }
 
         try {
@@ -72,10 +77,10 @@ public class EventoHotelController {
             model.addAttribute("errorMessage", e.getMessage());
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
-            return "eventoEspecifico";
+            return "hotel/eventoEspecifico";
         }
 
-        return "redirect:/eventos";
+        return "redirect:/hotel/eventos";
     }
 
     @PostMapping("/evento/participacao/rm")
@@ -86,7 +91,7 @@ public class EventoHotelController {
         if (bindingResultReserva.hasErrors()) {
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
-            return "eventoEspecifico";
+            return "hotel/eventoEspecifico";
         }
 
         try {
@@ -95,10 +100,10 @@ public class EventoHotelController {
             model.addAttribute("errorMessage", e.getMessage());
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
-            return "eventoEspecifico";
+            return "hotel/eventoEspecifico";
         }
 
-        return "redirect:/eventos";
+        return "redirect:/hotel/eventos";
     }
 
     @GetMapping("/evento/recomendacao")
@@ -109,7 +114,7 @@ public class EventoHotelController {
         if(bindingResult.hasErrors()) {
             List<Evento> eventos = eventoService.lerTodosEventos(EventoHotel.class);
             model.addAttribute("eventos", eventos);
-            return "eventos";
+            return "hotel/eventos";
         }
 
         try {
@@ -122,11 +127,11 @@ public class EventoHotelController {
             model.addAttribute("recomendacao", recomendacao);
             model.addAttribute("eventos", eventos);
 
-            return "eventos";
+            return "hotel/eventos";
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("eventos", eventoService.lerTodosEventos(EventoHotel.class));
-            return "eventos";
+            return "hotel/eventos";
         }
     }
 }

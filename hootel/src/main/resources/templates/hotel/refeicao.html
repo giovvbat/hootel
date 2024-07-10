@@ -18,12 +18,12 @@
     <![endif]-->
 
     <!-- Estilo customizado -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style_eventos.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style_cardapio.css}">
 
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/af46ebb8cd.js" crossorigin="anonymous"></script>
 
-    <title>eventos</title>
+    <title>cardápio</title>
 
 </head>
 <body>
@@ -31,7 +31,7 @@
     <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
         <div class="container">
 
-            <a th:href="@{/home}" class="navbar-brand brand">
+            <a th:href="@{/hotel/home}" class="navbar-brand brand">
                 <p>hootel</p>
             </a>
 
@@ -42,29 +42,29 @@
             <div class="collapse navbar-collapse" id="nav-principal">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a th:href="@{/home}" class="nav-link">Serviço de Quarto</a>
+                        <a th:href="@{/hotel/home}" class="nav-link">Serviço de Quarto</a>
                     </li>
 
                     <li class="nav-item">
-                        <a th:href="@{/eventos}" class="nav-link">Eventos</a>
+                        <a th:href="@{/hotel/eventos}" class="nav-link">Eventos</a>
                     </li>
 
                     <li class="nav-item">
-                        <a th:href="@{/refeicao}" class="nav-link">Cardápio</a>
+                        <a th:href="@{/hotel/refeicao}" class="nav-link">Cardápio</a>
                     </li>
 
                     <li class="nav-item">
-                        <a th:href="@{/camareiras}" class="nav-link">Camareiras</a>
+                        <a th:href="@{/hotel/camareiras}" class="nav-link">Camareiras</a>
                     </li>
 
                     <li class="nav-item">
-                        <a th:href="@{/informacoes}" class="nav-link">Mais informações</a>
+                        <a th:href="@{/hotel/informacoes}" class="nav-link">Mais informações</a>
                     </li>
 
                     <li class="nav-item divisor"></li>
 
                     <li class="nav-item">
-                        <a th:href="@{/avaliacao/formulario}" class="nav-link btn" id="btn-navbar">Sair</a>
+                        <a th:href="@{/hotel/avaliacao/formulario}" class="nav-link btn" id="btn-navbar">Sair</a>
                     </li>
 
                 </ul>
@@ -77,100 +77,68 @@
 <section id="formulario" class="d-flex">
     <div class="container align-self-center capa">
         <div class="row justify-content-center">
-            <h1>Calendário de eventos</h1>
-            <div th:if="${recomendacao.isEmpty()}" class="col-md-10">
-                <form th:action="@{/evento/recomendacao}" th:object="${reserva}" method="GET" class="text-center my-3">
-                    <div class="form-group">
-                        <label for="pin">Insira o PIN para mostrar recomendações personalizadas:</label>
-                        <input type="text" th:field="*{PIN}" id="pin" name="PIN" class="form-control" required />
+            <h1 class="text-center">Cárdapios do dia</h1>
+            <div class="col-md-10">
+                <div th:if="${recomendacao.isEmpty()}" class="d-flex justify-content-center">
+                    <form th:action="@{/hotel/refeicao/recomendacao}" th:object="${reserva}" method="GET" class="text-center my-3">
+                        <div class="form-group">
+                            <label for="pin">Insira o PIN para mostrar recomendações personalizadas:</label>
+                            <input type="text" th:field="*{PIN}" id="pin" name="PIN" class="form-control" required />
+                        </div>
+                        <button type="submit" class="btn btn-roxo" id="btn-roxo">Mostrar Recomendações</button>
+                        <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
+                        <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
+                    </form>
+                </div>
+
+                <div class="d-flex justify-content-center" th:if="${!recomendacao.isEmpty()}">
+                    <div class="col-md-10 text-center">
+                        <h5>Tá afim de se divertir? Dá uma olhada nas refeições que recomendamos para você</h5>
+                        <table class="table table-bordered table-striped mt-5" style="margin-bottom: 110px">
+                            <thead class="table-light">
+                            <tr>
+                                <th>Conteúdo</th>
+                                <th>Categorias</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="refeicao : ${recomendacao}">
+                                <td th:text="${refeicao.conteudo}"></td>
+                                <td th:text="${refeicao.categorias}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
+                        <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
                     </div>
-                    <button type="submit" class="btn btn-roxo" id="btn-roxo">Mostrar Recomendações</button>
+                </div>
 
-                    <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
-                    <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
-                </form>
+                <div class="d-flex justify-content-center" th:if="${!refeicoes.isEmpty()}">
+                    <div class="col-md-10 text-center">
+                        <h5>Confira também nossas outras opções de cardápios!</h5>
+                        <table class="table table-bordered table-striped mt-5" style="margin-bottom: 110px">
+                            <thead class="table-light">
+                            <tr>
+                                <th>Conteúdo</th>
+                                <th>Categorias</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="refeicao : ${refeicoes}">
+                                <td th:text="${refeicao.conteudo}"></td>
+                                <td th:text="${refeicao.categorias}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
+                        <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
+                    </div>
+                </div>
             </div>
-
-            <div class="col-md-10" th:if="${!recomendacao.isEmpty()}">
-
-                <h5>Tá afim de se divertir? Dá uma olhada nos eventos que recomendamos para você</h5>
-
-                <table class="table table-bordered table-striped mt-5" style="margin-bottom: 110px">
-                    <thead class="table-light">
-                    <tr>
-                        <th>Nome</th>
-                        <th>Lugar</th>
-                        <th>Data</th>
-                        <th>Horário</th>
-                        <th>Detalhes</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <tr th:each="evento : ${recomendacao}">
-
-                        <td th:text="${evento.nome}"></td>
-                        <td th:text="${evento.lugar}"></td>
-                        <td th:text="${evento.dataInicio}"></td>
-                        <td th:text="${evento.horario}"></td>
-
-                        <td>
-                            <a th:href="@{/evento(eventoId=${evento.id})}" class="btn" id="btn-roxo">
-                                Ver mais
-                            </a>
-                        </td>
-
-                    </tr>
-                    </tbody>
-                </table>
-
-                <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
-                <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
-
-            </div>
-
-
-            <div class="col-md-10" th:if="${!eventos.isEmpty()}">
-
-                <h5>Confira também nossas outras opções de eventos!</h5>
-
-                <table class="table table-bordered table-striped mt-5" style="margin-bottom: 110px">
-                    <thead class="table-light">
-                    <tr>
-                        <th>Nome</th>
-                        <th>Lugar</th>
-                        <th>Data</th>
-                        <th>Horário</th>
-                        <th>Detalhes</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <tr th:each="evento : ${eventos}">
-
-                        <td th:text="${evento.nome}"></td>
-                        <td th:text="${evento.lugar}"></td>
-                        <td th:text="${evento.dataInicio}"></td>
-                        <td th:text="${evento.horario}"></td>
-
-                        <td>
-                            <a th:href="@{/evento(eventoId=${evento.id})}" class="btn" id="btn-roxo">
-                                Ver mais
-                            </a>
-                        </td>
-
-                    </tr>
-                    </tbody>
-                </table>
-
-                <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
-                <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
-
-            </div>
-
         </div>
     </div>
 </section>
+
 
 <footer>
     <div class="container">

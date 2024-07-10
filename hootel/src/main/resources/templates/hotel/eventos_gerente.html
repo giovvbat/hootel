@@ -49,7 +49,7 @@
         </tbody>
     </table>
 
-    <form action="#" th:action="@{/addEvento}" th:object="${evento}" method="POST">
+    <form action="#" th:action="@{/hotel/addEvento}" th:object="${evento}" method="POST">
 
         <div class="input-group input-group-lg">
             <input type="text" th:field="*{lugar}" placeholder="lugar" class="form-control">
@@ -99,7 +99,7 @@
 
     <br><br>
 
-    <form action="#" th:action="@{/removeEvento}"  method="POST">
+    <form action="#" th:action="@{/hotel/removeEvento}"  method="POST">
 
         <div class="input-group input-group-lg">
             <input type="text" name="id_evento" placeholder="Digite seu PIN" class="form-control">
@@ -115,7 +115,7 @@
 
     <br><br>
 
-    <form action="#" th:action="@{/atualizaEvento}" th:object="${eventoAtualizar}" method="POST" class="mb-5">
+    <form action="#" th:action="@{/hotel/atualizaEvento}" th:object="${eventoAtualizar}" method="POST" class="mb-5">
 
         <div class="input-group input-group-lg">
             <input type="text" th:field="*{id}" placeholder="Digite seu PIN" class="form-control">

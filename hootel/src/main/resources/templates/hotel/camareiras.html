@@ -18,12 +18,12 @@
     <![endif]-->
 
     <!-- Estilo customizado -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style_avaliacao.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style_camareiras.css}">
 
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/af46ebb8cd.js" crossorigin="anonymous"></script>
 
-    <title>avaliação</title>
+    <title>camareiras</title>
     <link rel="icon" href="imagens/favicon.png">
 
   </head>
@@ -32,9 +32,9 @@
       <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
         <div class="container">
 
-          <a th:href="@{/home}" class="navbar-brand brand">
+          <a th:href="@{/hotel/home}" class="navbar-brand brand">
             <p>hootel</p>
-          </a> 
+          </a>
 
           <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
             <i class="fa-solid fa-bars"></i>
@@ -43,23 +43,29 @@
           <div class="collapse navbar-collapse" id="nav-principal">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a href="" class="nav-link">Serviço de Quarto</a>
+                <a th:href="@{/hotel/home}" class="nav-link">Serviço de Quarto</a>
               </li>
 
               <li class="nav-item">
-                <a href="" class="nav-link">Eventos</a>
+                <a th:href="@{/hotel/eventos}" class="nav-link">Eventos</a>
               </li>
 
               <li class="nav-item">
-                <a href="" class="nav-link">Cardápio</a>
+                <a th:href="@{/hotel/refeicao}" class="nav-link">Cardápio</a>
               </li>
 
               <li class="nav-item">
-                <a th:href="@{/camareiras}" class="nav-link">Camareiras</a>
+                <a th:href="@{/hotel/camareiras}" class="nav-link">Camareiras</a>
               </li>
 
               <li class="nav-item">
-                <a href="" class="nav-link">Mais informações</a>
+                <a th:href="@{/hotel/informacoes}" class="nav-link">Mais informações</a>
+              </li>
+
+              <li class="nav-item divisor"></li>
+
+              <li class="nav-item">
+                <a th:href="@{/hotel/avaliacao/formulario}" class="nav-link btn" id="btn-navbar">Sair</a>
               </li>
 
             </ul>
@@ -73,41 +79,67 @@
       <div class="container align-self-center capa">
         <div class="row justify-content-center">
           <div class="col-md-10">
-            <h1>Poxa, você já vai? <i class="fa-regular fa-face-frown"></i></h1>
-            
-
-            <span>Esperamos que sua estadia tenha sido proveitosa! Que tal avaliar nossos serviços rapidinho?</span>
-
-            <form action="#" th:action="@{/avaliacao/salvar}" th:object="${avaliacao}" method="POST" class="form-group">
+            <h3>Serviço de Camareiras <i class="fa-solid fa-broom"></i></h3>
+            <p>Selecione o melhor horário para você, junto de suas preferências, e uma funcionária será designada para atender o pedido conforme foi solicitado!</p>
+          </div>
 
 
-              <div class="form-group">
-                <h6><label for="positivos">O que você mais curtiu durante sua hospedagem?</label></h6>
-                <input type="text" th:field="*{avaliacao_positiva}" class="form-control" id="positivos" placeholder="Digite aqui">
+          <form th:action="@{/hotel/processarCamareiras}" th:object="${agendamentoCamareira}" method="POST">
+
+            <div class="row justify-content-center mt-3 no-gutters">
+
+              <div class="col-md-4">
+
+                <label>
+                  <input style="margin: 10px" type="radio" th:field="*{horario}"
+                         th:each="tempHorario : ${horarios}"
+                         th:value="${tempHorario}"
+                         th:text="${tempHorario.time}" />
+                </label>
+
+
               </div>
 
-              <div class="form-group">
-                <h6><label for="negativos">O que poderia melhorar?</label></h6>
-                <input class="form-control" type="text" th:field="*{avaliacao_negativa}" id="negativos" placeholder="Digite aqui">
+              <div class="col-md-4">
+
+                <label>
+                  <th:block th:each="servico : ${servicos}">
+                    <input style="margin: 10px" type="checkbox" th:field="*{especificacoes}"
+                           th:value="${servico}"
+                           th:text="${servico.displayName}" />
+                    <br/>
+                  </th:block>
+                </label>
+
               </div>
-
-              <div class="form-group">
-                <h6><label for="meurange">De 1 a 10, que nota você atribuiria à sua hospedagem?</label></h6>
-                <input class="form-control-range custom-range" type="range" 
-                id="meurange" min="1" max="10" th:field="*{nota}">
-              </div>
-
-              <input id="btn-roxo" class="btn btn-block mt-5" type="submit" value="Enviar">
-
-              <h6 style="text-align: center;" class="mt-2">
-                <a th:href="@{/index}">sair sem avaliar</a>
-              </h6>
-
-
-            </form>
             </div>
 
-          </div>
+
+
+            <div class="row mt-3 justify-content-center">
+              <div class="col-md-7">
+                <div class="form-group">
+                  <h6><label for="usuario">Qual é o seu PIN?</label></h6>
+                  <input type="text" th:field="*{reserva.PIN}" class="form-control" id="usuario" placeholder="Digite seu PIN">
+                  <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span> <br>
+                  <span style="color: #cb2d51" th:if="${#fields.hasErrors('reserva.PIN')}" th:errors="*{reserva.PIN}"></span> <br>
+                  <span style="color: #cb2d51" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="row mt-4 justify-content-center">
+
+
+              <div class="col-md-1">
+                <input class="btn btn-lg btn-primary" type="submit" value="Solicitar serviço">
+              </div>
+
+            </div>
+
+          </form>
+
         </div>
       </div>
     </section>

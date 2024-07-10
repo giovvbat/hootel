@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/hotel")
 public class InformacoesController {
     private InformacoesService informacoesService;
 
@@ -25,8 +27,8 @@ public class InformacoesController {
         }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("informacoes", new Informacoes());
-            return "info";
+            return "hotel/info";
         }
-        return "info";
+        return "hotel/info";
     }
 }
