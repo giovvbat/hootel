@@ -13,8 +13,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/spa")
 public class ReservaSpaResortController {
     
     private ReservaService reservaService;
@@ -25,12 +27,12 @@ public class ReservaSpaResortController {
 
     @GetMapping("/index")
     public String mostrarInicial(){
-        return "index";
+        return "spa/index";
     }
 
     @GetMapping("/home")
     public String mostrarHome(){
-        return "home";
+        return "spa/home";
     }
 
     @GetMapping("/reserva/formulario")
@@ -40,7 +42,7 @@ public class ReservaSpaResortController {
 
         theModel.addAttribute("reserva", reserva);
 
-        return "login";
+        return "spa/login";
     }
 
     @PostMapping("/reserva/checar")
@@ -49,7 +51,7 @@ public class ReservaSpaResortController {
                             Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "login";
+            return "spa/login";
         }
 
         try {
@@ -59,14 +61,14 @@ public class ReservaSpaResortController {
                 model.addAttribute("reserva", reserva);
                 model.addAttribute("tiposPrefAlimentar", PreferenciaAlimentarSpaResort.values());
                 model.addAttribute("tiposPrefEvento", PreferenciaEventoSpaResort.values());
-                return "preferencias";
+                return "spa/preferencias";
             }
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "login";
+            return "spa/login";
         }
 
-        return "home";
+        return "spa/home";
     }
 
     @PostMapping("/reserva/preferencias")
@@ -76,7 +78,7 @@ public class ReservaSpaResortController {
 
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors());
-            return "preferencias";
+            return "spa/preferencias";
         }
 
         try {
@@ -84,9 +86,9 @@ public class ReservaSpaResortController {
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             System.out.println(e.getMessage());
-            return "preferencias";
+            return "spa/preferencias";
         }
 
-        return "home";
+        return "spa/home";
     }
 }

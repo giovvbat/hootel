@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Meta tags Obrigatórias -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/af46ebb8cd.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+    <!-- HTML5Shiv -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+
+    <!-- Estilo customizado -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style_info.css}">
+
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/af46ebb8cd.js" crossorigin="anonymous"></script>
+
+    <title>informações</title>
+
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
+        <div class="container">
+
+            <a th:href="@{/hotel/home}" class="navbar-brand brand">
+                <p>hootel</p>
+            </a>
+
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="nav-principal">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a th:href="@{/hotel/home}" class="nav-link">Serviço de Quarto</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/hotel/eventos}" class="nav-link">Eventos</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/hotel/refeicao}" class="nav-link">Cardápio</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/hotel/camareiras}" class="nav-link">Camareiras</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/hotel/informacoes}" class="nav-link">Mais informações</a>
+                    </li>
+
+                    <li class="nav-item divisor"></li>
+
+                    <li class="nav-item">
+                        <a th:href="@{/hotel/avaliacao/formulario}" class="nav-link btn" id="btn-navbar">Sair</a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+<section id="formulario" class="d-flex">
+    <div class="container align-self-center capa">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <h1>Quer mais informações? Tá na mão! <i class="fa-solid fa-circle-info"></i></h1>
+
+
+                <h4>Aqui, você encontra mais informações sobre como aproveitar sua hospedagem ao máximo! Se liga:</h4>
+
+                <div class="mt-5" style="color: #7c26f8">
+                    <h5>Como posso ter acesso à Wi-Fi do meu hotel? <i class="fa-solid fa-wifi"></i></h5>
+                    <span>Nome da rede:</span> <span th:text="${informacoes.nomeWifi}"></span><br>
+                    <span>Senha:</span> <span th:text="${informacoes.senhaWifi}"></span><br>
+                    <span>Basta conectar-se e começar a navegar!</span>
+
+                    <h5 class="mt-4">Como posso entrar em contato com a recepção do meu hotel? <i class="fa-solid fa-phone"></i></h5>
+                    <span>O número da recepção é</span> <span th:text="${informacoes.numeroRecepcao}"></span><span>. Ligue, a partir do interfone em seu quarto, quando precisar!</span>
+
+                    <h5 class="mt-4">Em qual o horário posso usufruir da piscina do meu hotel? <i class="fa-solid fa-person-swimming"></i></h5>
+                    <span>O horário de funcionamento da piscina é das</span> <span th:text="${informacoes.inicioPiscina}"></span> <span>até as </span> <span th:text="${informacoes.finalPiscina}"></span><span>h. Aproveite!</span>
+
+                    <h5 class="mt-4">E o café da manhã? Em que horário está disponível? <i class="fa-solid fa-mug-saucer"></i></h5>
+                    <span>O café da manhã permanece aberto das</span> <span th:text="${informacoes.inicioCafe}"></span> <span>até as </span> <span th:text="${informacoes.finalCafe}"></span><span>h. Bom apetite!</span>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="row d-flex">
+            <div class="col-md-2 brand align-self-center">
+                <p>hootel</p>
+            </div>
+
+            <div class="col-md-2">
+                <h4>company</h4>
+                <ul class="navbar-nav">
+                    <a href="">Sobre</a>
+                    <a href="">Ajuda</a>
+                    <a href="">Contato</a>
+                    <a href="">Novidades</a>
+                </ul>
+
+            </div>
+
+            <div class="col-md-2">
+                <h4>Comunidades</h4>
+                <ul class="navbar-nav">
+                    <a href="">Hóspedes</a>
+                    <a href="">Empregados</a>
+                    <a href="">Proprietários</a>
+                </ul>
+
+            </div>
+
+            <div class="col-md-2">
+                <h4>Links úteis</h4>
+                <ul class="navbar-nav">
+                    <a href="">Vagas</a>
+                    <a href="">Presentes</a>
+                </ul>
+
+            </div>
+
+            <div class="col-md-1">
+                <h4>Extras</h4>
+                <ul class="navbar-nav">
+                    <a href="">Passagens</a>
+                    <a href="">Indicações</a>
+                    <a href="">Passeios</a>
+                </ul>
+
+            </div>
+
+            <div class="col-md-3 align-self-center">
+                <ul id="redes">
+                    <li>
+                        <a href="">
+                            <i class="fa-brands fa-facebook fa-2x"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="">
+                            <i class="fa-brands fa-x-twitter fa-2x"></i>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="">
+                            <i class="fa-brands fa-instagram fa-2x"></i>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+<!-- JavaScript (Opcional) -->
+<!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</body>
+</html>

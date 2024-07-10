@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/hotel")
-public class InformacoesController {
+public class InformacoesHotelController {
     private InformacoesService informacoesService;
 
     @Autowired
-    public InformacoesController(InformacoesService informacoesService) {
+    public InformacoesHotelController(InformacoesService informacoesService) {
         this.informacoesService = informacoesService;
     }
 

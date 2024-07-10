@@ -13,11 +13,11 @@ import java.util.Date;
 
 @Controller
 @RequestMapping("/hotel")
-public class AvaliacaoController {
+public class AvaliacaoHotelController {
 
     private AvaliacaoService avaliacaoService;
 
-    public AvaliacaoController(AvaliacaoService avaliacaoService) {
+    public AvaliacaoHotelController(AvaliacaoService avaliacaoService) {
         this.avaliacaoService = avaliacaoService;
     }
 
