@@ -18,12 +18,12 @@
     <![endif]-->
 
     <!-- Estilo customizado -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style_camareiras.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/spa_style_relaxamento.css}">
 
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/af46ebb8cd.js" crossorigin="anonymous"></script>
 
-    <title>camareiras</title>
+    <title>relaxamento</title>
     <link rel="icon" href="imagens/favicon.png">
 
   </head>
@@ -32,8 +32,8 @@
       <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
         <div class="container">
 
-          <a th:href="@{/hotel/home}" class="navbar-brand brand">
-            <p>hootel</p>
+          <a th:href="@{/spa/home}" class="navbar-brand brand">
+            <p>Spa Resort</p>
           </a>
 
           <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
@@ -43,29 +43,29 @@
           <div class="collapse navbar-collapse" id="nav-principal">
             <ul class="navbar-nav ml-auto">
               <li class="nav-item">
-                <a th:href="@{/hotel/home}" class="nav-link">Serviço de Quarto</a>
+                <a th:href="@{/spa/home}" class="nav-link">Serviço de Quarto</a>
               </li>
 
               <li class="nav-item">
-                <a th:href="@{/hotel/eventos}" class="nav-link">Eventos</a>
+                <a th:href="@{/spa/eventos}" class="nav-link">Eventos</a>
               </li>
 
               <li class="nav-item">
-                <a th:href="@{/hotel/refeicao}" class="nav-link">Cardápio</a>
+                <a th:href="@{/spa/refeicao}" class="nav-link">Cardápio</a>
               </li>
 
               <li class="nav-item">
-                <a th:href="@{/hotel/camareiras}" class="nav-link">Camareiras</a>
+                <a th:href="@{/spa/relaxamento}" class="nav-link">Relaxamento</a>
               </li>
 
               <li class="nav-item">
-                <a th:href="@{/hotel/informacoes}" class="nav-link">Mais informações</a>
+                <a th:href="@{/spa/informacoes}" class="nav-link">Mais informações</a>
               </li>
 
               <li class="nav-item divisor"></li>
 
               <li class="nav-item">
-                <a th:href="@{/hotel/avaliacao/formulario}" class="nav-link btn" id="btn-navbar">Sair</a>
+                <a th:href="@{/spa/avaliacao/formulario}" class="nav-link btn" id="btn-navbar">Sair</a>
               </li>
 
             </ul>
@@ -79,12 +79,12 @@
       <div class="container align-self-center capa">
         <div class="row justify-content-center">
           <div class="col-md-10">
-            <h3>Serviço de Camareiras <i class="fa-solid fa-broom"></i></h3>
-            <p>Selecione o melhor horário para você, junto de suas preferências, e uma funcionária será designada para atender o pedido conforme foi solicitado!</p>
+            <h3>Serviço de Relaxamento</h3>
+            <p>Selecione o melhor horário para você, junto de suas preferências!</p>
           </div>
 
 
-          <form th:action="@{/hotel/processarCamareiras}" th:object="${agendamentoCamareira}" method="POST">
+          <form th:action="@{/spa/processarRelaxamento}" th:object="${agendamentoRelaxamento}" method="POST">
 
             <div class="row justify-content-center mt-3 no-gutters">
 
@@ -106,12 +106,17 @@
                   <th:block th:each="servico : ${servicos}">
                     <input style="margin: 10px" type="checkbox" th:field="*{especificacoes}"
                            th:value="${servico}"
-                           th:text="${servico.displayName}" />
+                           th:text="${servico.name()}" />
                     <br/>
                   </th:block>
                 </label>
 
               </div>
+              <!--<div class="col-md-4">
+                  <label th:each="servico : ${servicos}">
+                    <input type="checkbox" th:field="${servicos}" th:value="${servico}" th:text="${servico.name()}" style="margin: 10px"/>
+                  </label>
+                </div>-->
             </div>
 
 
@@ -148,7 +153,7 @@
       <div class="container">
         <div class="row d-flex">
           <div class="col-md-2 brand align-self-center">
-            <p>hootel</p>
+            <p>Spa Resort</p>
           </div>
 
           <div class="col-md-2">

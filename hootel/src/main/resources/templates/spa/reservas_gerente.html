@@ -37,7 +37,7 @@
         </tr>
         </tbody>
 
-        <form action="#" th:action="@{/hotel/addReserva}" method="POST">
+        <form action="#" th:action="@{/spa/addReserva}" method="POST">
 
             <div class="input-group input-group-lg">
                 <div class="input-group-append">
@@ -50,7 +50,7 @@
 
         </form>
 
-        <form action="#" th:action="@{/hotel/removeReserva}" th:object="${reserva}" method="POST">
+        <form action="#" th:action="@{/spa/removeReserva}" th:object="${reserva}" method="POST">
 
             <div class="input-group input-group-lg">
                 <input type="text" th:field="*{PIN}" placeholder="Digite seu PIN" class="form-control">

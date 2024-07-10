@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/hotel")
-public class GerenteInformacoesController {
+@RequestMapping("/spa")
+public class GerenteInformacoesSpaResortController {
     private final InformacoesService informacoesService;
 
     @Autowired
-    public GerenteInformacoesController(InformacoesService informacoesService) {
+    public GerenteInformacoesSpaResortController(InformacoesService informacoesService) {
         this.informacoesService = informacoesService;
     }
 
@@ -33,16 +33,16 @@ public class GerenteInformacoesController {
             model.addAttribute("errorMessage", e.getMessage());
         }
 
-        return "hotel/info_gerente";
+        return "spa/info_gerente";
     }
 
     @PostMapping("/atualizaInfo")
     public String atualizarInfo(@Valid @ModelAttribute("info") Informacoes informacoes,
-                                    BindingResult bindingResult,
-                                    Model model) {
+                                BindingResult bindingResult,
+                                Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "hotel/info_gerente";
+            return "spa/info_gerente";
         }
 
         try {
@@ -51,6 +51,6 @@ public class GerenteInformacoesController {
             model.addAttribute("errorMessage", e.getMessage());
         }
 
-        return "hotel/info_gerente";
+        return "spa/info_gerente";
     }
 }

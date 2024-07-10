@@ -1,7 +1,7 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Reserva;
-import com.grupo11.hootel.entity.ReservaHotel;
+import com.grupo11.hootel.entity.ReservaSpaResort;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.ReservaService;
 import jakarta.validation.Valid;
@@ -17,19 +17,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("/hotel")
-public class GerenteReservaHotelController {
-
+@RequestMapping("/spa")
+public class GerenteReservaSpaResortController {
     private ReservaService reservaService;
 
-    public GerenteReservaHotelController(ReservaService ReservaService) {
+    public GerenteReservaSpaResortController(ReservaService ReservaService) {
         this.reservaService = ReservaService;
     }
 
     @ModelAttribute("todasReservas")
     public List<Reserva> populateReservas(Model model) {
         try {
-            return reservaService.lerTodasReservas(ReservaHotel.class);
+            return reservaService.lerTodasReservas(ReservaSpaResort.class);
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return new ArrayList<>();
@@ -38,18 +37,18 @@ public class GerenteReservaHotelController {
 
     @GetMapping("/mostrarReservas")
     public String mostrarReservas(Model model){
-        model.addAttribute("reserva", new ReservaHotel());
+        model.addAttribute("reserva", new ReservaSpaResort());
 
-        return "hotel/reservas_gerente";
+        return "spa/reservas_gerente";
     }
 
     @PostMapping("/addReserva")
     public String criarNovaReserva(Model model) {
 
-        Reserva reserva = reservaService.criarReserva(new ReservaHotel());
+        Reserva reserva = reservaService.criarReserva(new ReservaSpaResort());
         model.addAttribute("novaReserva", reserva);
 
-        return "redirect:/hotel/mostrarReservas";
+        return "redirect:/spa/mostrarReservas";
     }
 
     @PostMapping("/removeReserva")
@@ -58,16 +57,16 @@ public class GerenteReservaHotelController {
                                 Model model){
 
         if (bindingResult.hasErrors()){
-            return "hotel/reservas_gerente";
+            return "spa/reservas_gerente";
         }
 
         try {
             reservaService.deletarReserva(reserva);
         }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
-            return "hotel/reservas_gerente";
+            return "spa/reservas_gerente";
         }
 
-        return "redirect:/hotel/mostrarReservas";
+        return "redirect:/spa/mostrarReservas";
     }
 }

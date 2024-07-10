@@ -35,14 +35,12 @@ public class EventoSpaResortController {
             model.addAttribute("eventos", eventos);
             model.addAttribute("reserva", new ReservaSpaResort());
             model.addAttribute("recomendacao", new ArrayList<Evento>());
-            System.out.println("entrou aqui 01");
 
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("eventos", new ArrayList<Evento>());
             model.addAttribute("recomendacao", new ArrayList<Evento>());
             model.addAttribute("reserva", new ReservaSpaResort());
-            System.out.println("entrou aqui 02");
         }
         return "spa/eventos";
     }
@@ -51,7 +49,7 @@ public class EventoSpaResortController {
     public String mostrarEventoPorId(@RequestParam("eventoId") int theId,
                                      Model model) {
         try {
-            Evento evento = eventoService.lerEventoId(theId);
+            EventoSpaResort evento = (EventoSpaResort) eventoService.lerEventoId(theId);
             ReservaSpaResort reserva = new ReservaSpaResort();
             model.addAttribute("evento_escolhido", evento);
             model.addAttribute("reserva", reserva);

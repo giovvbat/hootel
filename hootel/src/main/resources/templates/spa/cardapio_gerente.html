@@ -1,3 +1,74 @@
+<!--
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  &lt;!&ndash; Required meta tags &ndash;&gt;
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  &lt;!&ndash; Bootstrap CSS &ndash;&gt;
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <title>refeicao</title>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h3>Cardapio</h3>
+  <hr>
+
+  <span th:text="${refeicao.id}"></span>
+  <span th:text="${refeicao.conteudo}"></span>
+
+
+  <form action="#" th:action="@{/spa/adicionarCardapio}" th:object="${refeicao}" method="POST">
+
+    <div class="input-group input-group-lg">
+      <div class="input-group input-group-lg">
+        <input type="text" th:field="*{conteudo}" placeholder="Conteúdo" class="form-control">
+      </div>
+
+      <h5>Preferencias</h5>
+      <div>
+        <label th:each="categoria : ${categorias}">
+          <input type="checkbox" th:field="*{categorias}" th:value="${categoria}" th:text="${categoria.name()}" style="margin: 10px"/>
+        </label>
+      </div>
+      <h5>Objetivos</h5>
+      <div>
+        <label th:each="objetivo : ${objetivos}">
+          <input type="checkbox" th:field="*{objetivos}" th:value="${objetivo}" th:text="${objetivo.name()}" style="margin: 10px"/>
+        </label>
+      </div>
+      <br>
+      <div class="input-group-append">
+        <button type="submit" class="btn" id="botao-logar" style="color: mediumpurple">Adicionar Alimentação</button>
+      </div>
+
+      <div th:if="${errorMessage}">
+        <span style="color: #cb2d51" th:text="${errorMessage}">Error</span>
+      </div>
+      <div th:if="${#fields.hasErrors('conteudo')}">
+        <span style="color: #cb2d51" th:errors="${refeicao.conteudo}"></span>
+      </div>
+      <div th:if="${#fields.hasErrors('categorias')}">
+        <span style="color: #cb2d51" th:errors="${refeicao.categorias}"></span>
+      </div>
+
+    </div>
+
+  </form>
+
+</div>
+
+</body>
+</html>
+-->
+
+
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
@@ -22,34 +93,40 @@
   <span th:text="${refeicao.id}"></span>
   <span th:text="${refeicao.conteudo}"></span>
 
-
-  <form action="#" th:action="@{/hotel/adicionarCardapio}" th:object="${refeicao}" method="POST">
+  <form action="#" th:action="@{/spa/adicionarCardapio}" th:object="${refeicao}" method="POST">
 
     <div class="input-group input-group-lg">
-      <div class="input-group input-group-lg">
-        <input type="text" th:field="*{conteudo}" placeholder="Conteúdo" class="form-control">
-      </div>
+      <input type="text" th:field="*{conteudo}" placeholder="Conteúdo" class="form-control">
+    </div>
 
-      <div>
-        <label th:each="categoria : ${categorias}">
-          <input type="checkbox" th:field="*{categorias}" th:value="${categoria}" th:text="${categoria.name()}" style="margin: 10px"/>
-        </label>
-      </div>
+    <h5>Preferencias</h5>
+    <div>
+      <label th:each="categoria : ${categorias}">
+        <input type="checkbox" th:field="*{categorias}" th:value="${categoria}" th:text="${categoria.name()}" style="margin: 10px"/>
+      </label>
+    </div>
 
-      <div class="input-group-append">
-        <button type="submit" class="btn" id="botao-logar" style="color: mediumpurple">Adicionar Alimentação</button>
-      </div>
+    <h5>Objetivos</h5>
+    <div>
+      <label th:each="objetivo : ${objetivos}">
+        <input type="checkbox" th:field="*{objetivos}" th:value="${objetivo}" th:text="${objetivo.name()}" style="margin: 10px"/>
+      </label>
+    </div>
 
-      <div th:if="${errorMessage}">
-        <span style="color: #cb2d51" th:text="${errorMessage}">Error</span>
-      </div>
-      <div th:if="${#fields.hasErrors('conteudo')}">
-        <span style="color: #cb2d51" th:errors="${refeicao.conteudo}"></span>
-      </div>
-      <div th:if="${#fields.hasErrors('categorias')}">
-        <span style="color: #cb2d51" th:errors="${refeicao.categorias}"></span>
-      </div>
+    <br>
 
+    <div class="input-group-append">
+      <button type="submit" class="btn" id="botao-logar" style="color: mediumpurple">Adicionar Alimentação</button>
+    </div>
+
+    <div th:if="${errorMessage}">
+      <span style="color: #cb2d51" th:text="${errorMessage}">Error</span>
+    </div>
+    <div th:if="${#fields.hasErrors('conteudo')}">
+      <span style="color: #cb2d51" th:errors="${refeicao.conteudo}"></span>
+    </div>
+    <div th:if="${#fields.hasErrors('categorias')}">
+      <span style="color: #cb2d51" th:errors="${refeicao.categorias}"></span>
     </div>
 
   </form>

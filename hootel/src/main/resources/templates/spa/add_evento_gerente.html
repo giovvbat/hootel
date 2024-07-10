@@ -19,7 +19,7 @@
     <h3>Adicione um evento</h3>
     <hr>
 
-    <form action="#" th:action="@{/hotel/addEvento}" th:object="${evento}" method="POST">
+    <form action="#" th:action="@{/spa/addEvento}" th:object="${evento}" method="POST">
 
         <div class="input-group input-group-lg">
             <input type="text" th:field="*{lugar}" placeholder="lugar" class="form-control">
@@ -27,12 +27,17 @@
             <input type="date" th:field="*{dataInicio}" placeholder="data" class="form-control">
             <input type="text" th:field="*{horario}" placeholder="horário" class="form-control">
             <input type="text" th:field="*{descricao}" placeholder="descricao" class="form-control">
-            <input type="number" min="0" th:field="*{idadeMinimaRecomendada}" placeholder="Idade Mínima Recomendada" class="form-control">
         </div>
 
         <div>
             <label th:each="categoria : ${categorias}">
                 <input type="checkbox" th:field="*{categorias}" th:value="${categoria}" th:text="${categoria.name()}" style="margin: 10px"/>
+            </label>
+        </div>
+
+        <div>
+            <label th:each="objetivo : ${objetivos}">
+                <input type="checkbox" th:field="*{objetivos}" th:value="${objetivo}" th:text="${objetivo.name()}" style="margin: 10px"/>
             </label>
         </div>
 
@@ -58,8 +63,8 @@
         <div th:if="${#fields.hasErrors('descricao')}">
             <span style="color: #cb2d51" th:errors="${evento.descricao}"></span>
         </div>
-        <div th:if="${#fields.hasErrors('idadeMinimaRecomendada')}">
-            <span style="color: #cb2d51" th:errors="${evento.idadeMinimaRecomendada}"></span>
+        <div th:if="${#fields.hasErrors('objetivos')}">
+            <span style="color: #cb2d51" th:errors="${evento.objetivos}"></span>
         </div>
         <div th:if="${#fields.hasErrors('categorias')}">
             <span style="color: #cb2d51" th:errors="${evento.categorias}"></span>

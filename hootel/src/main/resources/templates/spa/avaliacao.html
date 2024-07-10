@@ -18,7 +18,7 @@
     <![endif]-->
 
     <!-- Estilo customizado -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style_avaliacao.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/spa_style_avaliacao.css}">
 
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/af46ebb8cd.js" crossorigin="anonymous"></script>
@@ -32,8 +32,8 @@
       <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
         <div class="container">
 
-          <a th:href="@{/hotel/home}" class="navbar-brand brand">
-            <p>hootel</p>
+          <a th:href="@{/spa/home}" class="navbar-brand brand">
+            <p>Spa Resort</p>
           </a> 
 
           <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
@@ -55,7 +55,7 @@
               </li>
 
               <li class="nav-item">
-                <a th:href="@{/hotel/camareiras}" class="nav-link">Camareiras</a>
+                <a th:href="@{/spa/relaxamento}" class="nav-link">Relaxamento</a>
               </li>
 
               <li class="nav-item">
@@ -78,7 +78,7 @@
 
             <span>Esperamos que sua estadia tenha sido proveitosa! Que tal avaliar nossos serviços rapidinho?</span>
 
-            <form action="#" th:action="@{/hotel/avaliacao/salvar}" th:object="${avaliacao}" method="POST" class="form-group">
+            <form action="#" th:action="@{/spa/avaliacao/salvar}" th:object="${avaliacao}" method="POST" class="form-group">
 
 
               <div class="form-group">
@@ -100,7 +100,7 @@
               <input id="btn-roxo" class="btn btn-block mt-5" type="submit" value="Enviar">
 
               <h6 style="text-align: center;" class="mt-2">
-                <a th:href="@{/hotel/index}">sair sem avaliar</a>
+                <a th:href="@{/spa/index}">sair sem avaliar</a>
               </h6>
 
 
@@ -116,7 +116,7 @@
       <div class="container">
         <div class="row d-flex">
           <div class="col-md-2 brand align-self-center">
-            <p>hootel</p>
+            <p>Spa Resort</p>
           </div>
 
           <div class="col-md-2">

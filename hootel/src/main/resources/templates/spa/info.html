@@ -18,7 +18,7 @@
     <![endif]-->
 
     <!-- Estilo customizado -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style_info.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/spa_style_info.css}">
 
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/af46ebb8cd.js" crossorigin="anonymous"></script>
@@ -31,8 +31,8 @@
     <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
         <div class="container">
 
-            <a th:href="@{/hotel/home}" class="navbar-brand brand">
-                <p>hootel</p>
+            <a th:href="@{/spa/home}" class="navbar-brand brand">
+                <p>Spa Resort</p>
             </a>
 
             <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
@@ -42,29 +42,29 @@
             <div class="collapse navbar-collapse" id="nav-principal">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a th:href="@{/hotel/home}" class="nav-link">Serviço de Quarto</a>
+                        <a th:href="@{/spa/home}" class="nav-link">Serviço de Quarto</a>
                     </li>
 
                     <li class="nav-item">
-                        <a th:href="@{/hotel/eventos}" class="nav-link">Eventos</a>
+                        <a th:href="@{/spa/eventos}" class="nav-link">Eventos</a>
                     </li>
 
                     <li class="nav-item">
-                        <a th:href="@{/hotel/refeicao}" class="nav-link">Cardápio</a>
+                        <a th:href="@{/spa/refeicao}" class="nav-link">Cardápio</a>
                     </li>
 
                     <li class="nav-item">
-                        <a th:href="@{/hotel/camareiras}" class="nav-link">Camareiras</a>
+                        <a th:href="@{/spa/relaxamento}" class="nav-link">Relaxamento</a>
                     </li>
 
                     <li class="nav-item">
-                        <a th:href="@{/hotel/informacoes}" class="nav-link">Mais informações</a>
+                        <a th:href="@{/spa/informacoes}" class="nav-link">Mais informações</a>
                     </li>
 
                     <li class="nav-item divisor"></li>
 
                     <li class="nav-item">
-                        <a th:href="@{/hotel/avaliacao/formulario}" class="nav-link btn" id="btn-navbar">Sair</a>
+                        <a th:href="@{/spa/avaliacao/formulario}" class="nav-link btn" id="btn-navbar">Sair</a>
                     </li>
 
                 </ul>
@@ -84,15 +84,15 @@
                 <h4>Aqui, você encontra mais informações sobre como aproveitar sua hospedagem ao máximo! Se liga:</h4>
 
                 <div class="mt-5" style="color: #7c26f8">
-                    <h5>Como posso ter acesso à Wi-Fi do meu hotel? <i class="fa-solid fa-wifi"></i></h5>
+                    <h5>Como posso ter acesso à Wi-Fi do meu spa resort? <i class="fa-solid fa-wifi"></i></h5>
                     <span>Nome da rede:</span> <span th:text="${informacoes.nomeWifi}"></span><br>
                     <span>Senha:</span> <span th:text="${informacoes.senhaWifi}"></span><br>
                     <span>Basta conectar-se e começar a navegar!</span>
 
-                    <h5 class="mt-4">Como posso entrar em contato com a recepção do meu hotel? <i class="fa-solid fa-phone"></i></h5>
+                    <h5 class="mt-4">Como posso entrar em contato com a recepção do meu spa resort? <i class="fa-solid fa-phone"></i></h5>
                     <span>O número da recepção é</span> <span th:text="${informacoes.numeroRecepcao}"></span><span>. Ligue, a partir do interfone em seu quarto, quando precisar!</span>
 
-                    <h5 class="mt-4">Em qual o horário posso usufruir da piscina do meu hotel? <i class="fa-solid fa-person-swimming"></i></h5>
+                    <h5 class="mt-4">Em qual o horário posso usufruir da piscina do meu spa resort? <i class="fa-solid fa-person-swimming"></i></h5>
                     <span>O horário de funcionamento da piscina é das</span> <span th:text="${informacoes.inicioPiscina}"></span> <span>até as </span> <span th:text="${informacoes.finalPiscina}"></span><span>h. Aproveite!</span>
 
                     <h5 class="mt-4">E o café da manhã? Em que horário está disponível? <i class="fa-solid fa-mug-saucer"></i></h5>
@@ -109,7 +109,7 @@
     <div class="container">
         <div class="row d-flex">
             <div class="col-md-2 brand align-self-center">
-                <p>hootel</p>
+                <p>Spa Resort</p>
             </div>
 
             <div class="col-md-2">

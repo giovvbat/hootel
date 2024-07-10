@@ -14,25 +14,25 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
     <!-- Estilo customizado -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style_camareiras.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/spa_style_relaxamento.css}">
 </head>
 <body>
 <header>
     <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
         <div class="container">
-            <a th:href="@{/hotel/home}" class="navbar-brand brand">hootel</a>
+            <a th:href="@{/spa/home}" class="navbar-brand brand">Spa Resort</a>
             <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
                 <i class="fa-solid fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="nav-principal">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a th:href="@{/hotel/home}" class="nav-link">Serviço de Quarto</a></li>
-                    <li class="nav-item"><a th:href="@{/hotel/eventos}" class="nav-link">Eventos</a></li>
-                    <li class="nav-item"><a th:href="@{/hotel/refeicao}" class="nav-link">Cardápio</a></li>
-                    <li class="nav-item"><a th:href="@{/hotel/camareiras}" class="nav-link">Camareiras</a></li>
-                    <li class="nav-item"><a th:href="@{/hotel/informacoes}" class="nav-link">Mais informações</a></li>
+                    <li class="nav-item"><a th:href="@{/spa/home}" class="nav-link">Serviço de Quarto</a></li>
+                    <li class="nav-item"><a th:href="@{/spa/eventos}" class="nav-link">Eventos</a></li>
+                    <li class="nav-item"><a th:href="@{/spa/refeicao}" class="nav-link">Cardápio</a></li>
+                    <li class="nav-item"><a th:href="@{/spa/relaxamento}" class="nav-link">Relaxamento</a></li>
+                    <li class="nav-item"><a th:href="@{/spa/informacoes}" class="nav-link">Mais informações</a></li>
                     <li class="nav-item divisor"></li>
-                    <li class="nav-item"><a th:href="@{/hotel/avaliacao/formulario}" class="nav-link btn" id="btn-navbar">Sair</a></li>
+                    <li class="nav-item"><a th:href="@{/spa/avaliacao/formulario}" class="nav-link btn" id="btn-navbar">Sair</a></li>
                 </ul>
             </div>
         </div>
@@ -43,33 +43,20 @@
     <div class="container align-self-center capa">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                <h3>Serviço de Camareiras <i class="fa-solid fa-broom"></i></h3>
-                <p>Selecione o melhor horário para você, junto de suas preferências, e uma funcionária será designada para atender o pedido conforme foi solicitado!</p>
+                <h3>Preferências</h3>
+                <p>Preencha as seguintes informações para uma melhor experiência!</p>
             </div>
 
-            <form th:action="@{/hotel/reserva/preferencias}" th:object="${reserva}" method="post" class="col-md-10">
+            <form th:action="@{/spa/reserva/preferencias}" th:object="${reserva}" method="post" class="col-md-10">
                 <input type="hidden" th:field="*{PIN}">
 
                 <fieldset class="form-group">
                     <legend>Preferências alimentares:</legend>
-                    <div th:each="tipo : ${tiposPrefAlimentar}" class="form-check">
-                        <input type="checkbox" th:field="*{preferenciasAlimentares}" th:value="${tipo}" th:id="${tipo}" class="form-check-input" />
+                    <div th:each="tipo : ${objetivos}" class="form-check">
+                        <input type="checkbox" th:field="*{objetivos}" th:value="${tipo}" th:id="${tipo}" class="form-check-input" />
                         <label th:for="${tipo}" th:text="${tipo}" class="form-check-label"></label>
                     </div>
                 </fieldset>
-
-                <fieldset class="form-group">
-                    <legend>Preferências de evento:</legend>
-                    <div th:each="tipo : ${tiposPrefEvento}" class="form-check">
-                        <input type="checkbox" th:field="*{preferenciasEventos}" th:value="${tipo}" th:id="${tipo}" class="form-check-input" />
-                        <label th:for="${tipo}" th:text="${tipo}" class="form-check-label"></label>
-                    </div>
-                </fieldset>
-
-                <div class="form-group">
-                    <label for="idade">Idade:</label>
-                    <input type="number" th:field="*{idade}" min="0" class="form-control" id="idade">
-                </div>
 
                 <button type="submit" class="btn btn-primary">Salvar</button>
             </form>
@@ -81,7 +68,7 @@
     <div class="container">
         <div class="row d-flex">
             <div class="col-md-2 brand align-self-center">
-                <p>hootel</p>
+                <p>Spa Resort</p>
             </div>
             <div class="col-md-2">
                 <h4>Company</h4>
