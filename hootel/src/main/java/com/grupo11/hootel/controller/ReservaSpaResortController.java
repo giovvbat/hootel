@@ -1,81 +1,82 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Reserva;
-import com.grupo11.hootel.entity.ReservaHotel;
-import com.grupo11.hootel.entity.enums.PreferenciaAlimentarHotel;
-import com.grupo11.hootel.entity.enums.PreferenciaEventoHotel;
+import com.grupo11.hootel.entity.ReservaSpaResort;
+import com.grupo11.hootel.entity.enums.PreferenciaAlimentarSpaResort;
+import com.grupo11.hootel.entity.enums.PreferenciaEventoSpaResort;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.ReservaService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
-@RequestMapping("/hotel")
-public class ReservaHotelController {
-
+public class ReservaSpaResortController {
+    
     private ReservaService reservaService;
 
-    public ReservaHotelController(ReservaService ReservaService) {
+    public ReservaSpaResortController(ReservaService ReservaService) {
         this.reservaService = ReservaService;
     }
 
     @GetMapping("/index")
     public String mostrarInicial(){
-        return "hotel/index";
+        return "index";
     }
 
     @GetMapping("/home")
     public String mostrarHome(){
-        return "hotel/home";
+        return "home";
     }
 
     @GetMapping("/reserva/formulario")
     public String mostrarFormulario(Model theModel) {
-
-        Reserva reserva = new ReservaHotel();
+        
+        Reserva reserva = new ReservaSpaResort();
 
         theModel.addAttribute("reserva", reserva);
 
-        return "hotel/login";
+        return "login";
     }
 
     @PostMapping("/reserva/checar")
-    public String checarPIN(@Valid @ModelAttribute("reserva") ReservaHotel aReserva,
+    public String checarPIN(@Valid @ModelAttribute("reserva") ReservaSpaResort aReserva,
                             BindingResult bindingResult,
                             Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "hotel/login";
+            return "login";
         }
 
         try {
-            ReservaHotel reserva = (ReservaHotel) reservaService.lerReservaPin(aReserva.getPIN());
+            ReservaSpaResort reserva = (ReservaSpaResort) reservaService.lerReservaPin(aReserva.getPIN());
 
-            if (reserva.getPreferenciasEventos().isEmpty() || reserva.getPreferenciasAlimentares().isEmpty()) {
+            if (reserva.getObjetivos().isEmpty()) {
                 model.addAttribute("reserva", reserva);
-                model.addAttribute("tiposPrefAlimentar", PreferenciaAlimentarHotel.values());
-                model.addAttribute("tiposPrefEvento", PreferenciaEventoHotel.values());
-                return "hotel/preferencias";
+                model.addAttribute("tiposPrefAlimentar", PreferenciaAlimentarSpaResort.values());
+                model.addAttribute("tiposPrefEvento", PreferenciaEventoSpaResort.values());
+                return "preferencias";
             }
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "hotel/login";
+            return "login";
         }
 
-        return "hotel/home";
+        return "home";
     }
 
     @PostMapping("/reserva/preferencias")
-    public String checarPreferencias(@Valid @ModelAttribute("reserva") ReservaHotel aReserva,
+    public String checarPreferencias(@Valid @ModelAttribute("reserva") ReservaSpaResort aReserva,
                                      BindingResult bindingResult,
                                      Model model) {
 
         if (bindingResult.hasErrors()) {
             System.out.println(bindingResult.getAllErrors());
-            return "hotel/preferencias";
+            return "preferencias";
         }
 
         try {
@@ -83,9 +84,9 @@ public class ReservaHotelController {
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             System.out.println(e.getMessage());
-            return "hotel/preferencias";
+            return "preferencias";
         }
 
-        return "hotel/home";
+        return "home";
     }
 }

@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>informacoes</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Informações</h3>
+    <hr>
+
+    <span th:text="${info.id}"></span>
+    <span th:text="${info.nomeWifi}"></span>
+    <span th:text="${info.senhaWifi}"></span>
+    <span th:text="${info.inicioCafe}"></span>
+    <span th:text="${info.finalCafe}"></span>
+    <span th:text="${info.inicioPiscina}"></span>
+    <span th:text="${info.finalPiscina}"></span>
+    <span th:text="${info.numeroRecepcao}"></span>
+
+
+
+    <form action="#" th:action="@{/hotel/atualizaInfo}" th:object="${info}" method="POST">
+
+        <div class="input-group input-group-lg">
+            <input type="text" th:field="*{nomeWifi}" placeholder="wifi" class="form-control">
+            <input type="text" th:field="*{senhaWifi}" placeholder="senha" class="form-control">
+            <input type="text" th:field="*{inicioCafe}" placeholder="inicio cafe" class="form-control">
+            <input type="text" th:field="*{finalCafe}" placeholder="final cafe" class="form-control">
+            <input type="text" th:field="*{inicioPiscina}" placeholder="inicio piscina" class="form-control">
+            <input type="text" th:field="*{finalPiscina}" placeholder="final piscina" class="form-control">
+            <input type="text" th:field="*{numeroRecepcao}" placeholder="numero" class="form-control">
+            <div class="input-group-append">
+                <button type="submit" class="btn" id="botao-logar" style="color: white">Atualizar</button>
+            </div>
+
+
+        </div>
+
+        <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
+        <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
+
+    </form>
+
+</div>
+
+</body>
+</html>

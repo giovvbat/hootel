@@ -11,12 +11,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
+@RequestMapping("/hotel")
 public class GerenteReservaHotelController {
 
     private ReservaService reservaService;
@@ -40,7 +41,7 @@ public class GerenteReservaHotelController {
         /*model.addAttribute("reserva", new Reserva());*/
         model.addAttribute("reserva", new ReservaHotel());
 
-        return "reservas_gerente";
+        return "hotel/reservas_gerente";
     }
 
     @PostMapping("/addReserva")
@@ -49,7 +50,7 @@ public class GerenteReservaHotelController {
         Reserva reserva = reservaService.criarReserva(new ReservaHotel());
         model.addAttribute("novaReserva", reserva);
 
-        return "redirect:/mostrarReservas";
+        return "redirect:/hotel/mostrarReservas";
     }
 
     @PostMapping("/removeReserva")
@@ -58,16 +59,16 @@ public class GerenteReservaHotelController {
                                 Model model){
 
         if (bindingResult.hasErrors()){
-            return "reservas_gerente";
+            return "hotel/reservas_gerente";
         }
 
         try {
             reservaService.deletarReserva(reserva);
         }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
-            return "reservas_gerente";
+            return "hotel/reservas_gerente";
         }
 
-        return "redirect:/mostrarReservas";
+        return "redirect:/hotel/mostrarReservas";
     }
 }

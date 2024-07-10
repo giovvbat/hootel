@@ -29,7 +29,7 @@ public class ReservaHotel extends Reserva {
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = PreferenciaAlimentarHotel.class)
     @CollectionTable(name = "preferencias_alimentares_hotel", joinColumns = @JoinColumn(name = "pin_reserva"))
-    @Column(name = "preferencia_alimentacao", nullable = false)
+    @Column(name = "preferencia_refeicao", nullable = false)
     // @NotNull(message = "Selecione suas preferências de alimentação")
     private List<PreferenciaAlimentarHotel> preferenciasAlimentares;
 

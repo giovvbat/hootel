@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>reservas</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Reservas</h3>
+    <hr>
+
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>PIN</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="reservaTabela : ${todasReservas}">
+
+            <td th:text="${reservaTabela.PIN}" />
+
+            <!-- Add update button/link -->
+
+        </tr>
+        </tbody>
+
+        <form action="#" th:action="@{/hotel/addReserva}" method="POST">
+
+            <div class="input-group input-group-lg">
+                <div class="input-group-append">
+                    <button type="submit" class="btn" id="botao-logar" style="color: white">Gerar reserva</button>
+                </div>
+
+
+            </div>
+
+
+        </form>
+
+        <form action="#" th:action="@{/hotel/removeReserva}" th:object="${reserva}" method="POST">
+
+            <div class="input-group input-group-lg">
+                <input type="text" th:field="*{PIN}" placeholder="Digite seu PIN" class="form-control">
+                <div class="input-group-append">
+                    <button type="submit" class="btn" id="botao-logar" style="color: white">Remover</button>
+                </div>
+
+
+            </div>
+
+            <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
+            <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
+
+        </form>
+    </table>
+
+</div>
+
+</body>
+</html>

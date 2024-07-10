@@ -9,15 +9,13 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@RequestMapping("/hotel")
 public class GerenteEventosHotelController {
 
     private EventoService eventoService;
@@ -35,11 +33,12 @@ public class GerenteEventosHotelController {
             }
             model.addAttribute("eventos", eventoHotels);
             model.addAttribute("categorias", PreferenciaEventoHotel.values());
-            return "eventos_gerente";
+            return "hotel/eventos_gerente";
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("eventos", new ArrayList<EventoHotel>());
-            return "add_evento_gerente";
+            model.addAttribute("categorias", PreferenciaEventoHotel.values());
+            return "hotel/add_evento_gerente";
         }
     }
 
@@ -66,7 +65,7 @@ public class GerenteEventosHotelController {
             return popularModel(model);
         }
 
-        return "redirect:/mostrarEventos";
+        return "redirect:/hotel/mostrarEventos";
     }
 
     @PostMapping("/removeEvento")
@@ -89,7 +88,7 @@ public class GerenteEventosHotelController {
             model.addAttribute("eventoAtualizar", new EventoHotel());
             return popularModel(model);
         }
-        return "redirect:/mostrarEventos";
+        return "redirect:/hotel/mostrarEventos";
     }
 
     @PostMapping("/atualizaEvento")
@@ -115,6 +114,6 @@ public class GerenteEventosHotelController {
             return popularModel(model);
         }
 
-        return "redirect:/mostrarEventos";
+        return "redirect:/hotel/mostrarEventos";
     }
 }
