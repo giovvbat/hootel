@@ -84,7 +84,7 @@
                         <label for="pin">Insira o PIN para mostrar recomendações personalizadas:</label>
                         <input type="text" th:field="*{PIN}" id="pin" name="PIN" class="form-control" required />
                     </div>
-                    <button type="submit" class="btn btn-roxo" id="btn-roxo">Ir para Nova Página</button>
+                    <button type="submit" class="btn btn-roxo" id="btn-roxo">Mostrar Recomendações</button>
 
                     <span style="color: #cb2d51" th:each="err : ${#fields.allErrors()}" th:text="${err}"></span>
                     <span style="color: #cb2d51" th:if="${errorMessage}" th:text="${errorMessage}">Error</span>
