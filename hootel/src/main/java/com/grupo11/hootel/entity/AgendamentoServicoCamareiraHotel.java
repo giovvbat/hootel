@@ -19,7 +19,7 @@ public class AgendamentoServicoCamareiraHotel extends AgendamentoServico {
     @ElementCollection(targetClass = EspecificacoesCamareira.class)
     @CollectionTable(name = "especificacoes_camareira", joinColumns = @JoinColumn(name = "agendamento_camareira"))
     @Column(name = "especificacao", nullable = false)
-    @NotNull
+    @NotNull(message = "Escolha uma tarefa")
     private List<EspecificacoesCamareira> especificacoes;
 
     public AgendamentoServicoCamareiraHotel() {

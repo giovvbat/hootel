@@ -14,8 +14,8 @@ public abstract class Refeicao {
     private Integer id;
 
     @Column(name = "conteudo")
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    @NotEmpty(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo prato deve ser preenchido")
+    @NotEmpty(message = "Preencha o campo prato corretamente")
     private String conteudo;
 
     public Refeicao() {

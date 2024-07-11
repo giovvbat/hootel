@@ -17,10 +17,10 @@ public class EventoCruzeiro extends Evento {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "turno", nullable = false)
-    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo turno deve ser preenchido")
     private TurnoEventoCruzeiro turno;
 
-    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo idade minima recomendada deve ser preenchido")
     @Min(value = 0, message = "A idade minima é 0")
     @Column(name = "idade_minima")
     private Integer idadeMinimaRecomendada;
@@ -29,7 +29,7 @@ public class EventoCruzeiro extends Evento {
     @ElementCollection(targetClass = PreferenciaEventoCruzeiro.class)
     @CollectionTable(name = "categorias_eventos_cruzeiro", joinColumns = @JoinColumn(name = "id_evento"))
     @Column(name = "categoria", nullable = false)
-    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo preferencia de eventos deve ser preenchido")
     private List<PreferenciaEventoCruzeiro> categorias;
 
     public EventoCruzeiro() {

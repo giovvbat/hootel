@@ -15,27 +15,27 @@ public abstract class Evento {
     @Column(name = "id")
     private Integer id;
 
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    @NotEmpty(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo horaário deve ser preenchido")
+    @NotEmpty(message = "Preencha o campo horário corretamente")
     @Column(name = "horario")
     private String horario;
 
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    @NotEmpty(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo lugar deve ser preenchido")
+    @NotEmpty(message = "Preencha o campo lugar corretamente")
     @Column(name = "lugar")
     private String lugar;
 
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    @NotEmpty(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo nome deve ser preenchido")
+    @NotEmpty(message = "Preencha o campo nome corretamente")
     @Column(name = "nome")
     private String nome;
 
-    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo data deve ser preenchido")
     @Column(name = "data_inicio")
     private LocalDate dataInicio;
 
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    @NotEmpty(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo descricao deve ser preenchido")
+    @NotEmpty(message = "Preencha o campo descricao corretamente")
     @Column(name = "descricao")
     private String descricao;
 

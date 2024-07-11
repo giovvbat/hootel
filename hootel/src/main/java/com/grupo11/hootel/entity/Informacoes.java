@@ -16,38 +16,38 @@ public class Informacoes {
     private Integer id;
 
     @Column(name = "nome_wifi")
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    @NotEmpty(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo nome do Wifi deve ser preenchido")
+    @NotEmpty(message = "Preencha o campo nome do Wifi corretamente")
     private String nomeWifi;
 
     @Column(name = "senha_wifi")
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    @NotEmpty(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo senha Wifi deve ser preenchido")
+    @NotEmpty(message = "Preencha o campo senha do Wifi corretamente")
     private String senhaWifi;
 
     @Column(name = "numero_recepcao")
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    @NotEmpty(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo número recepcao deve ser preenchido")
+    @NotEmpty(message = "Preencha o campo número recepcao corretamente")
     private String numeroRecepcao;
 
     @Column(name = "horario_inicio_piscina")
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    @NotEmpty(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo horario de abertura da piscina deve ser preenchido")
+    @NotEmpty(message = "Preencha o campo horario de abertura da piscina corretamente")
     private String inicioPiscina;
 
     @Column(name = "horario_final_piscina")
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    @NotEmpty(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo horario de fechamento da piscina deve ser preenchido")
+    @NotEmpty(message = "Preencha o campo horario de fechamento da piscina corretamente")
     private String finalPiscina;
 
     @Column(name = "horario_inicio_cafe")
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    @NotEmpty(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo horario de inicio do cafe deve ser preenchido")
+    @NotEmpty(message = "Preencha o campo horario de inicio do cafe corretamente")
     private String inicioCafe;
 
     @Column(name = "horario_final_cafe")
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    @NotEmpty(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo horario final do cafe deve ser preenchido")
+    @NotEmpty(message = "Preencha o campo horario final do cafe corretamente")
     private String finalCafe;
 
     public Informacoes() {

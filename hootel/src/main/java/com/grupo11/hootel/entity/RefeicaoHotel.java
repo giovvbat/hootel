@@ -15,7 +15,7 @@ public class RefeicaoHotel extends Refeicao {
     @ElementCollection(targetClass = PreferenciaAlimentarHotel.class)
     @CollectionTable(name = "categorias_refeicao_hotel", joinColumns = @JoinColumn(name = "id_refeicao"))
     @Column(name = "categoria", nullable = false)
-    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo preferencia alimentar deve ser preenchido")
     private List<PreferenciaAlimentarHotel> categorias;
 
     public RefeicaoHotel() {

@@ -17,7 +17,7 @@ public class AgendamentoServicoRelaxamentoSpaResort extends AgendamentoServico {
     @ElementCollection(targetClass = EspecificacoesRelaxamento.class)
     @CollectionTable(name = "especificacoes_relaxamento", joinColumns = @JoinColumn(name = "agendamento_relaxamento"))
     @Column(name = "especificacao", nullable = false)
-    @NotNull
+    @NotNull(message = "Escolha pelo menos um tratamento")
     private List<EspecificacoesRelaxamento> especificacoes;
 
     public AgendamentoServicoRelaxamentoSpaResort() {

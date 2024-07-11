@@ -13,10 +13,7 @@ import java.util.List;
 @Table(name = "ReservaHotel")
 public class ReservaHotel extends Reserva {
 
-
-    // @NotNull
     @Column(name = "idade")
-    // @Min(value = 0, message = "A idade minima é 0")
     private Integer idade;
 
     @Enumerated(EnumType.STRING)
