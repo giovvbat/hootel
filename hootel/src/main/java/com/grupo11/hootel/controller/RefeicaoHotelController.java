@@ -68,6 +68,7 @@ public class RefeicaoHotelController {
                                Model model) {
 
         if(bindingResult.hasErrors()) {
+            model.addAttribute("recomendacao", new ArrayList<>());
             return "hotel/refeicao";
         }
 
@@ -85,6 +86,7 @@ public class RefeicaoHotelController {
             model.addAttribute("recomendacao", recomendacoes);
         } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
+            model.addAttribute("recomendacao", new ArrayList<>());
         }
 
         return "hotel/refeicao";

@@ -34,7 +34,6 @@ public class AvaliacaoHotelController {
     @PostMapping("/avaliacao/salvar")
     public String salvarAvaliacao(@ModelAttribute("avaliacao")Avaliacao theAvaliacao) {
 
-        theAvaliacao.setData(new Date());
         avaliacaoService.criarAvaliacao(theAvaliacao);
 
         return "hotel/index";

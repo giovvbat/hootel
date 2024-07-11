@@ -52,7 +52,7 @@ public class RefeicaoCruzeiroController {
         try {
             model.addAttribute("reserva", new ReservaCruzeiro());
             model.addAttribute("recomendacao", new ArrayList<>());
-        }catch (HoospedagemException e){
+        } catch (HoospedagemException e){
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("reserva", new ReservaCruzeiro());
             model.addAttribute("recomendacao", new ArrayList<>());
@@ -66,6 +66,7 @@ public class RefeicaoCruzeiroController {
                                Model model) {
 
         if(bindingResult.hasErrors()) {
+            model.addAttribute("recomendacao", new ArrayList<>());
             return "cruzeiro/refeicao";
         }
 
@@ -83,7 +84,6 @@ public class RefeicaoCruzeiroController {
             model.addAttribute("recomendacao", recomendacoes);
         } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            e.printStackTrace();
             model.addAttribute("recomendacao", new ArrayList<>());
         }
 
