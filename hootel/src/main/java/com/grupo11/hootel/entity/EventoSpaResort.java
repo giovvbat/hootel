@@ -18,7 +18,7 @@ public class EventoSpaResort extends Evento {
     @ElementCollection(targetClass = PreferenciaEventoSpaResort.class)
     @CollectionTable(name = "categorias_eventos_spa", joinColumns = @JoinColumn(name = "id_evento"))
     @Column(name = "categoria", nullable = false)
-    @NotNull(message = "Selecione suas preferências de eventos")
+    @NotNull(message = "O campo preferencia de eventos deve ser preenchido")
     private List<PreferenciaEventoSpaResort> categorias;
 
     @Enumerated(EnumType.STRING)

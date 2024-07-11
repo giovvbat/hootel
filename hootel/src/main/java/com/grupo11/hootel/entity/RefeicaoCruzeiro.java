@@ -17,12 +17,12 @@ public class RefeicaoCruzeiro extends Refeicao {
     @ElementCollection(targetClass = PreferenciaAlimentarCruzeiro.class)
     @CollectionTable(name = "categorias_refeicao_cruzeiro", joinColumns = @JoinColumn(name = "id_refeicao"))
     @Column(name = "categoria", nullable = false)
-    @NotNull(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo preferencia alimentar deve ser preenchido")
     private List<PreferenciaAlimentarCruzeiro> categorias;
 
     @Column(name = "restaurante")
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    @NotEmpty(message = "Todos os campos devem ser preenchidos")
+    @NotNull(message = "O campo restaurante deve ser preenchido")
+    @NotEmpty(message = "Preencha o campo restaurante corretamente")
     private String restaurante;
 
     public RefeicaoCruzeiro() {
