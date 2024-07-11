@@ -3,9 +3,7 @@ package com.grupo11.hootel.controller;
 import com.grupo11.hootel.entity.Reserva;
 import com.grupo11.hootel.entity.ReservaSpaResort;
 import com.grupo11.hootel.entity.enums.ObjetivosSpaResort;
-import com.grupo11.hootel.entity.enums.PreferenciaAlimentarSpaResort;
-import com.grupo11.hootel.entity.enums.PreferenciaEventoSpaResort;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.ReservaService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -63,7 +61,7 @@ public class ReservaSpaResortController {
                 model.addAttribute("objetivos", ObjetivosSpaResort.values());
                 return "spa/preferencias";
             }
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "spa/login";
         } catch (Exception e) {
@@ -80,15 +78,13 @@ public class ReservaSpaResortController {
                                      Model model) {
 
         if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult.getAllErrors());
             return "spa/preferencias";
         }
 
         try {
             reservaService.updateReserva(aReserva);
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            System.out.println(e.getMessage());
             return "spa/preferencias";
         }
 

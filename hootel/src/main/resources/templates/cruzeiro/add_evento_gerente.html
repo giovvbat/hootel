@@ -36,6 +36,12 @@
             </label>
         </div>
 
+        <div>
+            <label th:each="item : ${turno}">
+                <input type="radio" th:field="*{turno}" th:value="${item}" th:text="${item.name()}" style="margin: 10px"/>
+            </label>
+        </div>
+
         <div class="input-group-append">
             <button type="submit" class="btn" id="botao-logar" style="color: mediumpurple">Adicionar Evento</button>
         </div>

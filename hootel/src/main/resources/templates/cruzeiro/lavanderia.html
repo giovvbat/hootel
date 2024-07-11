@@ -42,9 +42,6 @@
 
         <div class="collapse navbar-collapse" id="nav-principal">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a th:href="@{/cruzeiro/home}" class="nav-link">Serviço de Quarto</a>
-            </li>
 
             <li class="nav-item">
               <a th:href="@{/cruzeiro/eventos}" class="nav-link">Eventos</a>
@@ -83,7 +80,7 @@
       <div class="container align-self-center capa">
         <div class="row justify-content-center">
           <div class="col-md-10">
-            <h3>Serviço de lavanderia<i class="fa-solid fa-broom"></i></h3>
+            <h3>Serviço de lavanderia</h3>
             <p>Selecione o melhor horário para você, junto de suas preferências, e uma funcionária será designada para atender o pedido conforme foi solicitado!</p>
           </div>
 
@@ -108,7 +105,7 @@
 
                 <label>
                   <th:block th:each="servico : ${servicos}">
-                    <input style="margin: 10px" type="checkbox" th:field="*{especificacoes}"
+                    <input style="margin: 10px" type="radio" th:field="*{especificacoes}"
                            th:value="${servico}"
                            th:text="${servico}" />
                     <br/>

@@ -1,7 +1,7 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.*;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.*;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -34,14 +34,12 @@ public class EventoHotelController {
             model.addAttribute("eventos", eventos);
             model.addAttribute("reserva", new ReservaHotel());
             model.addAttribute("recomendacao", new ArrayList<Evento>());
-            System.out.println("entrou aqui 01");
 
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("eventos", new ArrayList<Evento>());
             model.addAttribute("recomendacao", new ArrayList<Evento>());
             model.addAttribute("reserva", new ReservaHotel());
-            System.out.println("entrou aqui 02");
         }
         return "hotel/eventos";
     }
@@ -54,7 +52,7 @@ public class EventoHotelController {
             ReservaHotel reserva = new ReservaHotel();
             model.addAttribute("evento_escolhido", evento);
             model.addAttribute("reserva", reserva);
-        } catch (HootelException e){
+        } catch (HoospedagemException e){
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("evento_escolhido", new EventoHotel());
             model.addAttribute("reserva", new ReservaHotel());
@@ -75,7 +73,7 @@ public class EventoHotelController {
 
         try {
             eventoService.adicionarParticipante(reserva.getPIN(), evento.getId());
-        }catch (HootelException e){
+        }catch (HoospedagemException e){
             model.addAttribute("errorMessage", e.getMessage());
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
@@ -98,7 +96,7 @@ public class EventoHotelController {
 
         try {
             eventoService.removerParticipante(reserva.getPIN(), evento.getId());
-        }catch (HootelException e){
+        }catch (HoospedagemException e){
             model.addAttribute("errorMessage", e.getMessage());
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
@@ -129,12 +127,12 @@ public class EventoHotelController {
             model.addAttribute("eventos", eventos);
 
             return "hotel/eventos";
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("recomendacao", new ArrayList<>());
             model.addAttribute("errorMessage", e.getMessage());
             try {
                 model.addAttribute("eventos", eventoService.lerTodosEventos(EventoHotel.class));
-            } catch (HootelException e2) {
+            } catch (HoospedagemException e2) {
                 model.addAttribute("eventos", new ArrayList<>());
             }
             return "hotel/eventos";

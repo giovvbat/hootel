@@ -3,7 +3,7 @@ package com.grupo11.hootel.controller;
 import com.grupo11.hootel.entity.RefeicaoSpaResort;
 import com.grupo11.hootel.entity.enums.ObjetivosSpaResort;
 import com.grupo11.hootel.entity.enums.PreferenciaAlimentarSpaResort;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.RefeicaoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +48,7 @@ public class GerenteRefeicaoSpaResortController {
 
         try {
             refeicaoService.addRefeicao(refeicao);
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
 
@@ -69,7 +69,7 @@ public class GerenteRefeicaoSpaResortController {
 
         try {
             refeicaoService.atualizarRefeicao(refeicao);
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
 

@@ -4,7 +4,7 @@ import com.grupo11.hootel.entity.Reserva;
 import com.grupo11.hootel.entity.ReservaHotel;
 import com.grupo11.hootel.entity.enums.PreferenciaAlimentarHotel;
 import com.grupo11.hootel.entity.enums.PreferenciaEventoHotel;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.ReservaService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -60,7 +60,7 @@ public class ReservaHotelController {
                 model.addAttribute("tiposPrefEvento", PreferenciaEventoHotel.values());
                 return "hotel/preferencias";
             }
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "hotel/login";
         } catch (Exception e) {
@@ -82,9 +82,8 @@ public class ReservaHotelController {
 
         try {
             reservaService.updateReserva(aReserva);
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            System.out.println(e.getMessage());
             return "hotel/preferencias";
         }
 

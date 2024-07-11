@@ -2,7 +2,7 @@ package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.RefeicaoCruzeiro;
 import com.grupo11.hootel.entity.enums.PreferenciaAlimentarCruzeiro;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.RefeicaoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class GerenteRefeicaoCruzeiroController {
 
         try {
             refeicaoService.addRefeicao(refeicao);
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
 
@@ -65,7 +65,7 @@ public class GerenteRefeicaoCruzeiroController {
 
         try {
             refeicaoService.atualizarRefeicao(refeicao);
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
 

@@ -4,7 +4,7 @@ import com.grupo11.hootel.entity.Evento;
 import com.grupo11.hootel.entity.EventoSpaResort;
 import com.grupo11.hootel.entity.enums.ObjetivosSpaResort;
 import com.grupo11.hootel.entity.enums.PreferenciaEventoSpaResort;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.EventoService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -35,7 +35,7 @@ public class GerenteEventosSpaResortController {
             model.addAttribute("categorias", PreferenciaEventoSpaResort.values());
             model.addAttribute("objetivos", ObjetivosSpaResort.values());
             return "spa/eventos_gerente";
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("eventos", new ArrayList<EventoSpaResort>());
             model.addAttribute("categorias", PreferenciaEventoSpaResort.values());
@@ -62,7 +62,7 @@ public class GerenteEventosSpaResortController {
 
         try {
             eventoService.criarEvento(evento);
-        }catch (HootelException e) {
+        }catch (HoospedagemException e) {
             model.addAttribute("errorMessageAdd", e.getMessage());
             return popularModel(model);
         }
@@ -84,7 +84,7 @@ public class GerenteEventosSpaResortController {
         try {
             Evento evento = eventoService.lerEventoId(id_evento);
             eventoService.deletarEvento(evento.getId());
-        }catch (HootelException e) {
+        }catch (HoospedagemException e) {
             model.addAttribute("errorMessageRemove", e.getMessage());
             model.addAttribute("evento", new EventoSpaResort());
             model.addAttribute("eventoAtualizar", new EventoSpaResort());
@@ -110,7 +110,7 @@ public class GerenteEventosSpaResortController {
 
         try {
             eventoService.atualizarEvento(evento);
-        }catch (HootelException e) {
+        }catch (HoospedagemException e) {
             model.addAttribute("errorMessageUpdate", e.getMessage());
             model.addAttribute("evento", new EventoSpaResort());
             return popularModel(model);

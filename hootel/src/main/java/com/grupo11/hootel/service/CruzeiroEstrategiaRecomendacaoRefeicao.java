@@ -19,7 +19,7 @@ public class CruzeiroEstrategiaRecomendacaoRefeicao implements EstrategiaRecomen
                     RefeicaoCruzeiro RefeicaoCruzeiro = (RefeicaoCruzeiro) refeicao;
 
                     for (PreferenciaAlimentarCruzeiro preferencia : reservaCruzeiro.getPreferenciasAlimentares()) {
-                        if (!RefeicaoCruzeiro.getCategorias().contains(preferencia)) {
+                        if (RefeicaoCruzeiro.getCategorias().contains(preferencia)) {
                             recomendados.add(refeicao);
                             break;
                         }

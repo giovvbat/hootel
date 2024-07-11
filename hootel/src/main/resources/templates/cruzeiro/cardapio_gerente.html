@@ -30,6 +30,10 @@
         <input type="text" th:field="*{conteudo}" placeholder="Conteúdo" class="form-control">
       </div>
 
+      <div class="input-group input-group-lg">
+        <input type="text" th:field="*{restaurante}" placeholder="Restaurante" class="form-control">
+      </div>
+
       <div>
         <label th:each="categoria : ${categorias}">
           <input type="checkbox" th:field="*{categorias}" th:value="${categoria}" th:text="${categoria.name()}" style="margin: 10px"/>

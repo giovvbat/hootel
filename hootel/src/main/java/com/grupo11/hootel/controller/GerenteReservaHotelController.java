@@ -2,7 +2,7 @@ package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Reserva;
 import com.grupo11.hootel.entity.ReservaHotel;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.ReservaService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class GerenteReservaHotelController {
     public List<Reserva> populateReservas(Model model) {
         try {
             return reservaService.lerTodasReservas(ReservaHotel.class);
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return new ArrayList<>();
         }
@@ -63,7 +63,7 @@ public class GerenteReservaHotelController {
 
         try {
             reservaService.deletarReserva(reserva);
-        }catch (HootelException e){
+        }catch (HoospedagemException e){
             model.addAttribute("errorMessage", e.getMessage());
             return "hotel/reservas_gerente";
         }

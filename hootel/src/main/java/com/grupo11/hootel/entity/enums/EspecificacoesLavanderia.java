@@ -1,5 +1,8 @@
 package com.grupo11.hootel.entity.enums;
 
 public enum EspecificacoesLavanderia {
-    NAO_SEI_O_QUE_POR
+    LAVAGEM_COMUM,
+    LAVAGEM_A_SECO,
+    LAVAR_E_ENGOMAR,
+    LAVAGEM_DELICADA
 }

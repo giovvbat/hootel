@@ -4,7 +4,7 @@ import com.grupo11.hootel.entity.Evento;
 import com.grupo11.hootel.entity.EventoSpaResort;
 import com.grupo11.hootel.entity.Reserva;
 import com.grupo11.hootel.entity.ReservaSpaResort;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.*;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -38,7 +38,7 @@ public class EventoSpaResortController {
             model.addAttribute("reserva", new ReservaSpaResort());
             model.addAttribute("recomendacao", new ArrayList<Evento>());
 
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("eventos", new ArrayList<Evento>());
             model.addAttribute("recomendacao", new ArrayList<Evento>());
@@ -55,7 +55,7 @@ public class EventoSpaResortController {
             ReservaSpaResort reserva = new ReservaSpaResort();
             model.addAttribute("evento_escolhido", evento);
             model.addAttribute("reserva", reserva);
-        } catch (HootelException e){
+        } catch (HoospedagemException e){
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("evento_escolhido", new EventoSpaResort());
             model.addAttribute("reserva", new ReservaSpaResort());
@@ -76,7 +76,7 @@ public class EventoSpaResortController {
 
         try {
             eventoService.adicionarParticipante(reserva.getPIN(), evento.getId());
-        }catch (HootelException e){
+        }catch (HoospedagemException e){
             model.addAttribute("errorMessage", e.getMessage());
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
@@ -99,7 +99,7 @@ public class EventoSpaResortController {
 
         try {
             eventoService.removerParticipante(reserva.getPIN(), evento.getId());
-        }catch (HootelException e){
+        }catch (HoospedagemException e){
             model.addAttribute("errorMessage", e.getMessage());
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
@@ -130,12 +130,12 @@ public class EventoSpaResortController {
             model.addAttribute("eventos", eventos);
 
             return "spa/eventos";
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("recomendacao", new ArrayList<>());
             model.addAttribute("errorMessage", e.getMessage());
             try {
                 model.addAttribute("eventos", eventoService.lerTodosEventos(EventoSpaResort.class));
-            } catch (HootelException e2) {
+            } catch (HoospedagemException e2) {
                 model.addAttribute("eventos", new ArrayList<>());
             }
             return "spa/eventos";

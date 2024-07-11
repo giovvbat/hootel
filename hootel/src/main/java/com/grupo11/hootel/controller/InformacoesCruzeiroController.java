@@ -1,7 +1,7 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.Informacoes;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.InformacoesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ public class InformacoesCruzeiroController {
         try {
             Informacoes informacoes = informacoesService.lerInformacoes();
             model.addAttribute("informacoes", informacoes);
-        }catch (HootelException e){
+        }catch (HoospedagemException e){
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("informacoes", new Informacoes());
             return "cruzeiro/info";

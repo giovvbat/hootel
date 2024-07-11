@@ -5,7 +5,7 @@ import com.grupo11.hootel.entity.ReservaCruzeiro;
 import com.grupo11.hootel.entity.enums.PreferenciaAlimentarCruzeiro;
 import com.grupo11.hootel.entity.enums.PreferenciaEventoCruzeiro;
 import com.grupo11.hootel.entity.enums.TurnoEventoCruzeiro;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.ReservaService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -64,7 +64,7 @@ public class ReservaCruzeiroController {
                 model.addAttribute("turnos", TurnoEventoCruzeiro.values());
                 return "cruzeiro/preferencias";
             }
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "cruzeiro/login";
         } catch (Exception e) {
@@ -86,7 +86,7 @@ public class ReservaCruzeiroController {
 
         try {
             reservaService.updateReserva(aReserva);
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "cruzeiro/preferencias";
         }

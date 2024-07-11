@@ -2,9 +2,8 @@ package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.AgendamentoServicoMedicoCruzeiro;
 import com.grupo11.hootel.entity.ReservaCruzeiro;
-import com.grupo11.hootel.entity.enums.EspecificacoesMedico;
 import com.grupo11.hootel.entity.enums.HorarioAgendamento;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.AgendamentoServicoService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -33,15 +32,18 @@ public class AgendamentoMedicoCruzeiroController {
         return agendamento;
     }
 
+    @ModelAttribute("horarios")
+    public HorarioAgendamento[] getHorariosAgendamento() {
+        return HorarioAgendamento.values();
+    }
+
     @GetMapping("/medico")
     public String mostrarCamareiras(Model model) {
-        model.addAttribute("horarios", HorarioAgendamento.values());
-        model.addAttribute("servicos", EspecificacoesMedico.values());
         return "cruzeiro/medico";
     }
 
     @PostMapping("/processarMedico")
-    public String processarCamareiras(@Valid @ModelAttribute("agendamentoLavanderia") AgendamentoServicoMedicoCruzeiro agendamentoCamareira,
+    public String processarCamareiras(@Valid @ModelAttribute("agendamentoMedico") AgendamentoServicoMedicoCruzeiro agendamentoCamareira,
                                       BindingResult bindingResult,
                                       Model model
 
@@ -52,9 +54,8 @@ public class AgendamentoMedicoCruzeiroController {
 
         try {
             agendamentoService.criarAgendamento(agendamentoCamareira);
-        } catch(HootelException e) {
+        } catch(HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            System.out.println(e.getMessage());
             return "cruzeiro/medico";
         }
 

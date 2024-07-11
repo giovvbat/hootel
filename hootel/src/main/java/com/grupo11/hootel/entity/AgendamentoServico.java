@@ -15,7 +15,7 @@ public abstract class AgendamentoServico {
     @Column(name = "id")
     private Integer id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "reserva")
     @Valid
     private Reserva reserva;

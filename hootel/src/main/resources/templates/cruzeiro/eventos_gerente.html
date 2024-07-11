@@ -66,6 +66,12 @@
             </label>
         </div>
 
+        <div>
+            <label th:each="item : ${turno}">
+                <input type="radio" th:field="*{turno}" th:value="${item}" th:text="${item.name()}" style="margin: 10px"/>
+            </label>
+        </div>
+
         <div class="input-group-append">
             <button type="submit" class="btn" id="botao-logar" style="color: mediumpurple">Adicionar Evento</button>
         </div>
@@ -93,6 +99,9 @@
         </div>
         <div th:if="${#fields.hasErrors('categorias')}">
             <span style="color: #cb2d51" th:errors="${evento.categorias}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('turno')}">
+            <span style="color: #cb2d51" th:errors="${evento.turno}"></span>
         </div>
 
     </form>

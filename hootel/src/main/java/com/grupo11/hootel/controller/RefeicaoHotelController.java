@@ -3,7 +3,7 @@ package com.grupo11.hootel.controller;
 import com.grupo11.hootel.entity.*;
 import com.grupo11.hootel.entity.RefeicaoHotel;
 import com.grupo11.hootel.entity.Refeicao;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.*;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -44,7 +44,7 @@ public class RefeicaoHotelController {
             }
 
             return refeicoesHotel;
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             return new ArrayList<>();
         }
     }
@@ -54,7 +54,7 @@ public class RefeicaoHotelController {
         try {
             model.addAttribute("reserva", new ReservaHotel());
             model.addAttribute("recomendacao", new ArrayList<>());
-        }catch (HootelException e){
+        }catch (HoospedagemException e){
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("reserva", new ReservaHotel());
             model.addAttribute("recomendacao", new ArrayList<>());
@@ -83,7 +83,7 @@ public class RefeicaoHotelController {
             }
 
             model.addAttribute("recomendacao", recomendacoes);
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
 

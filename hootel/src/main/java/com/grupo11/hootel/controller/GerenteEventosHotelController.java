@@ -3,7 +3,7 @@ package com.grupo11.hootel.controller;
 import com.grupo11.hootel.entity.Evento;
 import com.grupo11.hootel.entity.EventoHotel;
 import com.grupo11.hootel.entity.enums.PreferenciaEventoHotel;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.EventoService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -34,7 +34,7 @@ public class GerenteEventosHotelController {
             model.addAttribute("eventos", eventoHotels);
             model.addAttribute("categorias", PreferenciaEventoHotel.values());
             return "hotel/eventos_gerente";
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("eventos", new ArrayList<EventoHotel>());
             model.addAttribute("categorias", PreferenciaEventoHotel.values());
@@ -60,7 +60,7 @@ public class GerenteEventosHotelController {
 
         try {
             eventoService.criarEvento(evento);
-        }catch (HootelException e) {
+        }catch (HoospedagemException e) {
             model.addAttribute("errorMessageAdd", e.getMessage());
             return popularModel(model);
         }
@@ -82,7 +82,7 @@ public class GerenteEventosHotelController {
         try {
             Evento evento = eventoService.lerEventoId(id_evento);
             eventoService.deletarEvento(evento.getId());
-        }catch (HootelException e) {
+        }catch (HoospedagemException e) {
             model.addAttribute("errorMessageRemove", e.getMessage());
             model.addAttribute("evento", new EventoHotel());
             model.addAttribute("eventoAtualizar", new EventoHotel());
@@ -108,7 +108,7 @@ public class GerenteEventosHotelController {
 
         try {
             eventoService.atualizarEvento(evento);
-        }catch (HootelException e) {
+        }catch (HoospedagemException e) {
             model.addAttribute("errorMessageUpdate", e.getMessage());
             model.addAttribute("evento", new EventoHotel());
             return popularModel(model);

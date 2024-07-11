@@ -26,9 +26,9 @@ public class ReservaCruzeiro extends Reserva {
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = PreferenciaEventoCruzeiro.class)
-    @CollectionTable(name = "preferencias_alimentares_cruzeiro", joinColumns = @JoinColumn(name = "pin_reserva"))
+    @CollectionTable(name = "preferencias_eventos_cruzeiro", joinColumns = @JoinColumn(name = "pin_reserva"))
     @Column(name = "preferencia_evento", nullable = false)
-    @NotNull(message = "Selecione suas preferências de alimentação")
+    @NotNull(message = "Selecione suas preferências de evento")
     private List<PreferenciaEventoCruzeiro> preferenciasEventos;
 
     @Enumerated(EnumType.STRING)

@@ -4,7 +4,7 @@ import com.grupo11.hootel.entity.AgendamentoServicoLavanderiaCruzeiro;
 import com.grupo11.hootel.entity.ReservaCruzeiro;
 import com.grupo11.hootel.entity.enums.EspecificacoesLavanderia;
 import com.grupo11.hootel.entity.enums.HorarioAgendamento;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.AgendamentoServicoService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -33,10 +33,18 @@ public class AgendamentoLavanderiaCruzeiroController {
         return agendamento;
     }
 
+    @ModelAttribute("horarios")
+    public HorarioAgendamento[] getHorarioAgendamentos() {
+        return HorarioAgendamento.values();
+    }
+
+    @ModelAttribute("servicos")
+    public EspecificacoesLavanderia[] getEspecificacoesLavanderia() {
+        return EspecificacoesLavanderia.values();
+    }
+
     @GetMapping("/lavanderia")
     public String mostrarCamareiras(Model model) {
-        model.addAttribute("horarios", HorarioAgendamento.values());
-        model.addAttribute("servicos", EspecificacoesLavanderia.values());
         return "cruzeiro/lavanderia";
     }
 
@@ -52,9 +60,8 @@ public class AgendamentoLavanderiaCruzeiroController {
 
         try {
             agendamentoService.criarAgendamento(agendamentoCamareira);
-        } catch(HootelException e) {
+        } catch(HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            System.out.println(e.getMessage());
             return "cruzeiro/lavanderia";
         }
 

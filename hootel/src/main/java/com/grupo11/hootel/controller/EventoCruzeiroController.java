@@ -1,7 +1,7 @@
 package com.grupo11.hootel.controller;
 
 import com.grupo11.hootel.entity.*;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.*;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -35,7 +35,7 @@ public class EventoCruzeiroController {
             model.addAttribute("reserva", new ReservaCruzeiro());
             model.addAttribute("recomendacao", new ArrayList<Evento>());
 
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("eventos", new ArrayList<Evento>());
             model.addAttribute("recomendacao", new ArrayList<Evento>());
@@ -52,7 +52,7 @@ public class EventoCruzeiroController {
             ReservaCruzeiro reserva = new ReservaCruzeiro();
             model.addAttribute("evento_escolhido", evento);
             model.addAttribute("reserva", reserva);
-        } catch (HootelException e){
+        } catch (HoospedagemException e){
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("evento_escolhido", new EventoCruzeiro());
             model.addAttribute("reserva", new ReservaCruzeiro());
@@ -73,7 +73,7 @@ public class EventoCruzeiroController {
 
         try {
             eventoService.adicionarParticipante(reserva.getPIN(), evento.getId());
-        }catch (HootelException e){
+        }catch (HoospedagemException e){
             model.addAttribute("errorMessage", e.getMessage());
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
@@ -96,7 +96,7 @@ public class EventoCruzeiroController {
 
         try {
             eventoService.removerParticipante(reserva.getPIN(), evento.getId());
-        }catch (HootelException e){
+        }catch (HoospedagemException e){
             model.addAttribute("errorMessage", e.getMessage());
             Evento eventoAtual = eventoService.lerEventoId(evento.getId());
             model.addAttribute("evento_escolhido", eventoAtual);
@@ -127,12 +127,12 @@ public class EventoCruzeiroController {
             model.addAttribute("eventos", eventos);
 
             return "cruzeiro/eventos";
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("recomendacao", new ArrayList<>());
             model.addAttribute("errorMessage", e.getMessage());
             try {
                 model.addAttribute("eventos", eventoService.lerTodosEventos(EventoCruzeiro.class));
-            } catch (HootelException e2) {
+            } catch (HoospedagemException e2) {
                 model.addAttribute("eventos", new ArrayList<>());
             }
             return "cruzeiro/eventos";

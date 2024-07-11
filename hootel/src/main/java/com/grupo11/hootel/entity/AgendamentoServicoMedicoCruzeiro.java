@@ -1,52 +1,43 @@
 package com.grupo11.hootel.entity;
 
-import com.grupo11.hootel.entity.enums.EspecificacoesLavanderia;
-import com.grupo11.hootel.entity.enums.EspecificacoesMedico;
 import com.grupo11.hootel.entity.enums.HorarioAgendamento;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "AgendamentoServicoMedicoCruzeiro")
 public class AgendamentoServicoMedicoCruzeiro extends AgendamentoServico {
 
-    @Enumerated(EnumType.STRING)
-    @ElementCollection(targetClass = EspecificacoesMedico.class)
-    @CollectionTable(name = "especificacoes_medico", joinColumns = @JoinColumn(name = "agendamento_medico"))
-    @Column(name = "especificacao", nullable = false)
-    @NotNull
-    private List<EspecificacoesMedico> especificacoes;
+    @Column(name = "sintomas")
+    @NotNull(message = "Informe os sintomas")
+    private String sintomas;
 
     public AgendamentoServicoMedicoCruzeiro() {
         super();
-        this.especificacoes = new ArrayList<>();
     }
 
-    public AgendamentoServicoMedicoCruzeiro(Integer id, Reserva reserva, HorarioAgendamento horario, List<EspecificacoesMedico> especificacoes) {
+    public AgendamentoServicoMedicoCruzeiro(Integer id, Reserva reserva, HorarioAgendamento horario, String sintomas) {
         super(id, reserva, horario);
-        this.especificacoes = especificacoes;
+        this.sintomas = sintomas;
     }
 
-    public List<EspecificacoesMedico> getEspecificacoes() {
-        return especificacoes;
+    public String getSintomas() {
+        return sintomas;
     }
 
-    public void setEspecificacoes(List<EspecificacoesMedico> especificacoes) {
-        this.especificacoes = especificacoes;
+    public void setSintomas(String sintomas) {
+        this.sintomas = sintomas;
     }
 
     @Override
     protected boolean validarEspecifico() {
-        return !especificacoes.isEmpty();
+        return !sintomas.isEmpty();
     }
 
     @Override
     public String toString() {
-        return "AgendamentoServicoLavanderiaCruzeiro{" +
-                "especificacoes=" + especificacoes +
+        return "AgendamentoServicoMedicoCruzeiro{" +
+                "sintomas='" + sintomas + '\'' +
                 '}';
     }
 }

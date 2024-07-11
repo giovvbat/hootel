@@ -18,7 +18,6 @@ public class EventoCruzeiro extends Evento {
     @Enumerated(EnumType.STRING)
     @Column(name = "turno", nullable = false)
     @NotNull(message = "Todos os campos devem ser preenchidos")
-    @NotEmpty(message = "Todos os campos devem ser preenchidos")
     private TurnoEventoCruzeiro turno;
 
     @NotNull(message = "Todos os campos devem ser preenchidos")

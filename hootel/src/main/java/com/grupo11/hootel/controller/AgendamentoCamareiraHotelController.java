@@ -4,7 +4,7 @@ import com.grupo11.hootel.entity.AgendamentoServicoCamareiraHotel;
 import com.grupo11.hootel.entity.ReservaHotel;
 import com.grupo11.hootel.entity.enums.EspecificacoesCamareira;
 import com.grupo11.hootel.entity.enums.HorarioAgendamento;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.AgendamentoServicoService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -33,10 +33,18 @@ public class AgendamentoCamareiraHotelController {
         return agendamento;
     }
 
+    @ModelAttribute("horarios")
+    public HorarioAgendamento[] getHorariosAgendamento() {
+        return HorarioAgendamento.values();
+    }
+
+    @ModelAttribute("servicos")
+    public EspecificacoesCamareira[] getEspecificacoes() {
+        return EspecificacoesCamareira.values();
+    }
+
     @GetMapping("/camareiras")
     public String mostrarCamareiras(Model model) {
-        model.addAttribute("horarios", HorarioAgendamento.values());
-        model.addAttribute("servicos", EspecificacoesCamareira.values());
         return "hotel/camareiras";
     }
 
@@ -47,15 +55,13 @@ public class AgendamentoCamareiraHotelController {
 
     ) {
         if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult.getAllErrors());
             return "hotel/camareiras";
         }
 
         try {
             agendamentoService.criarAgendamento(agendamentoCamareira);
-        } catch(HootelException e) {
+        } catch(HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            System.out.println(e.getMessage());
             return "hotel/camareiras";
         }
 

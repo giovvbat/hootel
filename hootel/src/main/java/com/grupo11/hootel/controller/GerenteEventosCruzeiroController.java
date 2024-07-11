@@ -3,7 +3,8 @@ package com.grupo11.hootel.controller;
 import com.grupo11.hootel.entity.Evento;
 import com.grupo11.hootel.entity.EventoCruzeiro;
 import com.grupo11.hootel.entity.enums.PreferenciaEventoCruzeiro;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.entity.enums.TurnoEventoCruzeiro;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.EventoService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -32,11 +33,13 @@ public class GerenteEventosCruzeiroController {
             }
             model.addAttribute("eventos", eventosCruzeiro);
             model.addAttribute("categorias", PreferenciaEventoCruzeiro.values());
+            model.addAttribute("turno", TurnoEventoCruzeiro.values());
             return "cruzeiro/eventos_gerente";
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("eventos", new ArrayList<EventoCruzeiro>());
             model.addAttribute("categorias", PreferenciaEventoCruzeiro.values());
+            model.addAttribute("turno", TurnoEventoCruzeiro.values());
             return "cruzeiro/add_evento_gerente";
         }
     }
@@ -59,7 +62,7 @@ public class GerenteEventosCruzeiroController {
 
         try {
             eventoService.criarEvento(evento);
-        }catch (HootelException e) {
+        }catch (HoospedagemException e) {
             model.addAttribute("errorMessageAdd", e.getMessage());
             return popularModel(model);
         }
@@ -81,7 +84,7 @@ public class GerenteEventosCruzeiroController {
         try {
             Evento evento = eventoService.lerEventoId(id_evento);
             eventoService.deletarEvento(evento.getId());
-        }catch (HootelException e) {
+        }catch (HoospedagemException e) {
             model.addAttribute("errorMessageRemove", e.getMessage());
             model.addAttribute("evento", new EventoCruzeiro());
             model.addAttribute("eventoAtualizar", new EventoCruzeiro());
@@ -107,7 +110,7 @@ public class GerenteEventosCruzeiroController {
 
         try {
             eventoService.atualizarEvento(evento);
-        }catch (HootelException e) {
+        }catch (HoospedagemException e) {
             model.addAttribute("errorMessageUpdate", e.getMessage());
             model.addAttribute("evento", new EventoCruzeiro());
             return popularModel(model);

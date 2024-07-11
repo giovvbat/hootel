@@ -4,7 +4,7 @@ import com.grupo11.hootel.entity.AgendamentoServicoRelaxamentoSpaResort;
 import com.grupo11.hootel.entity.ReservaSpaResort;
 import com.grupo11.hootel.entity.enums.EspecificacoesRelaxamento;
 import com.grupo11.hootel.entity.enums.HorarioAgendamento;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.AgendamentoServicoService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -33,10 +33,18 @@ public class AgendamentoRelaxamentoSpaResortController {
         return agendamento;
     }
 
+    @ModelAttribute("horarios")
+    public HorarioAgendamento[] getHorariosAgendamento() {
+        return HorarioAgendamento.values();
+    }
+
+    @ModelAttribute("servicos")
+    public EspecificacoesRelaxamento[] getEspecificacoes() {
+        return EspecificacoesRelaxamento.values();
+    }
+
     @GetMapping("/relaxamento")
     public String mostrarRelaxamento(Model model) {
-        model.addAttribute("horarios", HorarioAgendamento.values());
-        model.addAttribute("servicos", EspecificacoesRelaxamento.values());
         return "spa/relaxamento";
     }
 
@@ -47,15 +55,13 @@ public class AgendamentoRelaxamentoSpaResortController {
 
     ) {
         if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult.getAllErrors());
             return "spa/relaxamento";
         }
 
         try {
             agendamentoService.criarAgendamento(agendamentoRelaxamento);
-        } catch(HootelException e) {
+        } catch(HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            System.out.println(e.getMessage());
             return "spa/relaxamento";
         }
 

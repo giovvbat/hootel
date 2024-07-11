@@ -42,10 +42,6 @@ public class AgendamentoServicoServiceImpl implements AgendamentoServicoService 
     public void criarAgendamento(AgendamentoServico agendamento) {
         Reserva reserva = reservaService.lerReservaPin(agendamento.getReserva().getPIN());
 
-        if (!agendamentoRepository.findAllByReserva(reserva).isEmpty()) {
-            throw new ServicoSolicitadoException();
-        }
-
         if (!agendamento.validar()) {
             throw new AgendamentoInvalidoException();
         }

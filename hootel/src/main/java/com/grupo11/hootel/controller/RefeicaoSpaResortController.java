@@ -4,7 +4,7 @@ import com.grupo11.hootel.entity.Refeicao;
 import com.grupo11.hootel.entity.RefeicaoSpaResort;
 import com.grupo11.hootel.entity.Reserva;
 import com.grupo11.hootel.entity.ReservaSpaResort;
-import com.grupo11.hootel.exceptions.HootelException;
+import com.grupo11.hootel.exceptions.HoospedagemException;
 import com.grupo11.hootel.service.*;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -45,7 +45,7 @@ public class RefeicaoSpaResortController {
             }
 
             return refeicoesSpaResort;
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             return new ArrayList<>();
         }
     }
@@ -55,7 +55,7 @@ public class RefeicaoSpaResortController {
         try {
             model.addAttribute("reserva", new ReservaSpaResort());
             model.addAttribute("recomendacao", new ArrayList<>());
-        }catch (HootelException e){
+        }catch (HoospedagemException e){
             model.addAttribute("errorMessage", e.getMessage());
             model.addAttribute("reserva", new ReservaSpaResort());
             model.addAttribute("recomendacao", new ArrayList<>());
@@ -84,7 +84,7 @@ public class RefeicaoSpaResortController {
             }
 
             model.addAttribute("recomendacao", recomendacoes);
-        } catch (HootelException e) {
+        } catch (HoospedagemException e) {
             model.addAttribute("errorMessage", e.getMessage());
         }
 

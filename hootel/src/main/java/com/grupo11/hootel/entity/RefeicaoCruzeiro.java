@@ -20,7 +20,7 @@ public class RefeicaoCruzeiro extends Refeicao {
     @NotNull(message = "Todos os campos devem ser preenchidos")
     private List<PreferenciaAlimentarCruzeiro> categorias;
 
-    @Column(name = "conteudo")
+    @Column(name = "restaurante")
     @NotNull(message = "Todos os campos devem ser preenchidos")
     @NotEmpty(message = "Todos os campos devem ser preenchidos")
     private String restaurante;
