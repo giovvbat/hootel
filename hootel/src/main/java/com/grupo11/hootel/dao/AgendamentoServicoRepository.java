@@ -8,6 +8,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface AgendamentoServicoRepository extends JpaRepository<AgendamentoServico, Integer> {
-    public List<AgendamentoServico> findAllByReserva(Reserva reserva);
-    public List<AgendamentoServico> findAllByHorario(HorarioAgendamento horario);
 }

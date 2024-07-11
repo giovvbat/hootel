@@ -28,7 +28,7 @@ public class EventoServiceImpl implements EventoService {
     @Transactional
     public void atualizarEvento(Evento evento) {
         if (!evento.validar()) {
-            throw new EventoInvalidoException();
+            throw new EventoIncompletoException();
         }
         Optional<Evento> optionalEvento = eventoRepository.findById(evento.getId());
         if(optionalEvento.isEmpty()) {
