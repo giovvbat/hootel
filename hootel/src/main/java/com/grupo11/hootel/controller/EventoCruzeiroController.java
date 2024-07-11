@@ -128,8 +128,13 @@ public class EventoCruzeiroController {
 
             return "cruzeiro/eventos";
         } catch (HootelException e) {
+            model.addAttribute("recomendacao", new ArrayList<>());
             model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("eventos", eventoService.lerTodosEventos(EventoCruzeiro.class));
+            try {
+                model.addAttribute("eventos", eventoService.lerTodosEventos(EventoCruzeiro.class));
+            } catch (HootelException e2) {
+                model.addAttribute("eventos", new ArrayList<>());
+            }
             return "cruzeiro/eventos";
         }
     }

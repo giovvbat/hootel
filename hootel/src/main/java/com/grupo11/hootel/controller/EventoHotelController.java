@@ -130,8 +130,13 @@ public class EventoHotelController {
 
             return "hotel/eventos";
         } catch (HootelException e) {
+            model.addAttribute("recomendacao", new ArrayList<>());
             model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("eventos", eventoService.lerTodosEventos(EventoHotel.class));
+            try {
+                model.addAttribute("eventos", eventoService.lerTodosEventos(EventoHotel.class));
+            } catch (HootelException e2) {
+                model.addAttribute("eventos", new ArrayList<>());
+            }
             return "hotel/eventos";
         }
     }

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
     <!-- Estilo customizado -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/spa_style_relaxamento.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cruzeiro_style_medico.css}">
 </head>
 <body>
 
@@ -27,16 +27,37 @@
                 <p>Preencha as seguintes informações para uma melhor experiência!</p>
             </div>
 
-            <form th:action="@{/spa/reserva/preferencias}" th:object="${reserva}" method="post" class="col-md-10">
+            <form th:action="@{/cruzeiro/reserva/preferencias}" th:object="${reserva}" method="post" class="col-md-10">
                 <input type="hidden" th:field="*{PIN}">
 
                 <fieldset class="form-group">
                     <legend>Preferências alimentares:</legend>
-                    <div th:each="tipo : ${objetivos}" class="form-check">
-                        <input type="checkbox" th:field="*{objetivos}" th:value="${tipo}" th:id="${tipo}" class="form-check-input" />
+                    <div th:each="tipo : ${tiposPrefAlimentar}" class="form-check">
+                        <input type="checkbox" th:field="*{preferenciasAlimentares}" th:value="${tipo}" th:id="${tipo}" class="form-check-input" />
                         <label th:for="${tipo}" th:text="${tipo}" class="form-check-label"></label>
                     </div>
                 </fieldset>
+
+                <fieldset class="form-group">
+                    <legend>Preferências de evento:</legend>
+                    <div th:each="tipo : ${tiposPrefEvento}" class="form-check">
+                        <input type="checkbox" th:field="*{preferenciasEventos}" th:value="${tipo}" th:id="${tipo}" class="form-check-input" />
+                        <label th:for="${tipo}" th:text="${tipo}" class="form-check-label"></label>
+                    </div>
+                </fieldset>
+
+                <fieldset class="form-group">
+                    <legend>Turno preferido:</legend>
+                    <div th:each="tipo : ${turnos}" class="form-check">
+                        <input type="radio" th:field="*{turnoPreferido}" th:value="${tipo}" th:id="${tipo}" class="form-check-input" />
+                        <label th:for="${tipo}" th:text="${tipo}" class="form-check-label"></label>
+                    </div>
+                </fieldset>
+
+                <div class="form-group">
+                    <label for="idade">Idade:</label>
+                    <input type="number" th:field="*{idade}" min="0" class="form-control" id="idade">
+                </div>
 
                 <button type="submit" class="btn btn-primary">Salvar</button>
             </form>
@@ -48,7 +69,7 @@
     <div class="container">
         <div class="row d-flex">
             <div class="col-md-2 brand align-self-center">
-                <p>Spa Resort</p>
+                <p>cruzeiro</p>
             </div>
             <div class="col-md-2">
                 <h4>Company</h4>

@@ -50,11 +50,11 @@ public class RefeicaoCruzeiroController {
     @GetMapping("/refeicao")
     public String getrefeicao(Model model) {
         try {
-            model.addAttribute("reserva", new RefeicaoCruzeiro());
+            model.addAttribute("reserva", new ReservaCruzeiro());
             model.addAttribute("recomendacao", new ArrayList<>());
         }catch (HootelException e){
             model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("reserva", new RefeicaoCruzeiro());
+            model.addAttribute("reserva", new ReservaCruzeiro());
             model.addAttribute("recomendacao", new ArrayList<>());
         }
         return "cruzeiro/refeicao";

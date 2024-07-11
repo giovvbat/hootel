@@ -40,7 +40,7 @@ public class AgendamentoMedicoCruzeiroController {
         return "cruzeiro/medico";
     }
 
-    @PostMapping("/processarLavanderia")
+    @PostMapping("/processarMedico")
     public String processarCamareiras(@Valid @ModelAttribute("agendamentoLavanderia") AgendamentoServicoMedicoCruzeiro agendamentoCamareira,
                                       BindingResult bindingResult,
                                       Model model

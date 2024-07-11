@@ -4,6 +4,7 @@ import com.grupo11.hootel.entity.Reserva;
 import com.grupo11.hootel.entity.ReservaCruzeiro;
 import com.grupo11.hootel.entity.enums.PreferenciaAlimentarCruzeiro;
 import com.grupo11.hootel.entity.enums.PreferenciaEventoCruzeiro;
+import com.grupo11.hootel.entity.enums.TurnoEventoCruzeiro;
 import com.grupo11.hootel.exceptions.HootelException;
 import com.grupo11.hootel.service.ReservaService;
 import jakarta.validation.Valid;
@@ -60,10 +61,14 @@ public class ReservaCruzeiroController {
                 model.addAttribute("reserva", reserva);
                 model.addAttribute("tiposPrefAlimentar", PreferenciaAlimentarCruzeiro.values());
                 model.addAttribute("tiposPrefEvento", PreferenciaEventoCruzeiro.values());
+                model.addAttribute("turnos", TurnoEventoCruzeiro.values());
                 return "cruzeiro/preferencias";
             }
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
+            return "cruzeiro/login";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "PIN inválido");
             return "cruzeiro/login";
         }
 

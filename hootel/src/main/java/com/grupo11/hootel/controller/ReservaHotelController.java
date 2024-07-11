@@ -63,6 +63,9 @@ public class ReservaHotelController {
         } catch (HootelException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "hotel/login";
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "PIN inválido");
+            return "spa/login";
         }
 
         return "hotel/home";

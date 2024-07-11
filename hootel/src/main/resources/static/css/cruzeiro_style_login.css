@@ -1,0 +1,194 @@
+body {
+	background: linear-gradient(50deg, #1d1852, #003366);
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+nav.navbar-transparente {
+	padding: 15px 0px;
+	background: rgba(255, 255, 255, 0.9);
+}
+
+.navbar-light .navbar-nav .nav-link {
+	color: #003366;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+	color: #002244;
+}
+
+.navbar-light .navbar-toggler {
+	color: #003366;
+	border-color: #003366;
+}
+
+.divisor {
+	width: 1px;
+	background: #003366;
+	margin: 10px 21px 10px 12px;
+}
+
+#btn-navbar {
+	background: #003366;
+	color: white;
+}
+
+#btn-navbar:hover {
+	transition: background 0.3s, color 0.4s;
+	background: #002244;
+}
+
+html, body, #home, #formulario {
+	height: 100%;
+	overflow-x: hidden;
+}
+
+.capa, #home, #formulario {
+	text-align: left;
+}
+
+.btn-custom {
+	color: white;
+	border-radius: 500px;
+	-webkit-border-radius: 500px;
+	-moz-border-radius: 500px;
+	text-transform: uppercase;
+	transition: background 0.4s, color 0.4s;
+	padding: 10px 20px;
+	margin-left: 5px;
+}
+
+.btn-roxo {
+	background: #003366;
+}
+
+.btn-roxo:hover {
+	background: #002244;
+	color: white;
+}
+
+@font-face {
+	font-family: Super Sunday;
+	src: url('../fonts/KGRedHands.ttf')
+}
+
+.brand p {
+	color: #003366;
+	font-size: 2.5em;
+	margin: 0px;
+	padding: 0px;
+	font-family: Super Sunday, sans-serif;
+}
+
+h2 {
+	font-weight: 900;
+	letter-spacing: -0.05em;
+	margin-top: 10px;
+	color: white;
+}
+
+h3 {
+	font-weight: 600;
+	letter-spacing: -0.05em;
+	margin-top: 10px;
+	color: white;
+}
+
+@media (max-width: 575.98px) {
+	.btn-custom {
+		margin: 10px 15px;
+		font-size: 1em;
+	}
+	h3 {
+		font-size: 1em;
+	}
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+	h2 {
+		font-size: 3em;
+	}
+	h3 {
+		font-size: 2em;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+	h2 {
+		font-size: 3em;
+	}
+	h3 {
+		font-size: 2em;
+	}
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+	h2 {
+		font-size: 4em;
+	}
+	h3 {
+		font-size: 3em;
+	}
+}
+
+@media (min-width: 1200px) {
+	h2 {
+		font-size: 5em;
+	}
+	h3 {
+		font-size: 3em;
+	}
+}
+
+footer {
+	background: rgba(255, 255, 255, 1.0);
+	padding: 20px 0px 20px 0;
+	position: relative;
+}
+
+footer h4 {
+	color: #919496;
+	font-size: 0.8em;
+	text-transform: uppercase;
+}
+
+footer .navbar-nav a {
+	color: #003366;
+	font-size: 0.8em;
+}
+
+#redes a {
+	color: #003366;
+	font-size: 0.8em;
+	margin: 5px;
+}
+
+footer .navbar-nav a:hover {
+	color: #002244;
+	text-decoration: none;
+}
+
+#redes a:hover {
+	color: #002244;
+	font-size: 0.8em;
+}
+
+footer ul {
+	list-style: none;
+}
+
+footer ul li {
+	float: right;
+	margin: 0 5px;
+}
+
+.capa {
+	text-align: left;
+}
+
+#botao-logar {
+	background: #1d1852;
+}
+
+#botao-logar:hover {
+	background: #001122;
+}

@@ -10,7 +10,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/spa_style_login.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cruzeiro_style_login.css}">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
@@ -22,37 +22,56 @@
 
   <body>
 
-    <header>
-      <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
-        <div class="container">
+  <header>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
+      <div class="container">
 
-          <a th:href="@{/spa/index}" class="navbar-brand brand">
-            <p>Spa Resort</p>
-          </a> 
+        <a th:href="@{/cruzeiro/home}" class="navbar-brand brand">
+          <p>cruzeiro</p>
+        </a>
 
-          <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
-            <i class="fa-solid fa-bars"></i>
-          </button>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
+          <i class="fa-solid fa-bars"></i>
+        </button>
 
-          <div class="collapse navbar-collapse" id="nav-principal">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a href="" class="nav-link">Sobre</a>
-              </li>
+        <div class="collapse navbar-collapse" id="nav-principal">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a th:href="@{/cruzeiro/home}" class="nav-link">Serviço de Quarto</a>
+            </li>
 
-              <li class="nav-item">
-                <a href="" class="nav-link">Contato</a>
-              </li>
+            <li class="nav-item">
+              <a th:href="@{/cruzeiro/eventos}" class="nav-link">Eventos</a>
+            </li>
 
-              <li class="nav-item">
-                <a href="" class="nav-link">Ajuda</a>
-              </li>
-            </ul>
-          </div>
+            <li class="nav-item">
+              <a th:href="@{/cruzeiro/refeicao}" class="nav-link">Cardápio</a>
+            </li>
 
+            <li class="nav-item">
+              <a th:href="@{/cruzeiro/medico}" class="nav-link">Médico</a>
+            </li>
+
+            <li class="nav-item">
+              <a th:href="@{/cruzeiro/lavanderia}" class="nav-link">Lavanderia</a>
+            </li>
+
+            <li class="nav-item">
+              <a th:href="@{/cruzeiro/informacoes}" class="nav-link">Mais informações</a>
+            </li>
+
+            <li class="nav-item divisor"></li>
+
+            <li class="nav-item">
+              <a th:href="@{/cruzeiro/avaliacao/formulario}" class="nav-link btn" id="btn-navbar">Sair</a>
+            </li>
+
+          </ul>
         </div>
-      </nav>
-    </header>
+
+      </div>
+    </nav>
+  </header>
 
     <section id="home" class="d-flex">
       <div class="container align-self-center align-items-center mt-5">
@@ -65,7 +84,7 @@
               <p style="color: white;">Já fez o check-in? Beleza! <br> 
               Certifique o recebimento do seu PIN e tenha ele em mãos. Te ajudaremos com tudo!</p>
 
-              <form action="#" th:action="@{/spa/reserva/checar}" th:object="${reserva}" method="POST">
+              <form action="#" th:action="@{/cruzeiro/reserva/checar}" th:object="${reserva}" method="POST">
 
                 <div class="input-group input-group-lg">
                   <input type="text" th:field="*{PIN}" placeholder="Digite seu PIN" class="form-control">
@@ -100,7 +119,7 @@
       <div class="container">
         <div class="row d-flex">
           <div class="col-md-2 brand align-self-center">
-            <p>Spa Resort</p>
+            <p>cruzeiro</p>
           </div>
 
           <div class="col-md-2">

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <title>refeicao</title>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h3>Cardapio</h3>
+  <hr>
+
+  <span th:text="${refeicao.id}"></span>
+  <span th:text="${refeicao.conteudo}"></span>
+
+
+  <form action="#" th:action="@{/cruzeiro/adicionarCardapio}" th:object="${refeicao}" method="POST">
+
+    <div class="input-group input-group-lg">
+      <div class="input-group input-group-lg">
+        <input type="text" th:field="*{conteudo}" placeholder="Conteúdo" class="form-control">
+      </div>
+
+      <div>
+        <label th:each="categoria : ${categorias}">
+          <input type="checkbox" th:field="*{categorias}" th:value="${categoria}" th:text="${categoria.name()}" style="margin: 10px"/>
+        </label>
+      </div>
+
+      <div class="input-group-append">
+        <button type="submit" class="btn" id="botao-logar" style="color: mediumpurple">Adicionar Alimentação</button>
+      </div>
+
+      <div th:if="${errorMessage}">
+        <span style="color: #cb2d51" th:text="${errorMessage}">Error</span>
+      </div>
+      <div th:if="${#fields.hasErrors('conteudo')}">
+        <span style="color: #cb2d51" th:errors="${refeicao.conteudo}"></span>
+      </div>
+      <div th:if="${#fields.hasErrors('categorias')}">
+        <span style="color: #cb2d51" th:errors="${refeicao.categorias}"></span>
+      </div>
+
+    </div>
+
+  </form>
+
+</div>
+
+</body>
+</html>

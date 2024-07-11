@@ -21,22 +21,20 @@ public class ReservaCruzeiro extends Reserva {
     private Integer idade;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "turno", nullable = false)
-    @NotNull(message = "Todos os campos devem ser preenchidos")
-    @NotEmpty(message = "Todos os campos devem ser preenchidos")
+    @Column(name = "turno")
     private TurnoEventoCruzeiro turnoPreferido;
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = PreferenciaEventoCruzeiro.class)
     @CollectionTable(name = "preferencias_alimentares_cruzeiro", joinColumns = @JoinColumn(name = "pin_reserva"))
-    @Column(name = "preferencia_refeicao", nullable = false)
+    @Column(name = "preferencia_evento", nullable = false)
     @NotNull(message = "Selecione suas preferências de alimentação")
     private List<PreferenciaEventoCruzeiro> preferenciasEventos;
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = PreferenciaAlimentarCruzeiro.class)
     @CollectionTable(name = "preferencias_alimentares_cruzeiro", joinColumns = @JoinColumn(name = "pin_reserva"))
-    @Column(name = "preferencia_refeicao", nullable = false)
+    @Column(name = "preferencia_alimentar", nullable = false)
     @NotNull(message = "Selecione suas preferências de alimentação")
     private List<PreferenciaAlimentarCruzeiro> preferenciasAlimentares;
 

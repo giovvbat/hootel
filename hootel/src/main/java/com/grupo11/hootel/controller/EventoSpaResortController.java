@@ -131,8 +131,13 @@ public class EventoSpaResortController {
 
             return "spa/eventos";
         } catch (HootelException e) {
+            model.addAttribute("recomendacao", new ArrayList<>());
             model.addAttribute("errorMessage", e.getMessage());
-            model.addAttribute("eventos", eventoService.lerTodosEventos(EventoSpaResort.class));
+            try {
+                model.addAttribute("eventos", eventoService.lerTodosEventos(EventoSpaResort.class));
+            } catch (HootelException e2) {
+                model.addAttribute("eventos", new ArrayList<>());
+            }
             return "spa/eventos";
         }
     }

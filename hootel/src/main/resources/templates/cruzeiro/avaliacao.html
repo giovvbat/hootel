@@ -18,95 +18,103 @@
     <![endif]-->
 
     <!-- Estilo customizado -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/spa_style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/cruzeiro_style_avaliacao.css}">
 
-    <title>Spa Resort</title>
+    <!-- FontAwesome -->
+    <script src="https://kit.fontawesome.com/af46ebb8cd.js" crossorigin="anonymous"></script>
+
+    <title>avaliação</title>
     <link rel="icon" href="imagens/favicon.png">
 
   </head>
   <body>
-    <header>
-      <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
-        <div class="container">
+  <header>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-transparente">
+      <div class="container">
 
-          <a th:href="@{/spa/index}" class="navbar-brand brand">
-            <p>Spa Resort</p>
-          </a> 
+        <a th:href="@{/cruzeiro/home}" class="navbar-brand brand">
+          <p>cruzeiro</p>
+        </a>
 
-          <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
-            <i class="fa-solid fa-bars"></i>
-          </button>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
+          <i class="fa-solid fa-bars"></i>
+        </button>
 
-          <div class="collapse navbar-collapse" id="nav-principal">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a href="" class="nav-link">Sobre</a>
-              </li>
+        <div class="collapse navbar-collapse" id="nav-principal">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a th:href="@{/cruzeiro/home}" class="nav-link">Serviço de Quarto</a>
+            </li>
 
-              <li class="nav-item">
-                <a href="" class="nav-link">Contato</a>
-              </li>
+            <li class="nav-item">
+              <a th:href="@{/cruzeiro/eventos}" class="nav-link">Eventos</a>
+            </li>
 
-              <li class="nav-item">
-                <a href="" class="nav-link">Ajuda</a>
-              </li>
+            <li class="nav-item">
+              <a th:href="@{/cruzeiro/refeicao}" class="nav-link">Cardápio</a>
+            </li>
 
-              <li class="nav-item divisor"></li>
+            <li class="nav-item">
+              <a th:href="@{/cruzeiro/medico}" class="nav-link">Médico</a>
+            </li>
 
-              <li class="nav-item">
-                 <a th:href="@{reserva/formulario}" class="nav-link btn" id="btn-navbar">Entrar</a>
-              </li>
-            </ul>
-          </div>
+            <li class="nav-item">
+              <a th:href="@{/cruzeiro/lavanderia}" class="nav-link">Lavanderia</a>
+            </li>
 
+            <li class="nav-item">
+              <a th:href="@{/cruzeiro/informacoes}" class="nav-link">Mais informações</a>
+            </li>
+
+            <li class="nav-item divisor"></li>
+
+            <li class="nav-item">
+              <a th:href="@{/cruzeiro/avaliacao/formulario}" class="nav-link btn" id="btn-navbar">Sair</a>
+            </li>
+
+          </ul>
         </div>
-      </nav>
-    </header>
 
-    <section id="home" class="d-flex">
-      <div class="container align-self-center">
-        <div class="row">
-          <div class="col-md-12 mt-4 capa">
+      </div>
+    </nav>
+  </header>
+
+    <section id="formulario" class="d-flex">
+      <div class="container align-self-center capa">
+        <div class="row justify-content-center">
+          <div class="col-md-10">
+            <h1>Poxa, você já vai? <i class="fa-regular fa-face-frown"></i></h1>
             
-            <div id="carousel-spotify" class="carousel slide" data-ride="carousel">
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <h1>Olá, somos a Spa Resort!</h1>
 
-                  <a href="" class="btn btn-lg btn-custom btn-roxo">
-                    Nossos hotéis
-                    <ion-icon name="bed"></ion-icon>
-                  </a>
+            <span>Esperamos que sua estadia tenha sido proveitosa! Que tal avaliar nossos serviços rapidinho?</span>
 
-                  <a href="" class="btn btn-lg btn-custom btn-branco">
-                    Saiba mais informações
-                    <ion-icon name="information-circle"></ion-icon>
-                  </a>
+            <form action="#" th:action="@{/cruzeiro/avaliacao/salvar}" th:object="${avaliacao}" method="POST" class="form-group">
 
-                </div>
 
-                <div class="carousel-item">
-                  <h1>É um hóspede?</h1>
-
-                  <a th:href="@{reserva/formulario}" class="btn btn-lg btn-custom btn-roxo">
-                    Entrar com PIN
-                    <i class="fa-solid fa-lock"></i>
-                  </a>
-                  
-                </div>
-                
+              <div class="form-group">
+                <h6><label for="positivos">O que você mais curtiu durante sua hospedagem?</label></h6>
+                <input type="text" th:field="*{avaliacao_positiva}" class="form-control" id="positivos" placeholder="Digite aqui">
               </div>
-              
-              <a href="#carousel-spotify" class="carousel-control-prev" data-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-              </a>
 
-              <a href="#carousel-spotify" class="carousel-control-next" data-slide="next">
-                <span class="carousel-control-next-icon"></span>
-              </a>
+              <div class="form-group">
+                <h6><label for="negativos">O que poderia melhorar?</label></h6>
+                <input class="form-control" type="text" th:field="*{avaliacao_negativa}" id="negativos" placeholder="Digite aqui">
+              </div>
+
+              <div class="form-group">
+                <h6><label for="meurange">De 1 a 10, que nota você atribuiria à sua hospedagem?</label></h6>
+                <input class="form-control-range custom-range" type="range" 
+                id="meurange" min="1" max="10" th:field="*{nota}">
+              </div>
+
+              <input id="btn-roxo" class="btn btn-block mt-5" type="submit" value="Enviar">
+
+              <h6 style="text-align: center;" class="mt-2">
+                <a th:href="@{/cruzeiro/index}">sair sem avaliar</a>
+              </h6>
 
 
-
+            </form>
             </div>
 
           </div>
@@ -118,7 +126,7 @@
       <div class="container">
         <div class="row d-flex">
           <div class="col-md-2 brand align-self-center">
-            <p>Spa Resort</p>
+            <p>cruzeiro</p>
           </div>
 
           <div class="col-md-2">

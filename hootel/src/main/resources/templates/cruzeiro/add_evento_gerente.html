@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>ADD Eventos Gerente</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Adicione um evento</h3>
+    <hr>
+
+    <form action="#" th:action="@{/cruzeiro/addEvento}" th:object="${evento}" method="POST">
+
+        <div class="input-group input-group-lg">
+            <input type="text" th:field="*{lugar}" placeholder="lugar" class="form-control">
+            <input type="text" th:field="*{nome}" placeholder="nome" class="form-control">
+            <input type="date" th:field="*{dataInicio}" placeholder="data" class="form-control">
+            <input type="text" th:field="*{horario}" placeholder="horário" class="form-control">
+            <input type="text" th:field="*{descricao}" placeholder="descricao" class="form-control">
+            <input type="number" min="0" th:field="*{idadeMinimaRecomendada}" placeholder="Idade Mínima Recomendada" class="form-control">
+        </div>
+
+        <div>
+            <label th:each="categoria : ${categorias}">
+                <input type="checkbox" th:field="*{categorias}" th:value="${categoria}" th:text="${categoria.name()}" style="margin: 10px"/>
+            </label>
+        </div>
+
+        <div class="input-group-append">
+            <button type="submit" class="btn" id="botao-logar" style="color: mediumpurple">Adicionar Evento</button>
+        </div>
+
+        <div th:if="${errorMessageAdd}">
+            <span style="color: #cb2d51" th:text="${errorMessageAdd}">Error</span>
+        </div>
+        <div th:if="${#fields.hasErrors('lugar')}">
+            <span style="color: #cb2d51" th:errors="${evento.lugar}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('nome')}">
+            <span style="color: #cb2d51" th:errors="${evento.nome}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('dataInicio')}">
+            <span style="color: #cb2d51" th:errors="${evento.dataInicio}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('horario')}">
+            <span style="color: #cb2d51" th:errors="${evento.horario}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('descricao')}">
+            <span style="color: #cb2d51" th:errors="${evento.descricao}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('idadeMinimaRecomendada')}">
+            <span style="color: #cb2d51" th:errors="${evento.idadeMinimaRecomendada}"></span>
+        </div>
+        <div th:if="${#fields.hasErrors('categorias')}">
+            <span style="color: #cb2d51" th:errors="${evento.categorias}"></span>
+        </div>
+
+    </form>
+
+
+</div>
+
+</body>
+</html>
